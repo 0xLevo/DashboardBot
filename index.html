@@ -2,546 +2,324 @@
     <!DOCTYPE html><html lang="en">
     <head>
         <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BasedVector Signals</title>
+        <title>BasedVector Heatmap</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
         <style>
             body { font-family: 'Montserrat', sans-serif; background-color: #0f172a; color: white; }
-            .card { background: #1e293b; border-radius: 12px; transition: 0.3s; border: 1px solid #334155; }
-            .card:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5); }
-            .signal-btn { transition: 0.2s; }
-            .signal-btn:hover { opacity: 0.8; }
+            .coin-box { border-radius: 8px; transition: 0.2s; border: 1px solid rgba(255,255,255,0.1); }
+            .coin-box:hover { transform: scale(1.05); z-index: 10; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+            .tooltip { visibility: hidden; background-color: black; color: white; text-align: center; border-radius: 6px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; transform: translateX(-50%); opacity: 0; transition: opacity 0.3s; font-size: 0.75rem; }
+            .coin-box:hover .tooltip { visibility: visible; opacity: 1; }
         </style>
     </head>
     <body class="p-6">
         <header class="flex justify-between items-center pb-8 border-b border-slate-700 mb-8">
             <h1 class="text-3xl font-bold">
-                <span style="color: #38bdf8">Based</span><span style="color: #ef4444">Vector</span> <span class="text-white">Signals</span>
+                <span style="color: #38bdf8">Based</span><span style="color: #ef4444">Vector</span> <span class="text-white">Heatmap</span>
             </h1>
             <div class="flex gap-2">
                 <button onclick="toggleFavorites()" id="fav-btn" class="bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-semibold">Show Favorites</button>
-                <span class="text-sm text-slate-400 font-mono self-center">2026-02-17 23:41:50 UTC</span>
+                <span class="text-sm text-slate-400 font-mono self-center">2026-02-17 23:46:08 UTC</span>
             </div>
         </header>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4" id="coin-grid">
+        <div class="grid grid-cols-5 md:grid-cols-8 lg:grid-cols-10 gap-2" id="coin-grid">
     
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('BTC')" id="fav-BTC" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">BTC</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('BTC')">
+            <span class="font-bold font-mono text-sm">BTC</span>
+            <div class="tooltip">
+                $67521.4<br>RSI: 37.4
             </div>
-            <div class="text-2xl font-extrabold mb-1">$67518.7</div>
-            <div class="text-xs text-slate-400">RSI: 37.4</div>
+            <span id="star-BTC" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('ETH')" id="fav-ETH" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">ETH</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('ETH')">
+            <span class="font-bold font-mono text-sm">ETH</span>
+            <div class="tooltip">
+                $1994.11<br>RSI: 39.6
             </div>
-            <div class="text-2xl font-extrabold mb-1">$1995.33</div>
-            <div class="text-xs text-slate-400">RSI: 39.6</div>
+            <span id="star-ETH" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('BNB')" id="fav-BNB" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">BNB</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('BNB')">
+            <span class="font-bold font-mono text-sm">BNB</span>
+            <div class="tooltip">
+                $617.58<br>RSI: 27.8
             </div>
-            <div class="text-2xl font-extrabold mb-1">$617.51</div>
-            <div class="text-xs text-slate-400">RSI: 27.8</div>
+            <span id="star-BNB" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('SOL')" id="fav-SOL" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">SOL</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('SOL')">
+            <span class="font-bold font-mono text-sm">SOL</span>
+            <div class="tooltip">
+                $85.08<br>RSI: 37.5
             </div>
-            <div class="text-2xl font-extrabold mb-1">$85.05</div>
-            <div class="text-xs text-slate-400">RSI: 37.5</div>
+            <span id="star-SOL" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('XRP')" id="fav-XRP" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">XRP</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('XRP')">
+            <span class="font-bold font-mono text-sm">XRP</span>
+            <div class="tooltip">
+                $1.4754<br>RSI: 44.6
             </div>
-            <div class="text-2xl font-extrabold mb-1">$1.4758</div>
-            <div class="text-xs text-slate-400">RSI: 44.6</div>
+            <span id="star-XRP" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('ADA')" id="fav-ADA" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">ADA</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('ADA')">
+            <span class="font-bold font-mono text-sm">ADA</span>
+            <div class="tooltip">
+                $0.2814<br>RSI: 46.7
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.2813</div>
-            <div class="text-xs text-slate-400">RSI: 46.7</div>
+            <span id="star-ADA" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('AVAX')" id="fav-AVAX" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">AVAX</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('AVAX')">
+            <span class="font-bold font-mono text-sm">AVAX</span>
+            <div class="tooltip">
+                $9.15<br>RSI: 41.5
             </div>
-            <div class="text-2xl font-extrabold mb-1">$9.141</div>
-            <div class="text-xs text-slate-400">RSI: 41.5</div>
+            <span id="star-AVAX" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('DOGE')" id="fav-DOGE" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">DOGE</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('DOGE')">
+            <span class="font-bold font-mono text-sm">DOGE</span>
+            <div class="tooltip">
+                $0.10072<br>RSI: 45.9
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.10069</div>
-            <div class="text-xs text-slate-400">RSI: 45.9</div>
+            <span id="star-DOGE" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('DOT')" id="fav-DOT" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">DOT</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('DOT')">
+            <span class="font-bold font-mono text-sm">DOT</span>
+            <div class="tooltip">
+                $1.348<br>RSI: 40.2
             </div>
-            <div class="text-2xl font-extrabold mb-1">$1.347</div>
-            <div class="text-xs text-slate-400">RSI: 40.2</div>
+            <span id="star-DOT" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('TRX')" id="fav-TRX" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">TRX</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('TRX')">
+            <span class="font-bold font-mono text-sm">TRX</span>
+            <div class="tooltip">
+                $0.2821<br>RSI: 45.3
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.282</div>
-            <div class="text-xs text-slate-400">RSI: 45.2</div>
+            <span id="star-TRX" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('LINK')" id="fav-LINK" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">LINK</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('LINK')">
+            <span class="font-bold font-mono text-sm">LINK</span>
+            <div class="tooltip">
+                $8.835<br>RSI: 42.6
             </div>
-            <div class="text-2xl font-extrabold mb-1">$8.839</div>
-            <div class="text-xs text-slate-400">RSI: 42.7</div>
+            <span id="star-LINK" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('TON')" id="fav-TON" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">TON</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('TON')">
+            <span class="font-bold font-mono text-sm">TON</span>
+            <div class="tooltip">
+                $1.426<br>RSI: 52.0
             </div>
-            <div class="text-2xl font-extrabold mb-1">$1.426</div>
-            <div class="text-xs text-slate-400">RSI: 52.0</div>
+            <span id="star-TON" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('SHIB')" id="fav-SHIB" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">SHIB</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('SHIB')">
+            <span class="font-bold font-mono text-sm">SHIB</span>
+            <div class="tooltip">
+                $6.522e-06<br>RSI: 47.7
             </div>
-            <div class="text-2xl font-extrabold mb-1">$6.515e-06</div>
-            <div class="text-xs text-slate-400">RSI: 47.6</div>
+            <span id="star-SHIB" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('LTC')" id="fav-LTC" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">LTC</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('LTC')">
+            <span class="font-bold font-mono text-sm">LTC</span>
+            <div class="tooltip">
+                $53.98<br>RSI: 37.4
             </div>
-            <div class="text-2xl font-extrabold mb-1">$54.04</div>
-            <div class="text-xs text-slate-400">RSI: 37.5</div>
+            <span id="star-LTC" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('BCH')" id="fav-BCH" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">BCH</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('BCH')">
+            <span class="font-bold font-mono text-sm">BCH</span>
+            <div class="tooltip">
+                $564<br>RSI: 56.5
             </div>
-            <div class="text-2xl font-extrabold mb-1">$563.9</div>
-            <div class="text-xs text-slate-400">RSI: 56.5</div>
+            <span id="star-BCH" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('ATOM')" id="fav-ATOM" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">ATOM</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('ATOM')">
+            <span class="font-bold font-mono text-sm">ATOM</span>
+            <div class="tooltip">
+                $2.234<br>RSI: 59.9
             </div>
-            <div class="text-2xl font-extrabold mb-1">$2.233</div>
-            <div class="text-xs text-slate-400">RSI: 59.9</div>
+            <span id="star-ATOM" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('UNI')" id="fav-UNI" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">UNI</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('UNI')">
+            <span class="font-bold font-mono text-sm">UNI</span>
+            <div class="tooltip">
+                $3.53<br>RSI: 42.4
             </div>
-            <div class="text-2xl font-extrabold mb-1">$3.527</div>
-            <div class="text-xs text-slate-400">RSI: 42.4</div>
+            <span id="star-UNI" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('NEAR')" id="fav-NEAR" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">NEAR</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('NEAR')">
+            <span class="font-bold font-mono text-sm">NEAR</span>
+            <div class="tooltip">
+                $1.0443<br>RSI: 39.0
             </div>
-            <div class="text-2xl font-extrabold mb-1">$1.0445</div>
-            <div class="text-xs text-slate-400">RSI: 39.0</div>
+            <span id="star-NEAR" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('INJ')" id="fav-INJ" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">INJ</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('INJ')">
+            <span class="font-bold font-mono text-sm">INJ</span>
+            <div class="tooltip">
+                $3.102<br>RSI: 35.6
             </div>
-            <div class="text-2xl font-extrabold mb-1">$3.103</div>
-            <div class="text-xs text-slate-400">RSI: 35.7</div>
+            <span id="star-INJ" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('OP')" id="fav-OP" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">OP</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('OP')">
+            <span class="font-bold font-mono text-sm">OP</span>
+            <div class="tooltip">
+                $0.1871<br>RSI: 38.2
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.187</div>
-            <div class="text-xs text-slate-400">RSI: 38.2</div>
+            <span id="star-OP" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('ICP')" id="fav-ICP" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">ICP</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('ICP')">
+            <span class="font-bold font-mono text-sm">ICP</span>
+            <div class="tooltip">
+                $2.383<br>RSI: 39.4
             </div>
-            <div class="text-2xl font-extrabold mb-1">$2.382</div>
-            <div class="text-xs text-slate-400">RSI: 39.3</div>
+            <span id="star-ICP" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('FIL')" id="fav-FIL" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">FIL</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('FIL')">
+            <span class="font-bold font-mono text-sm">FIL</span>
+            <div class="tooltip">
+                $0.961<br>RSI: 41.2
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.962</div>
-            <div class="text-xs text-slate-400">RSI: 41.3</div>
+            <span id="star-FIL" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('LDO')" id="fav-LDO" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">LDO</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('LDO')">
+            <span class="font-bold font-mono text-sm">LDO</span>
+            <div class="tooltip">
+                $0.341<br>RSI: 34.9
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.341</div>
-            <div class="text-xs text-slate-400">RSI: 34.9</div>
+            <span id="star-LDO" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('TIA')" id="fav-TIA" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">TIA</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('TIA')">
+            <span class="font-bold font-mono text-sm">TIA</span>
+            <div class="tooltip">
+                $0.3412<br>RSI: 43.7
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.3411</div>
-            <div class="text-xs text-slate-400">RSI: 43.7</div>
+            <span id="star-TIA" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('STX')" id="fav-STX" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">STX</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('STX')">
+            <span class="font-bold font-mono text-sm">STX</span>
+            <div class="tooltip">
+                $0.2607<br>RSI: 34.7
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.2613</div>
-            <div class="text-xs text-slate-400">RSI: 34.8</div>
+            <span id="star-STX" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #47556920;">
-            <button onclick="toggleFav('APT')" id="fav-APT" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">APT</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #475569;">
-                    NEUTRAL
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #475569;" onclick="toggleFav('APT')">
+            <span class="font-bold font-mono text-sm">APT</span>
+            <div class="tooltip">
+                $0.918<br>RSI: 25.4
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.918</div>
-            <div class="text-xs text-slate-400">RSI: 25.4</div>
+            <span id="star-APT" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('ARB')" id="fav-ARB" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">ARB</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('ARB')">
+            <span class="font-bold font-mono text-sm">ARB</span>
+            <div class="tooltip">
+                $0.1128<br>RSI: 37.0
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.113</div>
-            <div class="text-xs text-slate-400">RSI: 37.1</div>
+            <span id="star-ARB" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('VET')" id="fav-VET" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">VET</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('VET')">
+            <span class="font-bold font-mono text-sm">VET</span>
+            <div class="tooltip">
+                $0.008123<br>RSI: 46.7
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.008125</div>
-            <div class="text-xs text-slate-400">RSI: 46.7</div>
+            <span id="star-VET" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('KAS')" id="fav-KAS" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">KAS</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('KAS')">
+            <span class="font-bold font-mono text-sm">KAS</span>
+            <div class="tooltip">
+                $0.031916<br>RSI: 49.7
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.031931</div>
-            <div class="text-xs text-slate-400">RSI: 49.7</div>
+            <span id="star-KAS" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('ETC')" id="fav-ETC" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">ETC</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('ETC')">
+            <span class="font-bold font-mono text-sm">ETC</span>
+            <div class="tooltip">
+                $8.69<br>RSI: 40.0
             </div>
-            <div class="text-2xl font-extrabold mb-1">$8.69</div>
-            <div class="text-xs text-slate-400">RSI: 40.0</div>
+            <span id="star-ETC" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('ALGO')" id="fav-ALGO" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">ALGO</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('ALGO')">
+            <span class="font-bold font-mono text-sm">ALGO</span>
+            <div class="tooltip">
+                $0.09311<br>RSI: 38.1
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.09305</div>
-            <div class="text-xs text-slate-400">RSI: 38.1</div>
+            <span id="star-ALGO" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('RUNE')" id="fav-RUNE" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">RUNE</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('RUNE')">
+            <span class="font-bold font-mono text-sm">RUNE</span>
+            <div class="tooltip">
+                $0.403<br>RSI: 37.7
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.4036</div>
-            <div class="text-xs text-slate-400">RSI: 37.8</div>
+            <span id="star-RUNE" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('EGLD')" id="fav-EGLD" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">EGLD</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('EGLD')">
+            <span class="font-bold font-mono text-sm">EGLD</span>
+            <div class="tooltip">
+                $4.692<br>RSI: 47.4
             </div>
-            <div class="text-2xl font-extrabold mb-1">$4.687</div>
-            <div class="text-xs text-slate-400">RSI: 47.4</div>
+            <span id="star-EGLD" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('SEI')" id="fav-SEI" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">SEI</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('SEI')">
+            <span class="font-bold font-mono text-sm">SEI</span>
+            <div class="tooltip">
+                $0.0742<br>RSI: 36.1
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.07429</div>
-            <div class="text-xs text-slate-400">RSI: 36.2</div>
+            <span id="star-SEI" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('SUI')" id="fav-SUI" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">SUI</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('SUI')">
+            <span class="font-bold font-mono text-sm">SUI</span>
+            <div class="tooltip">
+                $0.9684<br>RSI: 39.9
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.9678</div>
-            <div class="text-xs text-slate-400">RSI: 39.9</div>
+            <span id="star-SUI" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #22c55e20;">
-            <button onclick="toggleFav('AAVE')" id="fav-AAVE" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">AAVE</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #22c55e;">
-                    BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('AAVE')">
+            <span class="font-bold font-mono text-sm">AAVE</span>
+            <div class="tooltip">
+                $126.58<br>RSI: 50.9
             </div>
-            <div class="text-2xl font-extrabold mb-1">$126.65</div>
-            <div class="text-xs text-slate-400">RSI: 51.0</div>
+            <span id="star-AAVE" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
-        <div class="card p-4 relative" style="background-color: #16653420;">
-            <button onclick="toggleFav('SAND')" id="fav-SAND" class="absolute top-2 right-2 text-slate-500 hover:text-yellow-400 text-xl">
-                ★
-            </button>
-            <div class="flex justify-between items-center mb-2">
-                <span class="text-lg font-bold font-mono">SAND</span>
-                <span class="text-xs font-bold px-2 py-1 rounded-full text-white" style="background-color: #166534;">
-                    STRONG BUY
-                </span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('SAND')">
+            <span class="font-bold font-mono text-sm">SAND</span>
+            <div class="tooltip">
+                $0.08598<br>RSI: 38.6
             </div>
-            <div class="text-2xl font-extrabold mb-1">$0.08584</div>
-            <div class="text-xs text-slate-400">RSI: 38.5</div>
+            <span id="star-SAND" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
         </div>
         
         </div>
@@ -557,12 +335,11 @@
             function toggleFav(symbol) {
                 if (favorites.includes(symbol)) {
                     favorites = favorites.filter(f => f !== symbol);
-                    document.getElementById('fav-' + symbol).classList.remove('text-yellow-400');
                 } else {
                     favorites.push(symbol);
-                    document.getElementById('fav-' + symbol).classList.add('text-yellow-400');
                 }
                 localStorage.setItem('favs', JSON.stringify(favorites));
+                updateStars();
                 if (showingFavs) renderGrid();
             }
 
@@ -572,24 +349,34 @@
                 renderGrid();
             }
 
+            function updateStars() {
+                document.querySelectorAll('.coin-box').forEach(box => {
+                    const symbol = box.querySelector('.font-mono').innerText;
+                    const star = box.querySelector('span.absolute');
+                    if (favorites.includes(symbol)) {
+                        star.classList.remove('opacity-0');
+                        star.style.color = 'yellow';
+                    } else {
+                        star.classList.add('opacity-0');
+                    }
+                });
+            }
+
             function renderGrid() {
                 const grid = document.getElementById('coin-grid');
-                const cards = grid.getElementsByClassName('card');
-                for (let card of cards) {
-                    const symbol = card.querySelector('.font-mono').innerText;
+                const boxes = grid.getElementsByClassName('coin-box');
+                for (let box of boxes) {
+                    const symbol = box.querySelector('.font-mono').innerText;
                     if (showingFavs && !favorites.includes(symbol)) {
-                        card.style.display = 'none';
+                        box.style.display = 'none';
                     } else {
-                        card.style.display = 'block';
+                        box.style.display = 'block';
                     }
                 }
             }
 
-            // Sayfa yüklendiğinde favorileri vurgula
-            favorites.forEach(f => {
-                if(document.getElementById('fav-' + f))
-                    document.getElementById('fav-' + f).classList.add('text-yellow-400');
-            });
+            // Sayfa yüklendiğinde favori yıldızlarını göster
+            updateStars();
         </script>
     </body>
     </html>
