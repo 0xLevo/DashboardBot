@@ -6,12 +6,11 @@ from datetime import datetime, timezone, timedelta
 import json
 import base64
 
-# --- TOP COIN LISTESİ ---
+# --- TOP COIN LISTESİ (Dosya boyutu için kısa tutuldu) ---
 TOP_COINS = [
     'BTC', 'ETH', 'BNB', 'SOL', 'XRP', 'ADA', 'AVAX', 'DOGE', 'DOT', 'TRX',
     'LINK', 'MATIC', 'TON', 'SHIB', 'LTC', 'BCH', 'ATOM', 'UNI', 'NEAR', 'INJ',
-    'OP', 'ICP', 'FIL', 'LDO', 'TIA', 'STX', 'APT', 'ARB', 'RNDR', 'VET',
-    'KAS', 'ETC', 'ALGO', 'RUNE', 'EGLD', 'SEI', 'SUI', 'AAVE', 'FTM', 'SAND'
+    'OP', 'ICP', 'FIL', 'LDO', 'TIA' # Boyut için 25 coin
 ]
 
 def get_projections(prices, dates):
@@ -35,8 +34,8 @@ def get_projections(prices, dates):
         future_dates = [ (last_date + timedelta(days=i)).strftime('%Y-%m-%d') for i in range(future_days) ]
         all_dates = dates + future_dates
         
-        # Veri yoğunluğunu TradingView için azalt
-        data_reduction_factor = 20
+        # VERİ SIKIŞTIRMA (TradingView için kritik)
+        data_reduction_factor = 40 # 40 günde bir nokta
         
         line_data = []
         for i in range(0, len(all_dates), data_reduction_factor):
@@ -48,7 +47,7 @@ def get_projections(prices, dates):
             top_band.append({'time': all_dates[i], 'value': np.exp(regression_line[i] + 2.5 * std_dev)})
             bot_band.append({'time': all_dates[i], 'value': np.exp(regression_line[i] - 2.0 * std_dev)})
 
-        # Fiyat verisi (Geçmiş)
+        # Fiyat verisi (Sadece geçmiş veri)
         price_data = []
         for i in range(len(dates)):
             price_data.append({'time': dates[i], 'value': prices[i]})
@@ -70,7 +69,6 @@ def analyze_market():
 
             df = pd.DataFrame(bars, columns=['time', 'open', 'high', 'low', 'close', 'volume'])
             prices = df['close'].tolist()
-            # Tarihleri YYYY-MM-DD formatında al
             dates = pd.to_datetime(df['time'], unit='ms').dt.strftime('%Y-%m-%d').tolist()
 
             price_data, line_data, top_band, bot_band = get_projections(prices, dates)
