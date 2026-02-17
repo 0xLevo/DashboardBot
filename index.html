@@ -1,0 +1,419 @@
+
+    <!DOCTYPE html><html lang="en">
+    <head>
+        <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Crypto Regression Dashboard</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+        <style>
+            body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: white; }
+            .card { background: #1e293b; border-radius: 16px; transition: 0.3s; }
+            .card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); }
+            .modal { backdrop-filter: blur(5px); }
+        </style>
+    </head>
+    <body class="p-6">
+        <header class="flex justify-between items-center pb-8 border-b border-slate-700 mb-8">
+            <h1 class="text-3xl font-bold text-white">Market Regression <span class="text-sky-400">Dashboard</span></h1>
+            <span class="text-sm text-slate-400 font-mono">2026-02-17 22:22:05 UTC</span>
+        </header>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+    
+        <div class="card p-5 cursor-pointer" onclick="showModal('BTC', 'eyJDdXJyZW50IFByaWNlIjogIjY3NjQwLjUgVVNEVCIsICJTdGF0dXMiOiAiTkVVVFJBTCIsICJSZWdyZXNzaW9uIExpbmUiOiAiQ2FsY3VsYXRlZCBvbiAyMDAgRGF5cyJ9')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">BTC</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$67640.5</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('ETH', 'eyJDdXJyZW50IFByaWNlIjogIjIwMDAuMDMgVVNEVCIsICJTdGF0dXMiOiAiVkFMVUUiLCAiUmVncmVzc2lvbiBMaW5lIjogIkNhbGN1bGF0ZWQgb24gMjAwIERheXMifQ==')" style="border-left: 4px solid #22c55e;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">ETH</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #22c55e30; color: #22c55e;">
+                    VALUE
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$2000.03</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('BNB', 'eyJDdXJyZW50IFByaWNlIjogIjYxOC42NyBVU0RUIiwgIlN0YXR1cyI6ICJWQUxVRSIsICJSZWdyZXNzaW9uIExpbmUiOiAiQ2FsY3VsYXRlZCBvbiAyMDAgRGF5cyJ9')" style="border-left: 4px solid #22c55e;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">BNB</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #22c55e30; color: #22c55e;">
+                    VALUE
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$618.67</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('SOL', 'eyJDdXJyZW50IFByaWNlIjogIjg1LjMzIFVTRFQiLCAiU3RhdHVzIjogIk5FVVRSQUwiLCAiUmVncmVzc2lvbiBMaW5lIjogIkNhbGN1bGF0ZWQgb24gMjAwIERheXMifQ==')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">SOL</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$85.33</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('XRP', 'eyJDdXJyZW50IFByaWNlIjogIjEuNDc4OCBVU0RUIiwgIlN0YXR1cyI6ICJORVVUUkFMIiwgIlJlZ3Jlc3Npb24gTGluZSI6ICJDYWxjdWxhdGVkIG9uIDIwMCBEYXlzIn0=')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">XRP</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$1.4788</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('ADA', 'eyJDdXJyZW50IFByaWNlIjogIjAuMjgyMiBVU0RUIiwgIlN0YXR1cyI6ICJORVVUUkFMIiwgIlJlZ3Jlc3Npb24gTGluZSI6ICJDYWxjdWxhdGVkIG9uIDIwMCBEYXlzIn0=')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">ADA</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.2822</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('AVAX', 'eyJDdXJyZW50IFByaWNlIjogIjkuMTcgVVNEVCIsICJTdGF0dXMiOiAiTkVVVFJBTCIsICJSZWdyZXNzaW9uIExpbmUiOiAiQ2FsY3VsYXRlZCBvbiAyMDAgRGF5cyJ9')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">AVAX</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$9.17</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('DOGE', 'eyJDdXJyZW50IFByaWNlIjogIjAuMTAwODkgVVNEVCIsICJTdGF0dXMiOiAiTkVVVFJBTCIsICJSZWdyZXNzaW9uIExpbmUiOiAiQ2FsY3VsYXRlZCBvbiAyMDAgRGF5cyJ9')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">DOGE</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.10089</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('DOT', 'eyJDdXJyZW50IFByaWNlIjogIjEuMzUyIFVTRFQiLCAiU3RhdHVzIjogIk5FVVRSQUwiLCAiUmVncmVzc2lvbiBMaW5lIjogIkNhbGN1bGF0ZWQgb24gMjAwIERheXMifQ==')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">DOT</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$1.352</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('TRX', 'eyJDdXJyZW50IFByaWNlIjogIjAuMjgyMiBVU0RUIiwgIlN0YXR1cyI6ICJORVVUUkFMIiwgIlJlZ3Jlc3Npb24gTGluZSI6ICJDYWxjdWxhdGVkIG9uIDIwMCBEYXlzIn0=')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">TRX</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.2822</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('LINK', 'eyJDdXJyZW50IFByaWNlIjogIjguODc3IFVTRFQiLCAiU3RhdHVzIjogIk5FVVRSQUwiLCAiUmVncmVzc2lvbiBMaW5lIjogIkNhbGN1bGF0ZWQgb24gMjAwIERheXMifQ==')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">LINK</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$8.877</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('TON', 'eyJDdXJyZW50IFByaWNlIjogIjEuNDI5IFVTRFQiLCAiU3RhdHVzIjogIk5FVVRSQUwiLCAiUmVncmVzc2lvbiBMaW5lIjogIkNhbGN1bGF0ZWQgb24gMjAwIERheXMifQ==')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">TON</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$1.429</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('SHIB', 'eyJDdXJyZW50IFByaWNlIjogIjYuNTI0ZS0wNiBVU0RUIiwgIlN0YXR1cyI6ICJORVVUUkFMIiwgIlJlZ3Jlc3Npb24gTGluZSI6ICJDYWxjdWxhdGVkIG9uIDIwMCBEYXlzIn0=')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">SHIB</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$6.524e-06</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('LTC', 'eyJDdXJyZW50IFByaWNlIjogIjU0LjM1IFVTRFQiLCAiU3RhdHVzIjogIk5FVVRSQUwiLCAiUmVncmVzc2lvbiBMaW5lIjogIkNhbGN1bGF0ZWQgb24gMjAwIERheXMifQ==')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">LTC</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$54.35</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('BCH', 'eyJDdXJyZW50IFByaWNlIjogIjU2Ni43IFVTRFQiLCAiU3RhdHVzIjogIk5FVVRSQUwiLCAiUmVncmVzc2lvbiBMaW5lIjogIkNhbGN1bGF0ZWQgb24gMjAwIERheXMifQ==')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">BCH</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$566.7</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('ATOM', 'eyJDdXJyZW50IFByaWNlIjogIjIuMjM0IFVTRFQiLCAiU3RhdHVzIjogIk9WRVJWQUxVRUQiLCAiUmVncmVzc2lvbiBMaW5lIjogIkNhbGN1bGF0ZWQgb24gMjAwIERheXMifQ==')" style="border-left: 4px solid #f97316;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">ATOM</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #f9731630; color: #f97316;">
+                    OVERVALUED
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$2.234</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('UNI', 'eyJDdXJyZW50IFByaWNlIjogIjMuNTQzIFVTRFQiLCAiU3RhdHVzIjogIk5FVVRSQUwiLCAiUmVncmVzc2lvbiBMaW5lIjogIkNhbGN1bGF0ZWQgb24gMjAwIERheXMifQ==')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">UNI</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$3.543</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('NEAR', 'eyJDdXJyZW50IFByaWNlIjogIjEuMDQ0OSBVU0RUIiwgIlN0YXR1cyI6ICJORVVUUkFMIiwgIlJlZ3Jlc3Npb24gTGluZSI6ICJDYWxjdWxhdGVkIG9uIDIwMCBEYXlzIn0=')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">NEAR</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$1.0449</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('INJ', 'eyJDdXJyZW50IFByaWNlIjogIjMuMTA5IFVTRFQiLCAiU3RhdHVzIjogIk5FVVRSQUwiLCAiUmVncmVzc2lvbiBMaW5lIjogIkNhbGN1bGF0ZWQgb24gMjAwIERheXMifQ==')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">INJ</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$3.109</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('OP', 'eyJDdXJyZW50IFByaWNlIjogIjAuMTg2OSBVU0RUIiwgIlN0YXR1cyI6ICJORVVUUkFMIiwgIlJlZ3Jlc3Npb24gTGluZSI6ICJDYWxjdWxhdGVkIG9uIDIwMCBEYXlzIn0=')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">OP</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.1869</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('ICP', 'eyJDdXJyZW50IFByaWNlIjogIjIuMzkgVVNEVCIsICJTdGF0dXMiOiAiTkVVVFJBTCIsICJSZWdyZXNzaW9uIExpbmUiOiAiQ2FsY3VsYXRlZCBvbiAyMDAgRGF5cyJ9')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">ICP</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$2.39</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('FIL', 'eyJDdXJyZW50IFByaWNlIjogIjAuOTYyIFVTRFQiLCAiU3RhdHVzIjogIk5FVVRSQUwiLCAiUmVncmVzc2lvbiBMaW5lIjogIkNhbGN1bGF0ZWQgb24gMjAwIERheXMifQ==')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">FIL</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.962</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('LDO', 'eyJDdXJyZW50IFByaWNlIjogIjAuMzQxMyBVU0RUIiwgIlN0YXR1cyI6ICJORVVUUkFMIiwgIlJlZ3Jlc3Npb24gTGluZSI6ICJDYWxjdWxhdGVkIG9uIDIwMCBEYXlzIn0=')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">LDO</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.3413</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('TIA', 'eyJDdXJyZW50IFByaWNlIjogIjAuMzQyNCBVU0RUIiwgIlN0YXR1cyI6ICJORVVUUkFMIiwgIlJlZ3Jlc3Npb24gTGluZSI6ICJDYWxjdWxhdGVkIG9uIDIwMCBEYXlzIn0=')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">TIA</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.3424</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('STX', 'eyJDdXJyZW50IFByaWNlIjogIjAuMjYyMiBVU0RUIiwgIlN0YXR1cyI6ICJORVVUUkFMIiwgIlJlZ3Jlc3Npb24gTGluZSI6ICJDYWxjdWxhdGVkIG9uIDIwMCBEYXlzIn0=')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">STX</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.2622</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('APT', 'eyJDdXJyZW50IFByaWNlIjogIjAuOTIwNyBVU0RUIiwgIlN0YXR1cyI6ICJWQUxVRSIsICJSZWdyZXNzaW9uIExpbmUiOiAiQ2FsY3VsYXRlZCBvbiAyMDAgRGF5cyJ9')" style="border-left: 4px solid #22c55e;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">APT</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #22c55e30; color: #22c55e;">
+                    VALUE
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.9207</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('ARB', 'eyJDdXJyZW50IFByaWNlIjogIjAuMTEzMiBVU0RUIiwgIlN0YXR1cyI6ICJORVVUUkFMIiwgIlJlZ3Jlc3Npb24gTGluZSI6ICJDYWxjdWxhdGVkIG9uIDIwMCBEYXlzIn0=')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">ARB</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.1132</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('VET', 'eyJDdXJyZW50IFByaWNlIjogIjAuMDA4MTY3IFVTRFQiLCAiU3RhdHVzIjogIk5FVVRSQUwiLCAiUmVncmVzc2lvbiBMaW5lIjogIkNhbGN1bGF0ZWQgb24gMjAwIERheXMifQ==')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">VET</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.008167</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('KAS', 'eyJDdXJyZW50IFByaWNlIjogIjAuMDMyMDE2IFVTRFQiLCAiU3RhdHVzIjogIk5FVVRSQUwiLCAiUmVncmVzc2lvbiBMaW5lIjogIkNhbGN1bGF0ZWQgb24gMjAwIERheXMifQ==')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">KAS</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.032016</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('ETC', 'eyJDdXJyZW50IFByaWNlIjogIjguNzEgVVNEVCIsICJTdGF0dXMiOiAiTkVVVFJBTCIsICJSZWdyZXNzaW9uIExpbmUiOiAiQ2FsY3VsYXRlZCBvbiAyMDAgRGF5cyJ9')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">ETC</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$8.71</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('ALGO', 'eyJDdXJyZW50IFByaWNlIjogIjAuMDkzMzMgVVNEVCIsICJTdGF0dXMiOiAiTkVVVFJBTCIsICJSZWdyZXNzaW9uIExpbmUiOiAiQ2FsY3VsYXRlZCBvbiAyMDAgRGF5cyJ9')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">ALGO</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.09333</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('RUNE', 'eyJDdXJyZW50IFByaWNlIjogIjAuNDA0NCBVU0RUIiwgIlN0YXR1cyI6ICJORVVUUkFMIiwgIlJlZ3Jlc3Npb24gTGluZSI6ICJDYWxjdWxhdGVkIG9uIDIwMCBEYXlzIn0=')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">RUNE</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.4044</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('EGLD', 'eyJDdXJyZW50IFByaWNlIjogIjQuNjk2IFVTRFQiLCAiU3RhdHVzIjogIk5FVVRSQUwiLCAiUmVncmVzc2lvbiBMaW5lIjogIkNhbGN1bGF0ZWQgb24gMjAwIERheXMifQ==')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">EGLD</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$4.696</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('SEI', 'eyJDdXJyZW50IFByaWNlIjogIjAuMDc0NDUgVVNEVCIsICJTdGF0dXMiOiAiTkVVVFJBTCIsICJSZWdyZXNzaW9uIExpbmUiOiAiQ2FsY3VsYXRlZCBvbiAyMDAgRGF5cyJ9')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">SEI</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.07445</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('SUI', 'eyJDdXJyZW50IFByaWNlIjogIjAuOTcyMyBVU0RUIiwgIlN0YXR1cyI6ICJORVVUUkFMIiwgIlJlZ3Jlc3Npb24gTGluZSI6ICJDYWxjdWxhdGVkIG9uIDIwMCBEYXlzIn0=')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">SUI</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.9723</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('AAVE', 'eyJDdXJyZW50IFByaWNlIjogIjEyNi45NSBVU0RUIiwgIlN0YXR1cyI6ICJORVVUUkFMIiwgIlJlZ3Jlc3Npb24gTGluZSI6ICJDYWxjdWxhdGVkIG9uIDIwMCBEYXlzIn0=')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">AAVE</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$126.95</div>
+        </div>
+        
+        <div class="card p-5 cursor-pointer" onclick="showModal('SAND', 'eyJDdXJyZW50IFByaWNlIjogIjAuMDg2MDUgVVNEVCIsICJTdGF0dXMiOiAiTkVVVFJBTCIsICJSZWdyZXNzaW9uIExpbmUiOiAiQ2FsY3VsYXRlZCBvbiAyMDAgRGF5cyJ9')" style="border-left: 4px solid #64748b;">
+            <div class="flex justify-between items-center mb-3">
+                <span class="text-lg font-bold text-white font-mono">SAND</span>
+                <span class="text-xs font-semibold px-2 py-1 rounded-md" style="background: #64748b30; color: #64748b;">
+                    NEUTRAL
+                </span>
+            </div>
+            <div class="text-2xl font-extrabold text-white mb-1">$0.08605</div>
+        </div>
+        
+        </div>
+
+        <div id="modal" class="modal fixed inset-0 bg-black/70 hidden flex items-center justify-center p-4">
+            <div class="bg-slate-800 p-6 rounded-2xl max-w-sm w-full">
+                <div class="flex justify-between mb-4">
+                    <h2 id="m-title" class="text-2xl font-bold"></h2>
+                    <button onclick="closeModal()" class="text-xl">&times;</button>
+                </div>
+                <div id="m-body" class="text-slate-300 font-mono text-sm space-y-2"></div>
+            </div>
+        </div>
+
+        <script>
+            function showModal(symbol, dataEncoded) {
+                const data = JSON.parse(atob(dataEncoded));
+                document.getElementById('m-title').innerText = symbol;
+                let body = '';
+                for(let key in data) { body += `<p><strong>${key}:</strong> ${data[key]}</p>`; }
+                document.getElementById('m-body').innerHTML = body;
+                document.getElementById('modal').classList.remove('hidden');
+            }
+            function closeModal() { document.getElementById('modal').classList.remove('hidden') ? null : document.getElementById('modal').classList.add('hidden'); }
+            function closeModal() { document.getElementById('modal').classList.add('hidden'); }
+        </script>
+    </body>
+    </html>
+    
