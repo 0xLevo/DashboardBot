@@ -6,25 +6,21 @@ from datetime import datetime, timezone, timedelta
 import json
 import base64
 
-# --- TOP 100+ COIN LISTESİ (Stabil Coinler Hariç) ---
-# CMC verilerine göre kapsamlı liste
+# --- TOP COIN LISTESİ (Boyutu küçültmek için azaltıldı) ---
 TOP_COINS = [
     'BTC', 'ETH', 'BNB', 'SOL', 'XRP', 'ADA', 'AVAX', 'DOGE', 'DOT', 'TRX',
     'LINK', 'MATIC', 'TON', 'SHIB', 'LTC', 'BCH', 'ATOM', 'UNI', 'NEAR', 'INJ',
     'OP', 'ICP', 'FIL', 'LDO', 'TIA', 'STX', 'APT', 'ARB', 'RNDR', 'VET',
-    'KAS', 'ETC', 'ALGO', 'RUNE', 'EGLD', 'SEI', 'SUI', 'AAVE', 'FTM', 'SAND',
-    'IMX', 'MANA', 'GRT', 'FLOW', 'GALA', 'DYDX', 'QNT', 'MKR', 'WLD', 'APE',
-    'SNX', 'INJ', 'AXS', 'CHZ', 'MANA', 'SAND', 'LUNC', 'PEPE', 'BONK', 'ORDI'
+    'KAS', 'ETC', 'ALGO', 'RUNE', 'EGLD', 'SEI', 'SUI', 'AAVE', 'FTM', 'SAND'
 ]
 
 def get_projections(prices, dates):
-    """Logaritmik regresyon ile geçmiş ve gelecek bantlarını hesaplar."""
     try:
         y = np.log(prices)
         x = np.arange(len(y))
         slope, intercept = np.polyfit(x, y, 1)
 
-        # 2050'ye kadar projeksiyon
+        # 2050 Projeksiyonu
         last_date = datetime.strptime(dates[-1], '%Y-%m-%d')
         future_days = (datetime(2050, 1, 1) - last_date).days
         if future_days < 0: future_days = 365
@@ -36,30 +32,34 @@ def get_projections(prices, dates):
         residuals = y - (slope * x + intercept)
         std_dev = np.std(residuals)
 
-        # Bantları Hesapla (TradingView formatına uygun)
+        # Bantları Hesapla
         future_dates = [ (last_date + timedelta(days=i)).strftime('%Y-%m-%d') for i in range(future_days) ]
         all_dates = dates + future_dates
         
-        # Regresyon çizgisi verisi
+        # SADECE 30 GÜNDE BİR VERİ EKLEMEK (Boyut tasarrufu için)
+        # TradingView bu verileri otomatik birleştirir
+        data_reduction_factor = 30
+        
         line_data = []
-        for i in range(len(all_dates)):
+        for i in range(0, len(all_dates), data_reduction_factor):
             line_data.append({'time': all_dates[i], 'value': np.exp(regression_line[i])})
 
-        # Bant verileri
-        bands = {
-            "top": [{'time': all_dates[i], 'value': np.exp(regression_line[i] + 2.5 * std_dev)} for i in range(len(all_dates))],
-            "bot": [{'time': all_dates[i], 'value': np.exp(regression_line[i] - 2.0 * std_dev)} for i in range(len(all_dates))]
-        }
+        # Bantları daha az veri ile hesapla
+        top_band = []
+        bot_band = []
+        for i in range(0, len(all_dates), data_reduction_factor):
+            top_band.append({'time': all_dates[i], 'value': np.exp(regression_line[i] + 2.5 * std_dev)})
+            bot_band.append({'time': all_dates[i], 'value': np.exp(regression_line[i] - 2.0 * std_dev)})
 
         # Fiyat verisi
         price_data = []
         for i in range(len(dates)):
             price_data.append({'time': dates[i], 'value': prices[i]})
 
-        return price_data, line_data, bands
+        return price_data, line_data, top_band, bot_band
     except Exception as e:
         print(f"Error: {e}")
-        return None, None, None
+        return None, None, None, None
 
 def analyze_market():
     exchange = ccxt.mexc({'enableRateLimit': True})
@@ -68,7 +68,6 @@ def analyze_market():
     for symbol in TOP_COINS:
         try:
             pair = f"{symbol}/USDT"
-            # Maksimum veri
             bars = exchange.fetch_ohlcv(pair, timeframe='1d', limit=1000)
             if len(bars) < 100: continue
 
@@ -76,7 +75,7 @@ def analyze_market():
             prices = df['close'].tolist()
             dates = pd.to_datetime(df['time'], unit='ms').dt.strftime('%Y-%m-%d').tolist()
 
-            price_data, line_data, bands = get_projections(prices, dates)
+            price_data, line_data, top_band, bot_band = get_projections(prices, dates)
 
             if price_data:
                 results.append({
@@ -84,7 +83,8 @@ def analyze_market():
                     'price': f"{prices[-1]:.6g}",
                     'price_data': price_data,
                     'line_data': line_data,
-                    'bands': bands
+                    'top_band': top_band,
+                    'bot_band': bot_band
                 })
             time.sleep(0.05)
         except Exception as e:
@@ -95,7 +95,6 @@ def analyze_market():
 def create_html(data):
     full_update = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
     
-    # Tüm veriyi JS'e aktarmak yerine sadece seçili coini yükleyeceğiz
     html = f"""
     <!DOCTYPE html><html lang="en">
     <head>
@@ -167,8 +166,8 @@ def create_html(data):
 
                 priceSeries.setData(data.price_data);
                 lineSeries.setData(data.line_data);
-                topBandSeries.setData(data.bands.top);
-                botBandSeries.setData(data.bands.bot);
+                topBandSeries.setData(data.top_band);
+                botBandSeries.setData(data.bot_band);
             }}
         </script>
     </body>
