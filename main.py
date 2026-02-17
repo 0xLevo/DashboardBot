@@ -6,7 +6,7 @@ from datetime import datetime, timezone, timedelta
 import json
 import base64
 
-# --- TOP COIN LISTESİ (Boyutu küçültmek için azaltıldı) ---
+# --- TOP COIN LISTESİ ---
 TOP_COINS = [
     'BTC', 'ETH', 'BNB', 'SOL', 'XRP', 'ADA', 'AVAX', 'DOGE', 'DOT', 'TRX',
     'LINK', 'MATIC', 'TON', 'SHIB', 'LTC', 'BCH', 'ATOM', 'UNI', 'NEAR', 'INJ',
@@ -28,30 +28,27 @@ def get_projections(prices, dates):
         future_x = np.arange(len(y) + future_days)
         regression_line = slope * future_x + intercept
         
-        # Standart Sapma
         residuals = y - (slope * x + intercept)
         std_dev = np.std(residuals)
 
-        # Bantları Hesapla
+        # Bantları Hesapla (Tarih formatı: YYYY-MM-DD)
         future_dates = [ (last_date + timedelta(days=i)).strftime('%Y-%m-%d') for i in range(future_days) ]
         all_dates = dates + future_dates
         
-        # SADECE 30 GÜNDE BİR VERİ EKLEMEK (Boyut tasarrufu için)
-        # TradingView bu verileri otomatik birleştirir
-        data_reduction_factor = 30
+        # Veri yoğunluğunu TradingView için azalt
+        data_reduction_factor = 20
         
         line_data = []
         for i in range(0, len(all_dates), data_reduction_factor):
             line_data.append({'time': all_dates[i], 'value': np.exp(regression_line[i])})
 
-        # Bantları daha az veri ile hesapla
         top_band = []
         bot_band = []
         for i in range(0, len(all_dates), data_reduction_factor):
             top_band.append({'time': all_dates[i], 'value': np.exp(regression_line[i] + 2.5 * std_dev)})
             bot_band.append({'time': all_dates[i], 'value': np.exp(regression_line[i] - 2.0 * std_dev)})
 
-        # Fiyat verisi
+        # Fiyat verisi (Geçmiş)
         price_data = []
         for i in range(len(dates)):
             price_data.append({'time': dates[i], 'value': prices[i]})
@@ -73,6 +70,7 @@ def analyze_market():
 
             df = pd.DataFrame(bars, columns=['time', 'open', 'high', 'low', 'close', 'volume'])
             prices = df['close'].tolist()
+            # Tarihleri YYYY-MM-DD formatında al
             dates = pd.to_datetime(df['time'], unit='ms').dt.strftime('%Y-%m-%d').tolist()
 
             price_data, line_data, top_band, bot_band = get_projections(prices, dates)
@@ -138,10 +136,6 @@ def create_html(data):
 
         <script>
             let chart = null;
-            let priceSeries = null;
-            let lineSeries = null;
-            let topBandSeries = null;
-            let botBandSeries = null;
 
             function loadChart(encodedData) {{
                 const data = JSON.parse(atob(encodedData));
@@ -159,15 +153,17 @@ def create_html(data):
                     crosshair: {{ mode: LightweightCharts.CrosshairMode.Normal }},
                 }});
 
-                priceSeries = chart.addLineSeries({{ color: '#38bdf8', lineWidth: 2, title: 'Price' }});
-                lineSeries = chart.addLineSeries({{ color: '#eab308', lineWidth: 1, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'Regression Line' }});
-                topBandSeries = chart.addLineSeries({{ color: '#ef4444', lineWidth: 1, title: 'Upper Band' }});
-                botBandSeries = chart.addLineSeries({{ color: '#22c55e', lineWidth: 1, title: 'Lower Band' }});
+                const priceSeries = chart.addLineSeries({{ color: '#38bdf8', lineWidth: 2, title: 'Price' }});
+                const lineSeries = chart.addLineSeries({{ color: '#eab308', lineWidth: 1, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'Regression Line' }});
+                const topBandSeries = chart.addLineSeries({{ color: '#ef4444', lineWidth: 1, title: 'Upper Band' }});
+                const botBandSeries = chart.addLineSeries({{ color: '#22c55e', lineWidth: 1, title: 'Lower Band' }});
 
                 priceSeries.setData(data.price_data);
                 lineSeries.setData(data.line_data);
                 topBandSeries.setData(data.top_band);
                 botBandSeries.setData(data.bot_band);
+                
+                chart.timeScale().fitContent();
             }}
         </script>
     </body>
