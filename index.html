@@ -9,319 +9,390 @@
             body { font-family: 'Montserrat', sans-serif; background-color: #0f172a; color: white; }
             .coin-box { border-radius: 8px; transition: 0.2s; border: 1px solid rgba(255,255,255,0.1); }
             .coin-box:hover { transform: scale(1.05); z-index: 10; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-            .tooltip { visibility: hidden; background-color: black; color: white; text-align: center; border-radius: 6px; padding: 5px; position: absolute; z-index: 1; bottom: 125%; left: 50%; transform: translateX(-50%); opacity: 0; transition: opacity 0.3s; font-size: 0.75rem; }
-            .coin-box:hover .tooltip { visibility: visible; opacity: 1; }
+            .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); }
+            .modal-content { background-color: #1e293b; margin: 15% auto; padding: 20px; border-radius: 12px; width: 300px; border: 1px solid #334155; }
         </style>
     </head>
     <body class="p-6">
         <header class="flex justify-between items-center pb-8 border-b border-slate-700 mb-8">
-            <h1 class="text-3xl font-bold">
-                <span style="color: #38bdf8">Based</span><span style="color: #ef4444">Vector</span> <span class="text-white">Heatmap</span>
+            <h1 class="text-3xl font-bold font-mono">
+                <span style="color: #991b1b">B</span><span style="color: #ef4444">a</span><span style="color: #475569">s</span><span style="color: #22c55e">e</span><span style="color: #166534">d</span>
+                <span style="color: #991b1b">V</span><span style="color: #ef4444">e</span><span style="color: #475569">c</span><span style="color: #22c55e">t</span><span style="color: #166535">o</span><span style="color: #166535">r</span>
+                <span class="text-white">Heatmap</span>
             </h1>
             <div class="flex gap-2">
                 <button onclick="toggleFavorites()" id="fav-btn" class="bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-semibold">Show Favorites</button>
-                <span class="text-sm text-slate-400 font-mono self-center">2026-02-17 23:46:08 UTC</span>
+                <span class="text-sm text-slate-400 font-mono self-center">2026-02-17 23:54:13 UTC</span>
             </div>
         </header>
 
-        <div class="grid grid-cols-5 md:grid-cols-8 lg:grid-cols-10 gap-2" id="coin-grid">
+        <div class="grid grid-cols-5 md:grid-cols-8 lg:grid-cols-12 gap-2" id="coin-grid">
     
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('BTC')">
-            <span class="font-bold font-mono text-sm">BTC</span>
-            <div class="tooltip">
-                $67521.4<br>RSI: 37.4
-            </div>
-            <span id="star-BTC" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQlRDIiwgInByaWNlIjogIjY3NTI1LjQiLCAicnNpIjogIjM3LjQiLCAibWFjZCI6ICItNDc4Ni4wNiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')">
+            <span id="star-BTC" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">BTC</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('ETH')">
-            <span class="font-bold font-mono text-sm">ETH</span>
-            <div class="tooltip">
-                $1994.11<br>RSI: 39.6
-            </div>
-            <span id="star-ETH" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiRVRIIiwgInByaWNlIjogIjE5OTMuNjYiLCAicnNpIjogIjM5LjYiLCAibWFjZCI6ICItMjIzLjUxIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-ETH" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">ETH</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('BNB')">
-            <span class="font-bold font-mono text-sm">BNB</span>
-            <div class="tooltip">
-                $617.58<br>RSI: 27.8
-            </div>
-            <span id="star-BNB" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQk5CIiwgInByaWNlIjogIjYxNy44NCIsICJyc2kiOiAiMjcuOCIsICJtYWNkIjogIi02My4wMiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')">
+            <span id="star-BNB" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">BNB</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('SOL')">
-            <span class="font-bold font-mono text-sm">SOL</span>
-            <div class="tooltip">
-                $85.08<br>RSI: 37.5
-            </div>
-            <span id="star-SOL" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiU09MIiwgInByaWNlIjogIjg1LjIzIiwgInJzaSI6ICIzNy42IiwgIm1hY2QiOiAiLTEwLjAwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-SOL" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">SOL</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('XRP')">
-            <span class="font-bold font-mono text-sm">XRP</span>
-            <div class="tooltip">
-                $1.4754<br>RSI: 44.6
-            </div>
-            <span id="star-XRP" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiWFJQIiwgInByaWNlIjogIjEuNDc1NyIsICJyc2kiOiAiNDQuNiIsICJtYWNkIjogIi0wLjExIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')">
+            <span id="star-XRP" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">XRP</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('ADA')">
-            <span class="font-bold font-mono text-sm">ADA</span>
-            <div class="tooltip">
-                $0.2814<br>RSI: 46.7
-            </div>
-            <span id="star-ADA" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQURBIiwgInByaWNlIjogIjAuMjgxIiwgInJzaSI6ICI0Ni42IiwgIm1hY2QiOiAiLTAuMDIiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-ADA" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">ADA</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('AVAX')">
-            <span class="font-bold font-mono text-sm">AVAX</span>
-            <div class="tooltip">
-                $9.15<br>RSI: 41.5
-            </div>
-            <span id="star-AVAX" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQVZBWCIsICJwcmljZSI6ICI5LjE1IiwgInJzaSI6ICI0MS41IiwgIm1hY2QiOiAiLTAuNzQiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-AVAX" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">AVAX</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('DOGE')">
-            <span class="font-bold font-mono text-sm">DOGE</span>
-            <div class="tooltip">
-                $0.10072<br>RSI: 45.9
-            </div>
-            <span id="star-DOGE" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiRE9HRSIsICJwcmljZSI6ICIwLjEwMDc1IiwgInJzaSI6ICI0NS45IiwgIm1hY2QiOiAiLTAuMDEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-DOGE" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">DOGE</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('DOT')">
-            <span class="font-bold font-mono text-sm">DOT</span>
-            <div class="tooltip">
-                $1.348<br>RSI: 40.2
-            </div>
-            <span id="star-DOT" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiRE9UIiwgInByaWNlIjogIjEuMzQ4IiwgInJzaSI6ICI0MC4yIiwgIm1hY2QiOiAiLTAuMTMiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-DOT" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">DOT</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('TRX')">
-            <span class="font-bold font-mono text-sm">TRX</span>
-            <div class="tooltip">
-                $0.2821<br>RSI: 45.3
-            </div>
-            <span id="star-TRX" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiVFJYIiwgInByaWNlIjogIjAuMjgyIiwgInJzaSI6ICI0NS4yIiwgIm1hY2QiOiAiLTAuMDAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-TRX" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">TRX</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('LINK')">
-            <span class="font-bold font-mono text-sm">LINK</span>
-            <div class="tooltip">
-                $8.835<br>RSI: 42.6
-            </div>
-            <span id="star-LINK" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiTElOSyIsICJwcmljZSI6ICI4LjgzIiwgInJzaSI6ICI0Mi42IiwgIm1hY2QiOiAiLTAuNzgiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-LINK" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">LINK</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('TON')">
-            <span class="font-bold font-mono text-sm">TON</span>
-            <div class="tooltip">
-                $1.426<br>RSI: 52.0
-            </div>
-            <span id="star-TON" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiVE9OIiwgInByaWNlIjogIjEuNDI3IiwgInJzaSI6ICI1Mi4xIiwgIm1hY2QiOiAiLTAuMDMiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-TON" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">TON</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('SHIB')">
-            <span class="font-bold font-mono text-sm">SHIB</span>
-            <div class="tooltip">
-                $6.522e-06<br>RSI: 47.7
-            </div>
-            <span id="star-SHIB" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiU0hJQiIsICJwcmljZSI6ICI2LjUxNmUtMDYiLCAicnNpIjogIjQ3LjYiLCAibWFjZCI6ICItMC4wMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')">
+            <span id="star-SHIB" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">SHIB</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('LTC')">
-            <span class="font-bold font-mono text-sm">LTC</span>
-            <div class="tooltip">
-                $53.98<br>RSI: 37.4
-            </div>
-            <span id="star-LTC" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiTFRDIiwgInByaWNlIjogIjUzLjg4IiwgInJzaSI6ICIzNy4yIiwgIm1hY2QiOiAiLTMuOTIiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')">
+            <span id="star-LTC" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">LTC</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('BCH')">
-            <span class="font-bold font-mono text-sm">BCH</span>
-            <div class="tooltip">
-                $564<br>RSI: 56.5
-            </div>
-            <span id="star-BCH" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQkNIIiwgInByaWNlIjogIjU2My40IiwgInJzaSI6ICI1Ni40IiwgIm1hY2QiOiAiLTUuNDUiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-BCH" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">BCH</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('ATOM')">
-            <span class="font-bold font-mono text-sm">ATOM</span>
-            <div class="tooltip">
-                $2.234<br>RSI: 59.9
-            </div>
-            <span id="star-ATOM" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #475569;" onclick="openModal('eyJzeW1ib2wiOiAiQVRPTSIsICJwcmljZSI6ICIyLjIzOSIsICJyc2kiOiAiNjAuMiIsICJtYWNkIjogIi0wLjAzIiwgInNpZ25hbF90eXBlIjogIk5FVVRSQUwiLCAiY29sb3IiOiAiIzQ3NTU2OSJ9')">
+            <span id="star-ATOM" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">ATOM</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('UNI')">
-            <span class="font-bold font-mono text-sm">UNI</span>
-            <div class="tooltip">
-                $3.53<br>RSI: 42.4
-            </div>
-            <span id="star-UNI" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiVU5JIiwgInByaWNlIjogIjMuNTI3IiwgInJzaSI6ICI0Mi40IiwgIm1hY2QiOiAiLTAuMzMiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-UNI" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">UNI</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('NEAR')">
-            <span class="font-bold font-mono text-sm">NEAR</span>
-            <div class="tooltip">
-                $1.0443<br>RSI: 39.0
-            </div>
-            <span id="star-NEAR" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiTkVBUiIsICJwcmljZSI6ICIxLjA0NSIsICJyc2kiOiAiMzkuMSIsICJtYWNkIjogIi0wLjEyIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-NEAR" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">NEAR</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('INJ')">
-            <span class="font-bold font-mono text-sm">INJ</span>
-            <div class="tooltip">
-                $3.102<br>RSI: 35.6
-            </div>
-            <span id="star-INJ" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiSU5KIiwgInByaWNlIjogIjMuMTA0IiwgInJzaSI6ICIzNS43IiwgIm1hY2QiOiAiLTAuMzYiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')">
+            <span id="star-INJ" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">INJ</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('OP')">
-            <span class="font-bold font-mono text-sm">OP</span>
-            <div class="tooltip">
-                $0.1871<br>RSI: 38.2
-            </div>
-            <span id="star-OP" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiT1AiLCAicHJpY2UiOiAiMC4xODcxIiwgInJzaSI6ICIzOC4yIiwgIm1hY2QiOiAiLTAuMDMiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')">
+            <span id="star-OP" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">OP</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('ICP')">
-            <span class="font-bold font-mono text-sm">ICP</span>
-            <div class="tooltip">
-                $2.383<br>RSI: 39.4
-            </div>
-            <span id="star-ICP" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiSUNQIiwgInByaWNlIjogIjIuMzgyIiwgInJzaSI6ICIzOS4zIiwgIm1hY2QiOiAiLTAuMjIiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')">
+            <span id="star-ICP" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">ICP</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('FIL')">
-            <span class="font-bold font-mono text-sm">FIL</span>
-            <div class="tooltip">
-                $0.961<br>RSI: 41.2
-            </div>
-            <span id="star-FIL" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiRklMIiwgInByaWNlIjogIjAuOTYxMiIsICJyc2kiOiAiNDEuMiIsICJtYWNkIjogIi0wLjA5IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')">
+            <span id="star-FIL" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">FIL</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('LDO')">
-            <span class="font-bold font-mono text-sm">LDO</span>
-            <div class="tooltip">
-                $0.341<br>RSI: 34.9
-            </div>
-            <span id="star-LDO" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiTERPIiwgInByaWNlIjogIjAuMzQwNiIsICJyc2kiOiAiMzQuOCIsICJtYWNkIjogIi0wLjA1IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-LDO" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">LDO</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('TIA')">
-            <span class="font-bold font-mono text-sm">TIA</span>
-            <div class="tooltip">
-                $0.3412<br>RSI: 43.7
-            </div>
-            <span id="star-TIA" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiVElBIiwgInByaWNlIjogIjAuMzQwOCIsICJyc2kiOiAiNDMuNiIsICJtYWNkIjogIi0wLjAzIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')">
+            <span id="star-TIA" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">TIA</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('STX')">
-            <span class="font-bold font-mono text-sm">STX</span>
-            <div class="tooltip">
-                $0.2607<br>RSI: 34.7
-            </div>
-            <span id="star-STX" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiU1RYIiwgInByaWNlIjogIjAuMjYwOCIsICJyc2kiOiAiMzQuNyIsICJtYWNkIjogIi0wLjAxIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-STX" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">STX</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #475569;" onclick="toggleFav('APT')">
-            <span class="font-bold font-mono text-sm">APT</span>
-            <div class="tooltip">
-                $0.918<br>RSI: 25.4
-            </div>
-            <span id="star-APT" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQVBUIiwgInByaWNlIjogIjAuOTE3IiwgInJzaSI6ICIyNS40IiwgIm1hY2QiOiAiLTAuMTciLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')">
+            <span id="star-APT" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">APT</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('ARB')">
-            <span class="font-bold font-mono text-sm">ARB</span>
-            <div class="tooltip">
-                $0.1128<br>RSI: 37.0
-            </div>
-            <span id="star-ARB" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQVJCIiwgInByaWNlIjogIjAuMTEyOSIsICJyc2kiOiAiMzcuMSIsICJtYWNkIjogIi0wLjAyIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-ARB" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">ARB</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('VET')">
-            <span class="font-bold font-mono text-sm">VET</span>
-            <div class="tooltip">
-                $0.008123<br>RSI: 46.7
-            </div>
-            <span id="star-VET" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiVkVUIiwgInByaWNlIjogIjAuMDA4MTIxIiwgInJzaSI6ICI0Ni43IiwgIm1hY2QiOiAiLTAuMDAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-VET" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">VET</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('KAS')">
-            <span class="font-bold font-mono text-sm">KAS</span>
-            <div class="tooltip">
-                $0.031916<br>RSI: 49.7
-            </div>
-            <span id="star-KAS" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiS0FTIiwgInByaWNlIjogIjAuMDMxODk4IiwgInJzaSI6ICI0OS42IiwgIm1hY2QiOiAiLTAuMDAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-KAS" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">KAS</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('ETC')">
-            <span class="font-bold font-mono text-sm">ETC</span>
-            <div class="tooltip">
-                $8.69<br>RSI: 40.0
-            </div>
-            <span id="star-ETC" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiRVRDIiwgInByaWNlIjogIjguNjgiLCAicnNpIjogIjM5LjkiLCAibWFjZCI6ICItMC43MCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')">
+            <span id="star-ETC" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">ETC</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('ALGO')">
-            <span class="font-bold font-mono text-sm">ALGO</span>
-            <div class="tooltip">
-                $0.09311<br>RSI: 38.1
-            </div>
-            <span id="star-ALGO" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQUxHTyIsICJwcmljZSI6ICIwLjA5MzE0IiwgInJzaSI6ICIzOC4xIiwgIm1hY2QiOiAiLTAuMDEiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')">
+            <span id="star-ALGO" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">ALGO</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('RUNE')">
-            <span class="font-bold font-mono text-sm">RUNE</span>
-            <div class="tooltip">
-                $0.403<br>RSI: 37.7
-            </div>
-            <span id="star-RUNE" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiUlVORSIsICJwcmljZSI6ICIwLjQwMzUiLCAicnNpIjogIjM3LjgiLCAibWFjZCI6ICItMC4wNCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')">
+            <span id="star-RUNE" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">RUNE</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('EGLD')">
-            <span class="font-bold font-mono text-sm">EGLD</span>
-            <div class="tooltip">
-                $4.692<br>RSI: 47.4
-            </div>
-            <span id="star-EGLD" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiRUdMRCIsICJwcmljZSI6ICI0LjY5NSIsICJyc2kiOiAiNDcuNSIsICJtYWNkIjogIi0wLjIxIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-EGLD" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">EGLD</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('SEI')">
-            <span class="font-bold font-mono text-sm">SEI</span>
-            <div class="tooltip">
-                $0.0742<br>RSI: 36.1
-            </div>
-            <span id="star-SEI" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiU0VJIiwgInByaWNlIjogIjAuMDc0MzQiLCAicnNpIjogIjM2LjIiLCAibWFjZCI6ICItMC4wMSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')">
+            <span id="star-SEI" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">SEI</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('SUI')">
-            <span class="font-bold font-mono text-sm">SUI</span>
-            <div class="tooltip">
-                $0.9684<br>RSI: 39.9
-            </div>
-            <span id="star-SUI" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiU1VJIiwgInByaWNlIjogIjAuOTY3OSIsICJyc2kiOiAiMzkuOSIsICJtYWNkIjogIi0wLjEzIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-SUI" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">SUI</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #22c55e;" onclick="toggleFav('AAVE')">
-            <span class="font-bold font-mono text-sm">AAVE</span>
-            <div class="tooltip">
-                $126.58<br>RSI: 50.9
-            </div>
-            <span id="star-AAVE" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQUFWRSIsICJwcmljZSI6ICIxMjYuNTQiLCAicnNpIjogIjUwLjkiLCAibWFjZCI6ICItNy4wMSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')">
+            <span id="star-AAVE" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">AAVE</span>
         </div>
         
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="toggleFav('SAND')">
-            <span class="font-bold font-mono text-sm">SAND</span>
-            <div class="tooltip">
-                $0.08598<br>RSI: 38.6
-            </div>
-            <span id="star-SAND" class="absolute top-0 right-1 text-xs opacity-0 hover:opacity-100">★</span>
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiU0FORCIsICJwcmljZSI6ICIwLjA4NTg0IiwgInJzaSI6ICIzOC41IiwgIm1hY2QiOiAiLTAuMDEiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')">
+            <span id="star-SAND" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">SAND</span>
         </div>
         
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiSU1YIiwgInByaWNlIjogIjAuMTY2NCIsICJyc2kiOiAiNDMuMSIsICJtYWNkIjogIi0wLjAyIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-IMX" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">IMX</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiTUFOQSIsICJwcmljZSI6ICIwLjEwMTIzIiwgInJzaSI6ICI0MS43IiwgIm1hY2QiOiAiLTAuMDEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-MANA" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">MANA</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiR1JUIiwgInByaWNlIjogIjAuMDI3NzUiLCAicnNpIjogIjQ0LjEiLCAibWFjZCI6ICItMC4wMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')">
+            <span id="star-GRT" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">GRT</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiRkxPVyIsICJwcmljZSI6ICIwLjAzOTEzIiwgInJzaSI6ICI0MC45IiwgIm1hY2QiOiAiLTAuMDEiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')">
+            <span id="star-FLOW" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">FLOW</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiR0FMQSIsICJwcmljZSI6ICIwLjAwNDA0MiIsICJyc2kiOiAiMzcuNSIsICJtYWNkIjogIi0wLjAwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-GALA" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">GALA</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiRFlEWCIsICJwcmljZSI6ICIwLjEwNzMiLCAicnNpIjogIjM0LjMiLCAibWFjZCI6ICItMC4wMiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')">
+            <span id="star-DYDX" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">DYDX</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiUU5UIiwgInByaWNlIjogIjcwLjY4IiwgInJzaSI6ICI1Ni4zIiwgIm1hY2QiOiAiLTAuODEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-QNT" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">QNT</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiV0xEIiwgInByaWNlIjogIjAuMzk3NCIsICJyc2kiOiAiNDcuNiIsICJtYWNkIjogIi0wLjAyIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')">
+            <span id="star-WLD" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">WLD</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQVBFIiwgInByaWNlIjogIjAuMTI2NSIsICJyc2kiOiAiMzYuMyIsICJtYWNkIjogIi0wLjAxIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-APE" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">APE</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiU05YIiwgInByaWNlIjogIjAuMjk2OCIsICJyc2kiOiAiMzYuNCIsICJtYWNkIjogIi0wLjAzIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-SNX" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">SNX</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #475569;" onclick="openModal('eyJzeW1ib2wiOiAiQVhTIiwgInByaWNlIjogIjEuMzY4NyIsICJyc2kiOiAiMzkuOCIsICJtYWNkIjogIi0wLjA5IiwgInNpZ25hbF90eXBlIjogIk5FVVRSQUwiLCAiY29sb3IiOiAiIzQ3NTU2OSJ9')">
+            <span id="star-AXS" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">AXS</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQ0haIiwgInByaWNlIjogIjAuMDQwNjYiLCAicnNpIjogIjQyLjUiLCAibWFjZCI6ICItMC4wMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')">
+            <span id="star-CHZ" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">CHZ</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiTFVOQyIsICJwcmljZSI6ICIzLjM3N2UtMDUiLCAicnNpIjogIjM4LjMiLCAibWFjZCI6ICItMC4wMCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')">
+            <span id="star-LUNC" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">LUNC</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiUEVQRSIsICJwcmljZSI6ICI0LjM5OGUtMDYiLCAicnNpIjogIjUzLjgiLCAibWFjZCI6ICItMC4wMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')">
+            <span id="star-PEPE" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">PEPE</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQk9OSyIsICJwcmljZSI6ICI2LjUwNWUtMDYiLCAicnNpIjogIjQ0LjAiLCAibWFjZCI6ICItMC4wMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')">
+            <span id="star-BONK" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">BONK</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiT1JESSIsICJwcmljZSI6ICIyLjc4MyIsICJyc2kiOiAiNDAuMiIsICJtYWNkIjogIi0wLjMxIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')">
+            <span id="star-ORDI" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">ORDI</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiRkVUIiwgInByaWNlIjogIjAuMTcxMiIsICJyc2kiOiAiNDUuOCIsICJtYWNkIjogIi0wLjAyIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')">
+            <span id="star-FET" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">FET</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiTUlOQSIsICJwcmljZSI6ICIwLjA2NTM3IiwgInJzaSI6ICI0Mi4zIiwgIm1hY2QiOiAiLTAuMDAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-MINA" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">MINA</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiWExNIiwgInByaWNlIjogIjAuMTY1OCIsICJyc2kiOiAiNDQuMSIsICJtYWNkIjogIi0wLjAxIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')">
+            <span id="star-XLM" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">XLM</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiWFRaIiwgInByaWNlIjogIjAuMzk0NyIsICJyc2kiOiAiMzEuMiIsICJtYWNkIjogIi0wLjA0IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-XTZ" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">XTZ</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiS0FWQSIsICJwcmljZSI6ICIwLjA1NDQ2IiwgInJzaSI6ICIzNS44IiwgIm1hY2QiOiAiLTAuMDEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-KAVA" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">KAVA</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQ0FLRSIsICJwcmljZSI6ICIxLjMwNSIsICJyc2kiOiAiMjkuOCIsICJtYWNkIjogIi0wLjE0IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-CAKE" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">CAKE</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQVNUUiIsICJwcmljZSI6ICIwLjAwNzc3NSIsICJyc2kiOiAiNDAuNSIsICJtYWNkIjogIi0wLjAwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-ASTR" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">ASTR</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiSlVQIiwgInByaWNlIjogIjAuMTY0NSIsICJyc2kiOiAiMzYuNiIsICJtYWNkIjogIi0wLjAxIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-JUP" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">JUP</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiV0lGIiwgInByaWNlIjogIjAuMjMwNSIsICJyc2kiOiAiNDQuNiIsICJtYWNkIjogIi0wLjAyIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')">
+            <span id="star-WIF" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">WIF</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiUFlUSCIsICJwcmljZSI6ICIwLjA1NjU5IiwgInJzaSI6ICI1OC43IiwgIm1hY2QiOiAiLTAuMDAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')">
+            <span id="star-PYTH" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">PYTH</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #475569;" onclick="openModal('eyJzeW1ib2wiOiAiWklMIiwgInByaWNlIjogIjAuMDA0MjU5IiwgInJzaSI6ICIzMC4wIiwgIm1hY2QiOiAiLTAuMDAiLCAic2lnbmFsX3R5cGUiOiAiTkVVVFJBTCIsICJjb2xvciI6ICIjNDc1NTY5In0=')">
+            <span id="star-ZIL" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">ZIL</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiUVRVTSIsICJwcmljZSI6ICIwLjk2NDMiLCAicnNpIjogIjQwLjAiLCAibWFjZCI6ICItMC4wOCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')">
+            <span id="star-QTUM" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">QTUM</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiR0xNUiIsICJwcmljZSI6ICIwLjAxMzkyIiwgInJzaSI6ICIzNS41IiwgIm1hY2QiOiAiLTAuMDAiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')">
+            <span id="star-GLMR" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">GLMR</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQU5LUiIsICJwcmljZSI6ICIwLjAwNDcwMSIsICJyc2kiOiAiMzEuMyIsICJtYWNkIjogIi0wLjAwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-ANKR" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">ANKR</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #475569;" onclick="openModal('eyJzeW1ib2wiOiAiUk9TRSIsICJwcmljZSI6ICIwLjAxMjciLCAicnNpIjogIjM0LjUiLCAibWFjZCI6ICItMC4wMCIsICJzaWduYWxfdHlwZSI6ICJORVVUUkFMIiwgImNvbG9yIjogIiM0NzU1NjkifQ==')">
+            <span id="star-ROSE" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">ROSE</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiSU9UWCIsICJwcmljZSI6ICIwLjAwNTY5OSIsICJyc2kiOiAiMzYuNiIsICJtYWNkIjogIi0wLjAwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')">
+            <span id="star-IOTX" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">IOTX</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiREFTSCIsICJwcmljZSI6ICIzNy4yMyIsICJyc2kiOiAiNDEuOSIsICJtYWNkIjogIi00LjE3IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')">
+            <span id="star-DASH" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">DASH</span>
+        </div>
+        
+        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiWkVDIiwgInByaWNlIjogIjI5Ni4wMSIsICJyc2kiOiAiNTUuMiIsICJtYWNkIjogIi0xNy4xNiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')">
+            <span id="star-ZEC" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
+            <span class="font-bold font-mono text-xs">ZEC</span>
+        </div>
+        
+        </div>
+
+        <div id="detailModal" class="modal">
+            <div class="modal-content">
+                <div class="flex justify-between mb-4">
+                    <h2 id="m-title" class="text-2xl font-bold"></h2>
+                    <button onclick="closeModal()" class="text-slate-400 hover:text-white">&times;</button>
+                </div>
+                <div id="m-body" class="text-sm text-slate-300 space-y-2"></div>
+            </div>
         </div>
 
         <footer class="mt-12 pt-6 border-t border-slate-700 text-center text-slate-500 text-xs">
@@ -332,6 +403,25 @@
             let favorites = JSON.parse(localStorage.getItem('favs')) || [];
             let showingFavs = false;
 
+            function openModal(encodedData) {
+                const data = JSON.parse(atob(encodedData));
+                document.getElementById('m-title').innerText = data.symbol;
+                document.getElementById('m-body').innerHTML = `
+                    <p>Price: <strong>$${data.price}</strong></p>
+                    <p>Signal: <strong>${data.signal_type}</strong></p>
+                    <p>RSI: <strong>${data.rsi}</strong></p>
+                    <p>MACD: <strong>${data.macd}</strong></p>
+                `;
+                document.getElementById('detailModal').style.display = 'block';
+                
+                // Yıldız Tıklama Kontrolü (Modal açıkken yıldız tıklanırsa)
+                event.stopPropagation(); 
+            }
+
+            function closeModal() {
+                document.getElementById('detailModal').style.display = 'none';
+            }
+
             function toggleFav(symbol) {
                 if (favorites.includes(symbol)) {
                     favorites = favorites.filter(f => f !== symbol);
@@ -341,12 +431,7 @@
                 localStorage.setItem('favs', JSON.stringify(favorites));
                 updateStars();
                 if (showingFavs) renderGrid();
-            }
-
-            function toggleFavorites() {
-                showingFavs = !showingFavs;
-                document.getElementById('fav-btn').innerText = showingFavs ? 'Show All' : 'Show Favorites';
-                renderGrid();
+                event.stopPropagation(); // Kutu tıklamasını engelle
             }
 
             function updateStars() {
@@ -354,12 +439,19 @@
                     const symbol = box.querySelector('.font-mono').innerText;
                     const star = box.querySelector('span.absolute');
                     if (favorites.includes(symbol)) {
-                        star.classList.remove('opacity-0');
-                        star.style.color = 'yellow';
+                        star.style.color = '#facc15'; // Sarı yıldız
+                        star.style.opacity = '1';
                     } else {
-                        star.classList.add('opacity-0');
+                        star.style.color = '#cbd5e1'; // Soluk yıldız
+                        star.style.opacity = '0.5';
                     }
                 });
+            }
+
+            function toggleFavorites() {
+                showingFavs = !showingFavs;
+                document.getElementById('fav-btn').innerText = showingFavs ? 'Show All' : 'Show Favorites';
+                renderGrid();
             }
 
             function renderGrid() {
@@ -377,6 +469,14 @@
 
             // Sayfa yüklendiğinde favori yıldızlarını göster
             updateStars();
+            
+            // Modal dışına tıklayınca kapat
+            window.onclick = function(event) {
+                const modal = document.getElementById('detailModal');
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
         </script>
     </body>
     </html>
