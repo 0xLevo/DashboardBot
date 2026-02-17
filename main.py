@@ -6,11 +6,13 @@ from datetime import datetime, timezone
 import json 
 import base64
 
-# --- ANALİZ EDİLECEK COINLER ---
+# --- TOP 100 COINS (Eksikler eklendi) ---
 TOP_COINS = [
     'BTC', 'ETH', 'BNB', 'SOL', 'XRP', 'ADA', 'AVAX', 'DOGE', 'DOT', 'TRX', 
     'LINK', 'MATIC', 'TON', 'SHIB', 'LTC', 'BCH', 'ATOM', 'UNI', 'NEAR', 'INJ', 
-    'OP', 'ICP', 'FIL', 'LDO', 'TIA', 'STX', 'APT', 'ARB', 'RNDR', 'VET'
+    'OP', 'ICP', 'FIL', 'LDO', 'TIA', 'STX', 'APT', 'ARB', 'RNDR', 'VET', 
+    'KAS', 'ETC', 'ALGO', 'RUNE', 'EGLD', 'SEI', 'SUI', 'AAVE', 'FTM', 'SAND',
+    'IMX', 'MANA', 'GRT', 'FLOW', 'GALA', 'DYDX', 'QNT', 'MKR', 'RNDR', 'WLD'
 ]
 
 def get_rainbow_bands(prices):
@@ -23,15 +25,15 @@ def get_rainbow_bands(prices):
         # Regresyon çizgisi
         regression_line = slope * x + intercept
         
-        # Standart sapma ile bantları oluştur (Basitleştirilmiş rainbow)
+        # Standart sapma ile bantları oluştur
         std_dev = np.std(y - regression_line)
         
         bands = {
-            "top": np.exp(regression_line + 2.5 * std_dev).tolist(),
-            "mid_top": np.exp(regression_line + 1.25 * std_dev).tolist(),
+            "top": np.exp(regression_line + 2.0 * std_dev).tolist(),
+            "mid_top": np.exp(regression_line + 1.0 * std_dev).tolist(),
             "mid": np.exp(regression_line).tolist(),
-            "mid_bot": np.exp(regression_line - 1.25 * std_dev).tolist(),
-            "bot": np.exp(regression_line - 2.5 * std_dev).tolist(),
+            "mid_bot": np.exp(regression_line - 1.0 * std_dev).tolist(),
+            "bot": np.exp(regression_line - 2.0 * std_dev).tolist(),
         }
         
         # Güncel fiyatın hangi bantta olduğunu belirle
@@ -52,9 +54,9 @@ def analyze_market():
     for symbol in TOP_COINS:
         try:
             pair = f"{symbol}/USDT"
-            # 200 günlük veri çek
-            bars = exchange.fetch_ohlcv(pair, timeframe='1d', limit=200)
-            if len(bars) < 100: continue
+            # 300 günlük veri -> Daha uzun vadeli trend için
+            bars = exchange.fetch_ohlcv(pair, timeframe='1d', limit=300)
+            if len(bars) < 150: continue
             
             df = pd.DataFrame(bars, columns=['time', 'open', 'high', 'low', 'close', 'volume'])
             prices = df['close'].tolist()
@@ -86,12 +88,13 @@ def create_html(data):
         <title>Crypto Rainbow Dashboard</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
         <style>
             body {{ font-family: 'Poppins', sans-serif; background-color: #0f172a; color: white; }}
             .card {{ background: #1e293b; border-radius: 16px; transition: 0.3s; }}
             .card:hover {{ transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); }}
-            .modal {{ backdrop-filter: blur(5px); }}
+            .modal-content {{ background: #1e293b; width: 95vw; height: 90vh; }}
         </style>
     </head>
     <body class="p-6">
@@ -120,22 +123,25 @@ def create_html(data):
     html += """
         </div>
 
-        <div id="modal" class="modal fixed inset-0 bg-black/70 hidden flex items-center justify-center p-4">
-            <div class="bg-slate-800 p-6 rounded-2xl max-w-4xl w-full">
+        <div id="modal" class="fixed inset-0 bg-black/80 hidden flex items-center justify-center p-4">
+            <div class="modal-content p-6 rounded-3xl flex flex-col">
                 <div class="flex justify-between mb-4">
-                    <h2 id="m-title" class="text-2xl font-bold"></h2>
-                    <button onclick="closeModal()" class="text-2xl">&times;</button>
+                    <h2 id="m-title" class="text-3xl font-bold"></h2>
+                    <button onclick="closeModal()" class="text-4xl">&times;</button>
                 </div>
-                <canvas id="coinChart" height="200"></canvas>
+                <div class="flex-grow">
+                    <canvas id="coinChart"></canvas>
+                </div>
             </div>
         </div>
 
         <script>
             let currentChart = null;
+            Chart.register(ChartDataLabels);
 
             function showModal(encodedData) {
                 const data = JSON.parse(atob(encodedData));
-                document.getElementById('m-title').innerText = data.symbol + " Rainbow Chart";
+                document.getElementById('m-title').innerText = data.symbol + " Rainbow Model";
                 document.getElementById('modal').classList.remove('hidden');
 
                 if (currentChart) currentChart.destroy();
@@ -146,18 +152,24 @@ def create_html(data):
                     data: {
                         labels: data.dates,
                         datasets: [
-                            { label: 'Price', data: data.prices, borderColor: '#38bdf8', borderWidth: 2, fill: false, tension: 0.1, yAxisID: 'y' },
-                            { label: 'Top', data: data.bands.top, borderColor: '#ef4444', borderWidth: 1, fill: false, tension: 0.1, yAxisID: 'y' },
-                            { label: 'Mid-Top', data: data.bands.mid_top, borderColor: '#f97316', borderWidth: 1, fill: false, tension: 0.1, yAxisID: 'y' },
-                            { label: 'Mid', data: data.bands.mid, borderColor: '#eab308', borderWidth: 1, fill: false, tension: 0.1, yAxisID: 'y' },
-                            { label: 'Mid-Bot', data: data.bands.mid_bot, borderColor: '#22c55e', borderWidth: 1, fill: false, tension: 0.1, yAxisID: 'y' },
-                            { label: 'Bot', data: data.bands.bot, borderColor: '#166534', borderWidth: 1, fill: false, tension: 0.1, yAxisID: 'y' }
+                            { label: 'Price', data: data.prices, borderColor: '#fff', borderWidth: 3, fill: false, tension: 0.1, yAxisID: 'y', order: 1 },
+                            { label: 'Bubble', data: data.bands.top, borderColor: '#ef4444', backgroundColor: '#ef444430', borderWidth: 1, fill: '-1', tension: 0.1, yAxisID: 'y' },
+                            { label: 'FOMO', data: data.bands.mid_top, borderColor: '#f97316', backgroundColor: '#f9731630', borderWidth: 1, fill: '-1', tension: 0.1, yAxisID: 'y' },
+                            { label: 'Neutral', data: data.bands.mid, borderColor: '#eab308', backgroundColor: '#eab30830', borderWidth: 1, fill: '-1', tension: 0.1, yAxisID: 'y' },
+                            { label: 'Buy', data: data.bands.mid_bot, borderColor: '#22c55e', backgroundColor: '#22c55e30', borderWidth: 1, fill: '-1', tension: 0.1, yAxisID: 'y' },
+                            { label: 'Fire Sale', data: data.bands.bot, borderColor: '#166534', backgroundColor: '#16653430', borderWidth: 1, fill: false, tension: 0.1, yAxisID: 'y' }
                         ]
                     },
                     options: {
                         responsive: true,
-                        scales: { y: { type: 'logarithmic' } },
-                        plugins: { legend: { labels: { color: 'white' } } }
+                        maintainAspectRatio: false,
+                        scales: { y: { type: 'logarithmic', grid: { color: '#334155' } }, x: { grid: { color: '#334155' } } },
+                        plugins: {
+                            legend: { labels: { color: 'white' } },
+                            datalabels: {
+                                display: false // Bant isimlerini gizle
+                            }
+                        }
                     }
                 });
             }
