@@ -3,167 +3,173 @@ import pandas as pd
 import numpy as np
 import time
 from datetime import datetime, timezone, timedelta
-import json 
+import json
 import base64
 
-# --- ANALİZ EDİLECEK COINLER (Uzun Vadeli Model) ---
-TOP_COINS = ['BTC', 'ETH', 'SOL', 'XRP', 'DOGE', 'LINK', 'BNB', 'ADA', 'AVAX']
+# --- TOP 100+ COIN LISTESİ (Stabil Coinler Hariç) ---
+# CMC verilerine göre kapsamlı liste
+TOP_COINS = [
+    'BTC', 'ETH', 'BNB', 'SOL', 'XRP', 'ADA', 'AVAX', 'DOGE', 'DOT', 'TRX',
+    'LINK', 'MATIC', 'TON', 'SHIB', 'LTC', 'BCH', 'ATOM', 'UNI', 'NEAR', 'INJ',
+    'OP', 'ICP', 'FIL', 'LDO', 'TIA', 'STX', 'APT', 'ARB', 'RNDR', 'VET',
+    'KAS', 'ETC', 'ALGO', 'RUNE', 'EGLD', 'SEI', 'SUI', 'AAVE', 'FTM', 'SAND',
+    'IMX', 'MANA', 'GRT', 'FLOW', 'GALA', 'DYDX', 'QNT', 'MKR', 'WLD', 'APE',
+    'SNX', 'INJ', 'AXS', 'CHZ', 'MANA', 'SAND', 'LUNC', 'PEPE', 'BONK', 'ORDI'
+]
 
-def get_rainbow_bands(prices, dates):
+def get_projections(prices, dates):
+    """Logaritmik regresyon ile geçmiş ve gelecek bantlarını hesaplar."""
     try:
         y = np.log(prices)
         x = np.arange(len(y))
         slope, intercept = np.polyfit(x, y, 1)
-        
-        # --- 2050 YILINA KADAR PROJEKSİYON ---
-        target_year = 2050
+
+        # 2050'ye kadar projeksiyon
         last_date = datetime.strptime(dates[-1], '%Y-%m-%d')
-        future_days = (datetime(target_year, 1, 1) - last_date).days
-        
-        # Eğer tarih zaten 2050'yi geçtiyse limit koy
-        if future_days < 0: future_days = 365 
+        future_days = (datetime(2050, 1, 1) - last_date).days
+        if future_days < 0: future_days = 365
 
         future_x = np.arange(len(y) + future_days)
-        
-        # Regresyon çizgisi (2050'ye uzatılmış)
         regression_line = slope * future_x + intercept
         
         # Standart Sapma
         residuals = y - (slope * x + intercept)
         std_dev = np.std(residuals)
-        
-        # --- BANTLARIN 2050'YE UZATILMASI ---
-        bands = {
-            "bubble": np.exp(regression_line + 2.5 * std_dev).tolist(),
-            "fomo": np.exp(regression_line + 1.5 * std_dev).tolist(),
-            "neutral": np.exp(regression_line).tolist(),
-            "buy": np.exp(regression_line - 1.0 * std_dev).tolist(),
-            "firesale": np.exp(regression_line - 2.0 * std_dev).tolist(),
-        }
-        
-        # Gelecekteki tarihleri oluştur
+
+        # Bantları Hesapla (TradingView formatına uygun)
         future_dates = [ (last_date + timedelta(days=i)).strftime('%Y-%m-%d') for i in range(future_days) ]
         all_dates = dates + future_dates
-            
-        return bands, all_dates
-    except: return None, dates
+        
+        # Regresyon çizgisi verisi
+        line_data = []
+        for i in range(len(all_dates)):
+            line_data.append({'time': all_dates[i], 'value': np.exp(regression_line[i])})
+
+        # Bant verileri
+        bands = {
+            "top": [{'time': all_dates[i], 'value': np.exp(regression_line[i] + 2.5 * std_dev)} for i in range(len(all_dates))],
+            "bot": [{'time': all_dates[i], 'value': np.exp(regression_line[i] - 2.0 * std_dev)} for i in range(len(all_dates))]
+        }
+
+        # Fiyat verisi
+        price_data = []
+        for i in range(len(dates)):
+            price_data.append({'time': dates[i], 'value': prices[i]})
+
+        return price_data, line_data, bands
+    except Exception as e:
+        print(f"Error: {e}")
+        return None, None, None
 
 def analyze_market():
     exchange = ccxt.mexc({'enableRateLimit': True})
     results = []
-    
+
     for symbol in TOP_COINS:
         try:
             pair = f"{symbol}/USDT"
-            # MEXC'den alınabilecek maksimum veri (yaklaşık 3-4 yıl)
+            # Maksimum veri
             bars = exchange.fetch_ohlcv(pair, timeframe='1d', limit=1000)
             if len(bars) < 100: continue
-            
+
             df = pd.DataFrame(bars, columns=['time', 'open', 'high', 'low', 'close', 'volume'])
             prices = df['close'].tolist()
             dates = pd.to_datetime(df['time'], unit='ms').dt.strftime('%Y-%m-%d').tolist()
-            
-            bands, all_dates = get_rainbow_bands(prices, dates)
 
-            if bands:
+            price_data, line_data, bands = get_projections(prices, dates)
+
+            if price_data:
                 results.append({
                     'symbol': symbol,
                     'price': f"{prices[-1]:.6g}",
-                    'dates': all_dates,
-                    'prices': prices, # Fiyat geçmiş veridir
+                    'price_data': price_data,
+                    'line_data': line_data,
                     'bands': bands
                 })
             time.sleep(0.05)
-        except: continue
+        except Exception as e:
+            print(f"Error on {symbol}: {e}")
+            continue
     return results
 
 def create_html(data):
     full_update = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
     
+    # Tüm veriyi JS'e aktarmak yerine sadece seçili coini yükleyeceğiz
     html = f"""
     <!DOCTYPE html><html lang="en">
     <head>
         <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Crypto Rainbow Dashboard 2050</title>
+        <title>Crypto Regression Dashboard</title>
         <script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
         <style>
             body {{ font-family: 'Poppins', sans-serif; background-color: #0f172a; color: white; }}
             .card {{ background: #1e293b; border-radius: 16px; transition: 0.3s; }}
             .card:hover {{ transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); }}
-            .modal-content {{ background: #1e293b; width: 95vw; height: 90vh; }}
+            #chart-container {{ width: 100%; height: 70vh; }}
         </style>
     </head>
     <body class="p-6">
         <header class="flex justify-between items-center pb-8 border-b border-slate-700 mb-8">
-            <h1 class="text-3xl font-bold text-white">Rainbow <span class="text-sky-400">Dashboard 2050</span></h1>
+            <h1 class="text-3xl font-bold text-white">Log Regression <span class="text-sky-400">Dashboard</span></h1>
             <span class="text-sm text-slate-400 font-mono">{full_update} UTC</span>
         </header>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-3 mb-6">
     """
 
     for i in data:
         encoded_data = base64.b64encode(json.dumps(i).encode()).decode()
         html += f"""
-        <div class="card p-5 cursor-pointer" onclick="showModal('{encoded_data}')">
-            <div class="flex justify-between items-center mb-3">
-                <span class="text-lg font-bold text-white font-mono">{i['symbol']}</span>
-            </div>
-            <div class="text-2xl font-extrabold text-white mb-1">${i['price']}</div>
-        </div>
+        <button onclick="loadChart('{encoded_data}')" class="card p-3 text-center cursor-pointer hover:bg-slate-700">
+            <div class="text-sm font-bold text-white font-mono">{i['symbol']}</div>
+            <div class="text-xs text-sky-400 font-semibold">${i['price']}</div>
+        </button>
         """
 
-    html += """
+    html += f"""
         </div>
-
-        <div id="modal" class="fixed inset-0 bg-black/80 hidden flex items-center justify-center p-4">
-            <div class="modal-content p-6 rounded-3xl flex flex-col">
-                <div class="flex justify-between mb-4">
-                    <h2 id="m-title" class="text-3xl font-bold"></h2>
-                    <button onclick="closeModal()" class="text-4xl">&times;</button>
-                </div>
-                <div class="flex-grow">
-                    <canvas id="coinChart"></canvas>
-                </div>
-            </div>
+        
+        <div class="card p-4">
+            <h2 id="chart-title" class="text-xl font-bold mb-3 text-center">Coin Seçin</h2>
+            <div id="chart-container"></div>
         </div>
 
         <script>
-            let currentChart = null;
+            let chart = null;
+            let priceSeries = null;
+            let lineSeries = null;
+            let topBandSeries = null;
+            let botBandSeries = null;
 
-            function showModal(encodedData) {
+            function loadChart(encodedData) {{
                 const data = JSON.parse(atob(encodedData));
-                document.getElementById('m-title').innerText = data.symbol + " Rainbow Model to 2050";
-                document.getElementById('modal').classList.remove('hidden');
+                document.getElementById('chart-title').innerText = data.symbol + " Log Regression & Projection to 2050";
+                
+                if (chart) {{
+                    chart.remove();
+                }}
 
-                if (currentChart) currentChart.destroy();
+                chart = LightweightCharts.createChart(document.getElementById('chart-container'), {{
+                    layout: {{ backgroundColor: '#1e293b', textColor: '#d1d5db' }},
+                    grid: {{ vertLines: {{ color: '#334155' }}, horzLines: {{ color: '#334155' }} }},
+                    rightPriceScale: {{ scaleMargins: {{ top: 0.1, bottom: 0.1 }}, mode: LightweightCharts.PriceScaleMode.Logarithmic }},
+                    timeScale: {{ borderColor: '#334155', timeVisible: true, secondsVisible: false }},
+                    crosshair: {{ mode: LightweightCharts.CrosshairMode.Normal }},
+                }});
 
-                const ctx = document.getElementById('coinChart').getContext('2d');
-                currentChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: data.dates,
-                        datasets: [
-                            { label: 'Price', data: data.prices, borderColor: '#fff', borderWidth: 2, fill: false, tension: 0.1, yAxisID: 'y', order: 1 },
-                            { label: 'Bubble', data: data.bands.bubble, borderColor: '#ef4444', borderWidth: 1, fill: false, tension: 0.1, yAxisID: 'y' },
-                            { label: 'FOMO', data: data.bands.fomo, borderColor: '#f97316', borderWidth: 1, fill: false, tension: 0.1, yAxisID: 'y' },
-                            { label: 'Neutral', data: data.bands.neutral, borderColor: '#eab308', borderWidth: 1, fill: false, tension: 0.1, yAxisID: 'y' },
-                            { label: 'Buy', data: data.bands.buy, borderColor: '#22c55e', borderWidth: 1, fill: false, tension: 0.1, yAxisID: 'y' },
-                            { label: 'Fire Sale', data: data.bands.firesale, borderColor: '#166534', borderWidth: 1, fill: false, tension: 0.1, yAxisID: 'y' }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: { y: { type: 'logarithmic', grid: { color: '#334155' } }, x: { grid: { color: '#334155' } } },
-                        plugins: { legend: { labels: { color: 'white' } } }
-                    }
-                });
-            }
+                priceSeries = chart.addLineSeries({{ color: '#38bdf8', lineWidth: 2, title: 'Price' }});
+                lineSeries = chart.addLineSeries({{ color: '#eab308', lineWidth: 1, lineStyle: LightweightCharts.LineStyle.Dashed, title: 'Regression Line' }});
+                topBandSeries = chart.addLineSeries({{ color: '#ef4444', lineWidth: 1, title: 'Upper Band' }});
+                botBandSeries = chart.addLineSeries({{ color: '#22c55e', lineWidth: 1, title: 'Lower Band' }});
 
-            function closeModal() { document.getElementById('modal').classList.add('hidden'); }
+                priceSeries.setData(data.price_data);
+                lineSeries.setData(data.line_data);
+                topBandSeries.setData(data.bands.top);
+                botBandSeries.setData(data.bands.bot);
+            }}
         </script>
     </body>
     </html>
