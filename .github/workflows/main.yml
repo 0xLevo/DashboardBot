@@ -1,0 +1,42 @@
+name: BasedVector Scheduler
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 */4 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install ccxt pandas numpy
+
+      - name: Run Analysis
+        run: |
+          python main.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add index.html
+          git commit -m "Update Dashboard: $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+          git pull origin main --rebase
+          git push origin main
