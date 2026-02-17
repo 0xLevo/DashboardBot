@@ -6,42 +6,47 @@ from datetime import datetime, timezone
 import json 
 import base64
 
-# --- TOP 100 COINS (Eksikler eklendi) ---
+# --- TOP 100 COINS (Güncellenmiş Liste) ---
 TOP_COINS = [
     'BTC', 'ETH', 'BNB', 'SOL', 'XRP', 'ADA', 'AVAX', 'DOGE', 'DOT', 'TRX', 
     'LINK', 'MATIC', 'TON', 'SHIB', 'LTC', 'BCH', 'ATOM', 'UNI', 'NEAR', 'INJ', 
     'OP', 'ICP', 'FIL', 'LDO', 'TIA', 'STX', 'APT', 'ARB', 'RNDR', 'VET', 
     'KAS', 'ETC', 'ALGO', 'RUNE', 'EGLD', 'SEI', 'SUI', 'AAVE', 'FTM', 'SAND',
-    'IMX', 'MANA', 'GRT', 'FLOW', 'GALA', 'DYDX', 'QNT', 'MKR', 'RNDR', 'WLD'
+    'IMX', 'MANA', 'GRT', 'FLOW', 'GALA', 'DYDX', 'QNT', 'MKR', 'WLD'
 ]
 
 def get_rainbow_bands(prices):
-    """Logaritmik regresyon kullanarak rainbow bantlarını hesaplar."""
+    """
+    Logaritmik regresyon kullanarak rainbow bantlarını hesaplar.
+    Daha doğru bir model için standart sapmalar optimize edilmiştir.
+    """
     try:
         y = np.log(prices)
         x = np.arange(len(y))
         slope, intercept = np.polyfit(x, y, 1)
         
-        # Regresyon çizgisi
+        # Temel Regresyon Çizgisi
         regression_line = slope * x + intercept
         
-        # Standart sapma ile bantları oluştur
-        std_dev = np.std(y - regression_line)
+        # Standart Sapma Hesaplama
+        residuals = y - regression_line
+        std_dev = np.std(residuals)
         
+        # --- BANT HESAPLAMALARI (Daha doğru renk dağılımı) ---
         bands = {
-            "top": np.exp(regression_line + 2.0 * std_dev).tolist(),
-            "mid_top": np.exp(regression_line + 1.0 * std_dev).tolist(),
-            "mid": np.exp(regression_line).tolist(),
-            "mid_bot": np.exp(regression_line - 1.0 * std_dev).tolist(),
-            "bot": np.exp(regression_line - 2.0 * std_dev).tolist(),
+            "bubble": np.exp(regression_line + 2.5 * std_dev).tolist(),
+            "fomo": np.exp(regression_line + 1.5 * std_dev).tolist(),
+            "neutral": np.exp(regression_line).tolist(),
+            "buy": np.exp(regression_line - 1.0 * std_dev).tolist(),
+            "firesale": np.exp(regression_line - 2.0 * std_dev).tolist(),
         }
         
         # Güncel fiyatın hangi bantta olduğunu belirle
         curr_price = prices[-1]
-        if curr_price > bands["top"][-1]: status = ("BUBBLE", "#ef4444")
-        elif curr_price > bands["mid_top"][-1]: status = ("FOMO", "#f97316")
-        elif curr_price > bands["mid_bot"][-1]: status = ("NEUTRAL", "#eab308")
-        elif curr_price > bands["bot"][-1]: status = ("BUY", "#22c55e")
+        if curr_price > bands["bubble"][-1]: status = ("BUBBLE", "#ef4444")
+        elif curr_price > bands["fomo"][-1]: status = ("FOMO", "#f97316")
+        elif curr_price > bands["neutral"][-1]: status = ("NEUTRAL", "#eab308")
+        elif curr_price > bands["buy"][-1]: status = ("BUY", "#22c55e")
         else: status = ("FIRE SALE", "#166534")
             
         return bands, status
@@ -54,9 +59,9 @@ def analyze_market():
     for symbol in TOP_COINS:
         try:
             pair = f"{symbol}/USDT"
-            # 300 günlük veri -> Daha uzun vadeli trend için
-            bars = exchange.fetch_ohlcv(pair, timeframe='1d', limit=300)
-            if len(bars) < 150: continue
+            # 500 günlük veri -> Daha uzun vadeli trend için
+            bars = exchange.fetch_ohlcv(pair, timeframe='1d', limit=500)
+            if len(bars) < 200: continue
             
             df = pd.DataFrame(bars, columns=['time', 'open', 'high', 'low', 'close', 'volume'])
             prices = df['close'].tolist()
@@ -137,7 +142,6 @@ def create_html(data):
 
         <script>
             let currentChart = null;
-            Chart.register(ChartDataLabels);
 
             function showModal(encodedData) {
                 const data = JSON.parse(atob(encodedData));
@@ -153,11 +157,11 @@ def create_html(data):
                         labels: data.dates,
                         datasets: [
                             { label: 'Price', data: data.prices, borderColor: '#fff', borderWidth: 3, fill: false, tension: 0.1, yAxisID: 'y', order: 1 },
-                            { label: 'Bubble', data: data.bands.top, borderColor: '#ef4444', backgroundColor: '#ef444430', borderWidth: 1, fill: '-1', tension: 0.1, yAxisID: 'y' },
-                            { label: 'FOMO', data: data.bands.mid_top, borderColor: '#f97316', backgroundColor: '#f9731630', borderWidth: 1, fill: '-1', tension: 0.1, yAxisID: 'y' },
-                            { label: 'Neutral', data: data.bands.mid, borderColor: '#eab308', backgroundColor: '#eab30830', borderWidth: 1, fill: '-1', tension: 0.1, yAxisID: 'y' },
-                            { label: 'Buy', data: data.bands.mid_bot, borderColor: '#22c55e', backgroundColor: '#22c55e30', borderWidth: 1, fill: '-1', tension: 0.1, yAxisID: 'y' },
-                            { label: 'Fire Sale', data: data.bands.bot, borderColor: '#166534', backgroundColor: '#16653430', borderWidth: 1, fill: false, tension: 0.1, yAxisID: 'y' }
+                            { label: 'Bubble', data: data.bands.bubble, borderColor: '#ef4444', backgroundColor: '#ef444430', borderWidth: 1, fill: '-1', tension: 0.1, yAxisID: 'y' },
+                            { label: 'FOMO', data: data.bands.fomo, borderColor: '#f97316', backgroundColor: '#f9731630', borderWidth: 1, fill: '-1', tension: 0.1, yAxisID: 'y' },
+                            { label: 'Neutral', data: data.bands.neutral, borderColor: '#eab308', backgroundColor: '#eab30830', borderWidth: 1, fill: '-1', tension: 0.1, yAxisID: 'y' },
+                            { label: 'Buy', data: data.bands.buy, borderColor: '#22c55e', backgroundColor: '#22c55e30', borderWidth: 1, fill: '-1', tension: 0.1, yAxisID: 'y' },
+                            { label: 'Fire Sale', data: data.bands.firesale, borderColor: '#166534', backgroundColor: '#16653430', borderWidth: 1, fill: false, tension: 0.1, yAxisID: 'y' }
                         ]
                     },
                     options: {
@@ -165,10 +169,7 @@ def create_html(data):
                         maintainAspectRatio: false,
                         scales: { y: { type: 'logarithmic', grid: { color: '#334155' } }, x: { grid: { color: '#334155' } } },
                         plugins: {
-                            legend: { labels: { color: 'white' } },
-                            datalabels: {
-                                display: false // Bant isimlerini gizle
-                            }
+                            legend: { labels: { color: 'white' } }
                         }
                     }
                 });
