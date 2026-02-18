@@ -8,21 +8,20 @@
         <style>
             body { font-family: 'Montserrat', sans-serif; background-color: #020617; color: white; }
             .gradient-text {
-                background: linear-gradient(to right, #991b1b, #f87171, #475569, #4ade80, #166534);
+                background: linear-gradient(to right, #991b1b, #f87171, #475569, #52b788, #1b4332);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }
-            .disclaimer-bar {
-                background: rgba(15, 23, 42, 0.8);
-                border-bottom: 1px solid #1e293b;
-                font-size: 10px;
-                text-transform: uppercase;
-                letter-spacing: 0.1em;
+            .disclaimer-bar { background: rgba(15, 23, 42, 0.8); border-bottom: 1px solid #1e293b; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; }
+            /* BELİRGİN KENARLIKLAR (BORDER) */
+            .coin-box { 
+                border-radius: 4px; 
+                transition: all 0.2s ease; 
+                border: 2px solid rgba(255, 255, 255, 0.2); /* Daha belirgin kenarlık */
             }
-            .coin-box { border-radius: 4px; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(255,255,255,0.03); }
-            .coin-box:hover { transform: scale(1.08); z-index: 50; box-shadow: 0 0 20px rgba(0,0,0,0.6); border-color: rgba(255,255,255,0.3); }
+            .coin-box:hover { transform: scale(1.08); z-index: 50; border-color: rgba(255, 255, 255, 0.6); box-shadow: 0 0 15px rgba(0,0,0,0.5); }
             .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(12px); }
-            .modal-content { background: #0f172a; margin: 8% auto; padding: 32px; border-radius: 24px; width: 360px; border: 1px solid #334155; box-shadow: 0 0 40px rgba(0,0,0,0.8); }
+            .modal-content { background: #0f172a; margin: 8% auto; padding: 32px; border-radius: 24px; width: 360px; border: 1px solid #334155; }
             .star-btn { cursor: pointer; transition: 0.2s; font-size: 1.1rem; }
         </style>
     </head>
@@ -34,994 +33,682 @@
         <div class="p-4 md:p-8">
             <header class="flex flex-col lg:flex-row justify-between items-center pb-8 border-b border-slate-800 mb-8 gap-6">
                 <h1 class="text-5xl font-black gradient-text tracking-tight">BasedVector</h1>
-                
                 <div class="flex flex-wrap gap-4 items-center justify-center">
-                    <input type="text" id="search-input" placeholder="Search Asset (e.g. BTC)..." onkeyup="filterCoins()" class="bg-slate-900 border border-slate-700 text-white px-5 py-2 rounded-xl text-sm outline-none w-72 focus:border-sky-500">
+                    <input type="text" id="search-input" placeholder="Search Asset..." onkeyup="filterCoins()" class="bg-slate-900 border border-slate-700 text-white px-5 py-2 rounded-xl text-sm outline-none w-72 focus:border-sky-500">
                     <button onclick="toggleFavoritesFilter()" id="fav-filter-btn" class="bg-sky-600 hover:bg-sky-500 text-white px-6 py-2 rounded-xl text-sm font-bold transition-all">Show Favorites</button>
-                    <div class="text-[10px] text-slate-500 font-mono bg-slate-950 px-4 py-2 rounded-full border border-slate-800">
-                        SYNCED: 2026-02-18 11:12:34 UTC
-                    </div>
+                    <div class="text-[10px] text-slate-500 font-mono bg-slate-950 px-4 py-2 rounded-full border border-slate-800 uppercase">SYNCED: 2026-02-18 11:18:03</div>
                 </div>
             </header>
 
-            <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-10 lg:grid-cols-12 xl:grid-cols-14 gap-1.5" id="coin-grid">
+            <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-10 lg:grid-cols-12 xl:grid-cols-14 gap-2" id="coin-grid">
     
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQlRDIiwgInByaWNlIjogIjY3MjcwLjUiLCAicnNpIjogIjQwLjMiLCAibWFjZCI6ICItNDYzOS43MTM1IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="BTC">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'BTC')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQlRDIiwgInByaWNlIjogIjY3MzI4LjQiLCAicnNpIjogIjQwLjQiLCAibWFjZCI6ICItNDYzNS4wOTE1IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="BTC">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'BTC')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">BTC</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiRVRIIiwgInByaWNlIjogIjE5ODAuNzEiLCAicnNpIjogIjQyLjIiLCAibWFjZCI6ICItMjE0LjM2NDYiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="ETH">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ETH')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiRVRIIiwgInByaWNlIjogIjE5ODEuNDciLCAicnNpIjogIjQyLjMiLCAibWFjZCI6ICItMjE0LjMwNDAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="ETH">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ETH')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ETH</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQk5CIiwgInByaWNlIjogIjYxNC40NyIsICJyc2kiOiAiMzMuNyIsICJtYWNkIjogIi02MS4yMjk3IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')" data-symbol="BNB">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'BNB')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQk5CIiwgInByaWNlIjogIjYxNS40MyIsICJyc2kiOiAiMzMuOCIsICJtYWNkIjogIi02MS4xNTMxIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="BNB">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'BNB')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">BNB</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiU09MIiwgInByaWNlIjogIjgzLjM4IiwgInJzaSI6ICI0MC43IiwgIm1hY2QiOiAiLTkuNjEyNCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="SOL">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'SOL')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU09MIiwgInByaWNlIjogIjgzLjU1IiwgInJzaSI6ICI0MC45IiwgIm1hY2QiOiAiLTkuNTk4OCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="SOL">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'SOL')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">SOL</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiWFJQIiwgInByaWNlIjogIjEuNDY4IiwgInJzaSI6ICI0Ny41IiwgIm1hY2QiOiAiLTAuMDk5NyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="XRP">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'XRP')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiWFJQIiwgInByaWNlIjogIjEuNDcwMSIsICJyc2kiOiAiNDcuNyIsICJtYWNkIjogIi0wLjA5OTUiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="XRP">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'XRP')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">XRP</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQURBIiwgInByaWNlIjogIjAuMjgxIiwgInJzaSI6ICI0OC4yIiwgIm1hY2QiOiAiLTAuMDE2NyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="ADA">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ADA')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQURBIiwgInByaWNlIjogIjAuMjgxOSIsICJyc2kiOiAiNDguNSIsICJtYWNkIjogIi0wLjAxNjYiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="ADA">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ADA')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ADA</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQVZBWCIsICJwcmljZSI6ICI5LjAyIiwgInJzaSI6ICI0Mi4zIiwgIm1hY2QiOiAiLTAuNzA5OCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="AVAX">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'AVAX')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQVZBWCIsICJwcmljZSI6ICI5LjA1IiwgInJzaSI6ICI0Mi42IiwgIm1hY2QiOiAiLTAuNzA3NCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="AVAX">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'AVAX')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">AVAX</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiRE9HRSIsICJwcmljZSI6ICIwLjA5OTU3IiwgInJzaSI6ICI0Ni43IiwgIm1hY2QiOiAiLTAuMDA1NiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="DOGE">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'DOGE')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiRE9HRSIsICJwcmljZSI6ICIwLjEwMDEyIiwgInJzaSI6ICI0Ny4xIiwgIm1hY2QiOiAiLTAuMDA1NiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="DOGE">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'DOGE')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">DOGE</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiRE9UIiwgInByaWNlIjogIjEuMzQxIiwgInJzaSI6ICI0MS45IiwgIm1hY2QiOiAiLTAuMTI2MSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="DOT">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'DOT')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiRE9UIiwgInByaWNlIjogIjEuMzQ1IiwgInJzaSI6ICI0Mi4xIiwgIm1hY2QiOiAiLTAuMTI1OCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="DOT">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'DOT')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">DOT</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiVFJYIiwgInByaWNlIjogIjAuMjgwNCIsICJyc2kiOiAiNDYuNSIsICJtYWNkIjogIi0wLjAwMzYiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="TRX">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'TRX')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiVFJYIiwgInByaWNlIjogIjAuMjgwNCIsICJyc2kiOiAiNDYuNSIsICJtYWNkIjogIi0wLjAwMzYiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="TRX">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'TRX')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">TRX</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiTElOSyIsICJwcmljZSI6ICI4Ljc4NCIsICJyc2kiOiAiNDQuNCIsICJtYWNkIjogIi0wLjc0MTIiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="LINK">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'LINK')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTElOSyIsICJwcmljZSI6ICI4LjgiLCAicnNpIjogIjQ0LjYiLCAibWFjZCI6ICItMC43Mzk5IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="LINK">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'LINK')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">LINK</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiVE9OIiwgInByaWNlIjogIjEuNDI4IiwgInJzaSI6ICI1Mi45IiwgIm1hY2QiOiAiLTAuMDI2OCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="TON">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'TON')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiVE9OIiwgInByaWNlIjogIjEuNDI4IiwgInJzaSI6ICI1Mi45IiwgIm1hY2QiOiAiLTAuMDI2OCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="TON">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'TON')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">TON</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiU0hJQiIsICJwcmljZSI6ICI2LjQyMmUtMDYiLCAicnNpIjogIjQ3LjIiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="SHIB">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'SHIB')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU0hJQiIsICJwcmljZSI6ICI2LjQ0NGUtMDYiLCAicnNpIjogIjQ3LjQiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="SHIB">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'SHIB')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">SHIB</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiTFRDIiwgInByaWNlIjogIjUzLjgxIiwgInJzaSI6ICIzOC4xIiwgIm1hY2QiOiAiLTMuNzQ0OCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="LTC">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'LTC')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTFRDIiwgInByaWNlIjogIjUzLjk2IiwgInJzaSI6ICIzOC40IiwgIm1hY2QiOiAiLTMuNzMyOCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="LTC">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'LTC')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">LTC</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQkNIIiwgInByaWNlIjogIjU1Ny40IiwgInJzaSI6ICI1NC4zIiwgIm1hY2QiOiAiLTQuNTY4MSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="BCH">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'BCH')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQkNIIiwgInByaWNlIjogIjU1OC4yIiwgInJzaSI6ICI1NC41IiwgIm1hY2QiOiAiLTQuNTA0MyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="BCH">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'BCH')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">BCH</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiTkVBUiIsICJwcmljZSI6ICIxLjAzOCIsICJyc2kiOiAiMzkuNyIsICJtYWNkIjogIi0wLjEwODciLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="NEAR">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'NEAR')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTkVBUiIsICJwcmljZSI6ICIxLjA0MjYiLCAicnNpIjogIjQwLjAiLCAibWFjZCI6ICItMC4xMDg0IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="NEAR">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'NEAR')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">NEAR</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiVU5JIiwgInByaWNlIjogIjMuNTMzIiwgInJzaSI6ICI0My43IiwgIm1hY2QiOiAiLTAuMzA1NyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="UNI">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'UNI')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiVU5JIiwgInByaWNlIjogIjMuNTQ2IiwgInJzaSI6ICI0NC4wIiwgIm1hY2QiOiAiLTAuMzA0NiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="UNI">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'UNI')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">UNI</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiUEVQRSIsICJwcmljZSI6ICI0LjM0MWUtMDYiLCAicnNpIjogIjUxLjciLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="PEPE">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'PEPE')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiUEVQRSIsICJwcmljZSI6ICI0LjM3M2UtMDYiLCAicnNpIjogIjUyLjIiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="PEPE">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'PEPE')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">PEPE</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiSUNQIiwgInByaWNlIjogIjIuMzMzIiwgInJzaSI6ICIzOC40IiwgIm1hY2QiOiAiLTAuMjEyMyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="ICP">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ICP')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSUNQIiwgInByaWNlIjogIjIuMzQ1IiwgInJzaSI6ICIzOC44IiwgIm1hY2QiOiAiLTAuMjExMyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="ICP">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ICP')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ICP</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQVBUIiwgInByaWNlIjogIjAuOTAyIiwgInJzaSI6ICIyNS45IiwgIm1hY2QiOiAiLTAuMTY0MiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="APT">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'APT')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQVBUIiwgInByaWNlIjogIjAuOTA2OSIsICJyc2kiOiAiMjYuMSIsICJtYWNkIjogIi0wLjE2MzkiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="APT">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'APT')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">APT</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiSEJBUiIsICJwcmljZSI6ICIwLjEwMDU0IiwgInJzaSI6ICI2MC42IiwgIm1hY2QiOiAiLTAuMDAxMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="HBAR">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'HBAR')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiSEJBUiIsICJwcmljZSI6ICIwLjEwMDkxIiwgInJzaSI6ICI2MS4wIiwgIm1hY2QiOiAiLTAuMDAxMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="HBAR">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'HBAR')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">HBAR</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiRklMIiwgInByaWNlIjogIjAuOTU2IiwgInJzaSI6ICI0Mi4wIiwgIm1hY2QiOiAiLTAuMDgyNyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="FIL">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'FIL')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiRklMIiwgInByaWNlIjogIjAuOTYiLCAicnNpIjogIjQyLjMiLCAibWFjZCI6ICItMC4wODI0IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="FIL">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'FIL')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">FIL</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiWExNIiwgInByaWNlIjogIjAuMTY1OSIsICJyc2kiOiAiNDYuNSIsICJtYWNkIjogIi0wLjAwOTUiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="XLM">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'XLM')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiWExNIiwgInByaWNlIjogIjAuMTY2MyIsICJyc2kiOiAiNDYuOCIsICJtYWNkIjogIi0wLjAwOTQiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="XLM">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'XLM')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">XLM</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQVJCIiwgInByaWNlIjogIjAuMTEyIiwgInJzaSI6ICIzNy43IiwgIm1hY2QiOiAiLTAuMDE1NCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="ARB">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ARB')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQVJCIiwgInByaWNlIjogIjAuMTEyMyIsICJyc2kiOiAiMzcuOSIsICJtYWNkIjogIi0wLjAxNTQiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="ARB">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ARB')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ARB</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQVRPTSIsICJwcmljZSI6ICIyLjI4NCIsICJyc2kiOiAiNjQuNiIsICJtYWNkIjogIi0wLjAwOTUiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="ATOM">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ATOM')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQVRPTSIsICJwcmljZSI6ICIyLjI5MSIsICJyc2kiOiAiNjQuOCIsICJtYWNkIjogIi0wLjAwODkiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="ATOM">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ATOM')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ATOM</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiU1RYIiwgInByaWNlIjogIjAuMjU5NCIsICJyc2kiOiAiNDIuNSIsICJtYWNkIjogIi0wLjAxNDYiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="STX">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'STX')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU1RYIiwgInByaWNlIjogIjAuMjYwMiIsICJyc2kiOiAiNDIuOCIsICJtYWNkIjogIi0wLjAxNDUiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="STX">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'STX')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">STX</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiT0tCIiwgInByaWNlIjogIjc5LjIzMiIsICJyc2kiOiAiNDYuNyIsICJtYWNkIjogIi01LjU1NDUiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="OKB">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'OKB')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiT0tCIiwgInByaWNlIjogIjc5LjQzMSIsICJyc2kiOiAiNDcuMCIsICJtYWNkIjogIi01LjUzODciLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="OKB">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'OKB')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">OKB</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiSU1YIiwgInByaWNlIjogIjAuMTcwNCIsICJyc2kiOiAiNDcuMyIsICJtYWNkIjogIi0wLjAxNjMiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="IMX">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'IMX')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiSU1YIiwgInByaWNlIjogIjAuMTcwNyIsICJyc2kiOiAiNDcuNCIsICJtYWNkIjogIi0wLjAxNjMiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="IMX">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'IMX')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">IMX</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiS0FTIiwgInByaWNlIjogIjAuMDMxOTY0IiwgInJzaSI6ICI1Mi40IiwgIm1hY2QiOiAiLTAuMDAyMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="KAS">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'KAS')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiS0FTIiwgInByaWNlIjogIjAuMDMyMDIyIiwgInJzaSI6ICI1Mi41IiwgIm1hY2QiOiAiLTAuMDAyMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="KAS">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'KAS')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">KAS</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiVkVUIiwgInByaWNlIjogIjAuMDA3OTgiLCAicnNpIjogIjQ2LjQiLCAibWFjZCI6ICItMC4wMDA1IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="VET">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'VET')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiVkVUIiwgInByaWNlIjogIjAuMDA4MDEiLCAicnNpIjogIjQ2LjciLCAibWFjZCI6ICItMC4wMDA1IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="VET">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'VET')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">VET</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiTERPIiwgInByaWNlIjogIjAuMzM5MSIsICJyc2kiOiAiMzUuOCIsICJtYWNkIjogIi0wLjA0NjAiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="LDO">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'LDO')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTERPIiwgInByaWNlIjogIjAuMzQwMiIsICJyc2kiOiAiMzYuMCIsICJtYWNkIjogIi0wLjA0NTkiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="LDO">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'LDO')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">LDO</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiVElBIiwgInByaWNlIjogIjAuMzM5IiwgInJzaSI6ICI0My42IiwgIm1hY2QiOiAiLTAuMDMwNiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="TIA">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'TIA')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiVElBIiwgInByaWNlIjogIjAuMzQwNyIsICJyc2kiOiAiNDMuOSIsICJtYWNkIjogIi0wLjAzMDQiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="TIA">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'TIA')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">TIA</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiR1JUIiwgInByaWNlIjogIjAuMDI3NTUiLCAicnNpIjogIjQ1LjEiLCAibWFjZCI6ICItMC4wMDIxIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="GRT">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'GRT')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiR1JUIiwgInByaWNlIjogIjAuMDI3NTkiLCAicnNpIjogIjQ1LjMiLCAibWFjZCI6ICItMC4wMDIxIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="GRT">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'GRT')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">GRT</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiU0VJIiwgInByaWNlIjogIjAuMDc0MTciLCAicnNpIjogIjM3LjQiLCAibWFjZCI6ICItMC4wMDc2IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')" data-symbol="SEI">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'SEI')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU0VJIiwgInByaWNlIjogIjAuMDc0MzQiLCAicnNpIjogIjM3LjUiLCAibWFjZCI6ICItMC4wMDc1IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="SEI">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'SEI')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">SEI</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiU1VJIiwgInByaWNlIjogIjAuOTYyNCIsICJyc2kiOiAiNDEuMiIsICJtYWNkIjogIi0wLjEyNTciLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="SUI">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'SUI')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU1VJIiwgInByaWNlIjogIjAuOTY3IiwgInJzaSI6ICI0MS41IiwgIm1hY2QiOiAiLTAuMTI1MyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="SUI">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'SUI')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">SUI</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiT1AiLCAicHJpY2UiOiAiMC4xODU5IiwgInJzaSI6ICIzNC4yIiwgIm1hY2QiOiAiLTAuMDI1MSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="OP">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'OP')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiT1AiLCAicHJpY2UiOiAiMC4xODY0IiwgInJzaSI6ICIzNC40IiwgIm1hY2QiOiAiLTAuMDI1MCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="OP">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'OP')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">OP</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiSU5KIiwgInByaWNlIjogIjMuMDg0IiwgInJzaSI6ICIzNi45IiwgIm1hY2QiOiAiLTAuMzQyMCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="INJ">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'INJ')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSU5KIiwgInByaWNlIjogIjMuMDk4IiwgInJzaSI6ICIzNy4zIiwgIm1hY2QiOiAiLTAuMzQwOSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="INJ">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'INJ')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">INJ</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiUlVORSIsICJwcmljZSI6ICIwLjM5OTUiLCAicnNpIjogIjQwLjEiLCAibWFjZCI6ICItMC4wMzY5IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="RUNE">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'RUNE')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiUlVORSIsICJwcmljZSI6ICIwLjQwMSIsICJyc2kiOiAiNDAuNCIsICJtYWNkIjogIi0wLjAzNjgiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="RUNE">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'RUNE')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">RUNE</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiRkxPS0kiLCAicHJpY2UiOiAiMy4xNTRlLTA1IiwgInJzaSI6ICI0NC45IiwgIm1hY2QiOiAiLTAuMDAwMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="FLOKI">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'FLOKI')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiRkxPS0kiLCAicHJpY2UiOiAiMy4xNzNlLTA1IiwgInJzaSI6ICI0NS4yIiwgIm1hY2QiOiAiLTAuMDAwMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="FLOKI">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'FLOKI')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">FLOKI</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiTFVOQyIsICJwcmljZSI6ICIzLjM5MmUtMDUiLCAicnNpIjogIjQwLjMiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="LUNC">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'LUNC')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTFVOQyIsICJwcmljZSI6ICIzLjM5N2UtMDUiLCAicnNpIjogIjQwLjUiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="LUNC">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'LUNC')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">LUNC</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQkVBTSIsICJwcmljZSI6ICIwLjAyMzQ5IiwgInJzaSI6ICI0NS4xIiwgIm1hY2QiOiAiLTAuMDAxMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="BEAM">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'BEAM')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQkVBTSIsICJwcmljZSI6ICIwLjAyMzUxIiwgInJzaSI6ICI0NS4yIiwgIm1hY2QiOiAiLTAuMDAxMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="BEAM">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'BEAM')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">BEAM</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiR0FMQSIsICJwcmljZSI6ICIwLjAwMzk4OCIsICJyc2kiOiAiMzcuNSIsICJtYWNkIjogIi0wLjAwMDUiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="GALA">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'GALA')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiR0FMQSIsICJwcmljZSI6ICIwLjAwNDAwNyIsICJyc2kiOiAiMzcuOCIsICJtYWNkIjogIi0wLjAwMDUiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="GALA">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'GALA')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">GALA</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiUEVORExFIiwgInByaWNlIjogIjEuMjAzIiwgInJzaSI6ICIzNS4wIiwgIm1hY2QiOiAiLTAuMTY2NyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="PENDLE">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'PENDLE')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUEVORExFIiwgInByaWNlIjogIjEuMjA2IiwgInJzaSI6ICIzNS4xIiwgIm1hY2QiOiAiLTAuMTY2NSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="PENDLE">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'PENDLE')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">PENDLE</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiRFlEWCIsICJwcmljZSI6ICIwLjEwNzMiLCAicnNpIjogIjM1LjYiLCAibWFjZCI6ICItMC4wMTU0IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')" data-symbol="DYDX">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'DYDX')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRFlEWCIsICJwcmljZSI6ICIwLjEwNzciLCAicnNpIjogIjM2LjAiLCAibWFjZCI6ICItMC4wMTU0IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="DYDX">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'DYDX')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">DYDX</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQUFWRSIsICJwcmljZSI6ICIxMjUuNzgiLCAicnNpIjogIjUxLjUiLCAibWFjZCI6ICItNi4xOTU2IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="AAVE">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'AAVE')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQUFWRSIsICJwcmljZSI6ICIxMjYuMjkiLCAicnNpIjogIjUxLjkiLCAibWFjZCI6ICItNi4xNTUwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="AAVE">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'AAVE')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">AAVE</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiT1JESSIsICJwcmljZSI6ICIyLjc2MiIsICJyc2kiOiAiNDAuNSIsICJtYWNkIjogIi0wLjI5OTEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="ORDI">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ORDI')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiT1JESSIsICJwcmljZSI6ICIyLjc3NCIsICJyc2kiOiAiNDAuOCIsICJtYWNkIjogIi0wLjI5ODEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="ORDI">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ORDI')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ORDI</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiV0lGIiwgInByaWNlIjogIjAuMjI5NCIsICJyc2kiOiAiNDQuOCIsICJtYWNkIjogIi0wLjAyMzEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="WIF">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'WIF')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiV0lGIiwgInByaWNlIjogIjAuMjMwNSIsICJyc2kiOiAiNDUuMSIsICJtYWNkIjogIi0wLjAyMzAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="WIF">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'WIF')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">WIF</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQk9OSyIsICJwcmljZSI6ICI2LjQyN2UtMDYiLCAicnNpIjogIjQ0LjAiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="BONK">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'BONK')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQk9OSyIsICJwcmljZSI6ICI2LjQ1NGUtMDYiLCAicnNpIjogIjQ0LjIiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="BONK">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'BONK')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">BONK</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiUFlUSCIsICJwcmljZSI6ICIwLjA1NjQiLCAicnNpIjogIjU5LjUiLCAibWFjZCI6ICItMC4wMDA3IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="PYTH">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'PYTH')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiUFlUSCIsICJwcmljZSI6ICIwLjA1NjY1IiwgInJzaSI6ICI1OS45IiwgIm1hY2QiOiAiLTAuMDAwNiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="PYTH">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'PYTH')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">PYTH</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiSlVQIiwgInByaWNlIjogIjAuMTYzMSIsICJyc2kiOiAiMzguNyIsICJtYWNkIjogIi0wLjAwOTYiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="JUP">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'JUP')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSlVQIiwgInByaWNlIjogIjAuMTY0IiwgInJzaSI6ICIzOS4wIiwgIm1hY2QiOiAiLTAuMDA5NSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="JUP">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'JUP')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">JUP</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiRkVUIiwgInByaWNlIjogIjAuMTY5OCIsICJyc2kiOiAiNDUuOSIsICJtYWNkIjogIi0wLjAxNTQiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="FET">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'FET')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiRkVUIiwgInByaWNlIjogIjAuMTcwNyIsICJyc2kiOiAiNDYuMyIsICJtYWNkIjogIi0wLjAxNTMiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="FET">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'FET')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">FET</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiRUdMRCIsICJwcmljZSI6ICI0LjYyNyIsICJyc2kiOiAiNDguOCIsICJtYWNkIjogIi0wLjIyMTAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="EGLD">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'EGLD')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiRUdMRCIsICJwcmljZSI6ICI0LjY0MyIsICJyc2kiOiAiNDkuMCIsICJtYWNkIjogIi0wLjIxOTciLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="EGLD">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'EGLD')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">EGLD</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiRkxPVyIsICJwcmljZSI6ICIwLjAzODciLCAicnNpIjogIjQwLjQiLCAibWFjZCI6ICItMC4wMDkyIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="FLOW">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'FLOW')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiRkxPVyIsICJwcmljZSI6ICIwLjAzODY0IiwgInJzaSI6ICI0MC4zIiwgIm1hY2QiOiAiLTAuMDA5MiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="FLOW">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'FLOW')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">FLOW</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiTUlOQSIsICJwcmljZSI6ICIwLjA2NjI0IiwgInJzaSI6ICI0Mi45IiwgIm1hY2QiOiAiLTAuMDAzNyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="MINA">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'MINA')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTUlOQSIsICJwcmljZSI6ICIwLjA2Njc5IiwgInJzaSI6ICI0My45IiwgIm1hY2QiOiAiLTAuMDAzNiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="MINA">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'MINA')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">MINA</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiUU5UIiwgInByaWNlIjogIjY5LjI2IiwgInJzaSI6ICI1My45IiwgIm1hY2QiOiAiLTAuNzU5OCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="QNT">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'QNT')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiUU5UIiwgInByaWNlIjogIjY5LjM5IiwgInJzaSI6ICI1NC4xIiwgIm1hY2QiOiAiLTAuNzQ5NCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="QNT">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'QNT')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">QNT</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #f87171;" onclick="openModal('eyJzeW1ib2wiOiAiQVhTIiwgInByaWNlIjogIjEuMzI5MSIsICJyc2kiOiAiNDEuNSIsICJtYWNkIjogIi0wLjA5MzkiLCAic2lnbmFsX3R5cGUiOiAiU0VMTCIsICJjb2xvciI6ICIjZjg3MTcxIn0=')" data-symbol="AXS">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'AXS')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiQVhTIiwgInByaWNlIjogIjEuMzMwOCIsICJyc2kiOiAiNDEuNiIsICJtYWNkIjogIi0wLjA5MzciLCAic2lnbmFsX3R5cGUiOiAiU0VMTCIsICJjb2xvciI6ICIjZTU5ODliIn0=')" data-symbol="AXS">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'AXS')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">AXS</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQ0haIiwgInByaWNlIjogIjAuMDQwMzQiLCAicnNpIjogIjQxLjkiLCAibWFjZCI6ICItMC4wMDI1IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="CHZ">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'CHZ')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQ0haIiwgInByaWNlIjogIjAuMDQwNDgiLCAicnNpIjogIjQyLjEiLCAibWFjZCI6ICItMC4wMDI1IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="CHZ">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'CHZ')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">CHZ</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiTUFOQSIsICJwcmljZSI6ICIwLjEwMDM0IiwgInJzaSI6ICI0Mi4yIiwgIm1hY2QiOiAiLTAuMDA4OSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="MANA">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'MANA')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTUFOQSIsICJwcmljZSI6ICIwLjEwMDg0IiwgInJzaSI6ICI0Mi42IiwgIm1hY2QiOiAiLTAuMDA4OSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="MANA">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'MANA')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">MANA</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiU0FORCIsICJwcmljZSI6ICIwLjA4NjI5IiwgInJzaSI6ICI0MC4wIiwgIm1hY2QiOiAiLTAuMDA4NiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="SAND">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'SAND')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU0FORCIsICJwcmljZSI6ICIwLjA4NjY0IiwgInJzaSI6ICI0MC4zIiwgIm1hY2QiOiAiLTAuMDA4NiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="SAND">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'SAND')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">SAND</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiWFRaIiwgInByaWNlIjogIjAuMzkzOSIsICJyc2kiOiAiMzEuOCIsICJtYWNkIjogIi0wLjAzNjkiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="XTZ">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'XTZ')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiWFRaIiwgInByaWNlIjogIjAuMzk1IiwgInJzaSI6ICIzMi4wIiwgIm1hY2QiOiAiLTAuMDM2OCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="XTZ">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'XTZ')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">XTZ</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiSU9UQSIsICJwcmljZSI6ICIwLjA2ODQ1IiwgInJzaSI6ICIzOC41IiwgIm1hY2QiOiAiLTAuMDA0NSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="IOTA">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'IOTA')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSU9UQSIsICJwcmljZSI6ICIwLjA2ODg2IiwgInJzaSI6ICIzOC45IiwgIm1hY2QiOiAiLTAuMDA0NSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="IOTA">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'IOTA')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">IOTA</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiS0FWQSIsICJwcmljZSI6ICIwLjA1NDE2IiwgInJzaSI6ICIzNS44IiwgIm1hY2QiOiAiLTAuMDA1NyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="KAVA">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'KAVA')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiS0FWQSIsICJwcmljZSI6ICIwLjA1NDQyIiwgInJzaSI6ICIzNi4yIiwgIm1hY2QiOiAiLTAuMDA1NyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="KAVA">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'KAVA')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">KAVA</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQ0FLRSIsICJwcmljZSI6ICIxLjI5NiIsICJyc2kiOiAiMzAuNyIsICJtYWNkIjogIi0wLjEzNzIiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="CAKE">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'CAKE')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQ0FLRSIsICJwcmljZSI6ICIxLjMiLCAicnNpIjogIjMwLjkiLCAibWFjZCI6ICItMC4xMzY5IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="CAKE">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'CAKE')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">CAKE</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQVNUUiIsICJwcmljZSI6ICIwLjAwNzc1OSIsICJyc2kiOiAiNDIuOCIsICJtYWNkIjogIi0wLjAwMDYiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="ASTR">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ASTR')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQVNUUiIsICJwcmljZSI6ICIwLjAwNzc5MSIsICJyc2kiOiAiNDMuMiIsICJtYWNkIjogIi0wLjAwMDYiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="ASTR">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ASTR')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ASTR</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #f87171;" onclick="openModal('eyJzeW1ib2wiOiAiWklMIiwgInByaWNlIjogIjAuMDA0MTkyIiwgInJzaSI6ICIzMC42IiwgIm1hY2QiOiAiLTAuMDAwMiIsICJzaWduYWxfdHlwZSI6ICJTRUxMIiwgImNvbG9yIjogIiNmODcxNzEifQ==')" data-symbol="ZIL">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ZIL')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiWklMIiwgInByaWNlIjogIjAuMDA0MjA0IiwgInJzaSI6ICIzMC43IiwgIm1hY2QiOiAiLTAuMDAwMiIsICJzaWduYWxfdHlwZSI6ICJTRUxMIiwgImNvbG9yIjogIiNlNTk4OWIifQ==')" data-symbol="ZIL">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ZIL')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ZIL</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiUVRVTSIsICJwcmljZSI6ICIwLjk2NjUiLCAicnNpIjogIjQyLjciLCAibWFjZCI6ICItMC4wNzUzIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="QTUM">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'QTUM')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiUVRVTSIsICJwcmljZSI6ICIwLjk3MDgiLCAicnNpIjogIjQzLjEiLCAibWFjZCI6ICItMC4wNzUwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="QTUM">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'QTUM')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">QTUM</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiR0xNUiIsICJwcmljZSI6ICIwLjAxMzg0IiwgInJzaSI6ICIzNC45IiwgIm1hY2QiOiAiLTAuMDAxOCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="GLMR">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'GLMR')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiR0xNUiIsICJwcmljZSI6ICIwLjAxMzg0IiwgInJzaSI6ICIzNC45IiwgIm1hY2QiOiAiLTAuMDAxOCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="GLMR">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'GLMR')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">GLMR</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQU5LUiIsICJwcmljZSI6ICIwLjAwNDYzOCIsICJyc2kiOiAiMzcuNyIsICJtYWNkIjogIi0wLjAwMDQiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="ANKR">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ANKR')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQU5LUiIsICJwcmljZSI6ICIwLjAwNDY1OSIsICJyc2kiOiAiMzguMCIsICJtYWNkIjogIi0wLjAwMDQiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="ANKR">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ANKR')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ANKR</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #f87171;" onclick="openModal('eyJzeW1ib2wiOiAiUk9TRSIsICJwcmljZSI6ICIwLjAxNDE5IiwgInJzaSI6ICI0NS41IiwgIm1hY2QiOiAiLTAuMDAwOCIsICJzaWduYWxfdHlwZSI6ICJTRUxMIiwgImNvbG9yIjogIiNmODcxNzEifQ==')" data-symbol="ROSE">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ROSE')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiUk9TRSIsICJwcmljZSI6ICIwLjAxNDE5IiwgInJzaSI6ICI0NS41IiwgIm1hY2QiOiAiLTAuMDAwOCIsICJzaWduYWxfdHlwZSI6ICJTRUxMIiwgImNvbG9yIjogIiNlNTk4OWIifQ==')" data-symbol="ROSE">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ROSE')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ROSE</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiSU9UWCIsICJwcmljZSI6ICIwLjAwNTY1MSIsICJyc2kiOiAiMzcuNiIsICJtYWNkIjogIi0wLjAwMDUiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="IOTX">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'IOTX')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSU9UWCIsICJwcmljZSI6ICIwLjAwNTY3MSIsICJyc2kiOiAiMzcuOCIsICJtYWNkIjogIi0wLjAwMDUiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="IOTX">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'IOTX')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">IOTX</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiREFTSCIsICJwcmljZSI6ICIzNy4yIiwgInJzaSI6ICI0NS4xIiwgIm1hY2QiOiAiLTMuOTM0MyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="DASH">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'DASH')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiREFTSCIsICJwcmljZSI6ICIzNy4zNSIsICJyc2kiOiAiNDUuNCIsICJtYWNkIjogIi0zLjkyMjMiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="DASH">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'DASH')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">DASH</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiWkVDIiwgInByaWNlIjogIjI4My42NiIsICJyc2kiOiAiNTYuNyIsICJtYWNkIjogIi0xMy42MjAxIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="ZEC">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ZEC')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiWkVDIiwgInByaWNlIjogIjI4NS4xIiwgInJzaSI6ICI1Ny4wIiwgIm1hY2QiOiAiLTEzLjUwNTIiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="ZEC">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ZEC')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ZEC</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiWE1SIiwgInByaWNlIjogIjMzOS4wOCIsICJyc2kiOiAiNDEuMCIsICJtYWNkIjogIi0zNi4yOTA2IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="XMR">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'XMR')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiWE1SIiwgInByaWNlIjogIjM0MC4zNyIsICJyc2kiOiAiNDEuMyIsICJtYWNkIjogIi0zNi4xODc3IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="XMR">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'XMR')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">XMR</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiV0xEIiwgInByaWNlIjogIjAuMzg3MiIsICJyc2kiOiAiNDYuMCIsICJtYWNkIjogIi0wLjAyMzIiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="WLD">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'WLD')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiV0xEIiwgInByaWNlIjogIjAuMzg4NiIsICJyc2kiOiAiNDYuMiIsICJtYWNkIjogIi0wLjAyMzEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="WLD">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'WLD')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">WLD</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiU1RSSyIsICJwcmljZSI6ICIwLjA0NzkyIiwgInJzaSI6ICIzNy43IiwgIm1hY2QiOiAiLTAuMDA1NiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="STRK">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'STRK')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU1RSSyIsICJwcmljZSI6ICIwLjA0ODEzIiwgInJzaSI6ICIzOC4wIiwgIm1hY2QiOiAiLTAuMDA1NiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="STRK">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'STRK')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">STRK</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiRFlNIiwgInByaWNlIjogIjAuMDQ1NjUiLCAicnNpIjogIjQ5LjUiLCAibWFjZCI6ICItMC4wMDMxIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="DYM">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'DYM')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiRFlNIiwgInByaWNlIjogIjAuMDQ1NzMiLCAicnNpIjogIjQ5LjUiLCAibWFjZCI6ICItMC4wMDMxIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="DYM">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'DYM')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">DYM</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiTUFOVEEiLCAicHJpY2UiOiAiMC4wNzY3MSIsICJyc2kiOiAiNTIuNyIsICJtYWNkIjogIjAuMDAwNiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="MANTA">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'MANTA')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTUFOVEEiLCAicHJpY2UiOiAiMC4wNzY5MSIsICJyc2kiOiAiNTIuOSIsICJtYWNkIjogIjAuMDAwNiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="MANTA">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'MANTA')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">MANTA</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiUk9OIiwgInByaWNlIjogIjAuMDk4MzciLCAicnNpIjogIjQ3LjciLCAibWFjZCI6ICItMC4wMDg0IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="RON">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'RON')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiUk9OIiwgInByaWNlIjogIjAuMDk4NDEiLCAicnNpIjogIjQ3LjgiLCAibWFjZCI6ICItMC4wMDg0IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="RON">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'RON')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">RON</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiUElYRUwiLCAicHJpY2UiOiAiMC4wMDUzOTUiLCAicnNpIjogIjM4LjIiLCAibWFjZCI6ICItMC4wMDA2IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')" data-symbol="PIXEL">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'PIXEL')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUElYRUwiLCAicHJpY2UiOiAiMC4wMDU0MjYiLCAicnNpIjogIjM4LjYiLCAibWFjZCI6ICItMC4wMDA2IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="PIXEL">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'PIXEL')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">PIXEL</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQ0tCIiwgInByaWNlIjogIjAuMDAxNjQ1IiwgInJzaSI6ICIzNC43IiwgIm1hY2QiOiAiLTAuMDAwMiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="CKB">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'CKB')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQ0tCIiwgInByaWNlIjogIjAuMDAxNjUyIiwgInJzaSI6ICIzNS4xIiwgIm1hY2QiOiAiLTAuMDAwMiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="CKB">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'CKB')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">CKB</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQlRUIiwgInByaWNlIjogIjMuNDNlLTA3IiwgInJzaSI6ICI0NC44IiwgIm1hY2QiOiAiLTAuMDAwMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="BTT">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'BTT')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQlRUIiwgInByaWNlIjogIjMuNDI5ZS0wNyIsICJyc2kiOiAiNDQuOCIsICJtYWNkIjogIi0wLjAwMDAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="BTT">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'BTT')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">BTT</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiSE9UIiwgInByaWNlIjogIjAuMDAwMzk4MiIsICJyc2kiOiAiNDcuMCIsICJtYWNkIjogIi0wLjAwMDAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="HOT">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'HOT')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiSE9UIiwgInByaWNlIjogIjAuMDAwMzk5NSIsICJyc2kiOiAiNDcuMiIsICJtYWNkIjogIi0wLjAwMDAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="HOT">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'HOT')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">HOT</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiR01UIiwgInByaWNlIjogIjAuMDEyNDEiLCAicnNpIjogIjQxLjkiLCAibWFjZCI6ICItMC4wMDExIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="GMT">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'GMT')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiR01UIiwgInByaWNlIjogIjAuMDEyNDUiLCAicnNpIjogIjQyLjIiLCAibWFjZCI6ICItMC4wMDExIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="GMT">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'GMT')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">GMT</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiR05TIiwgInByaWNlIjogIjAuODE3OCIsICJyc2kiOiAiNDMuNiIsICJtYWNkIjogIi0wLjAzMDciLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="GNS">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'GNS')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiR05TIiwgInByaWNlIjogIjAuODE3NyIsICJyc2kiOiAiNDMuNiIsICJtYWNkIjogIi0wLjAzMDciLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="GNS">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'GNS')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">GNS</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiR01YIiwgInByaWNlIjogIjYuNDg4IiwgInJzaSI6ICI1My40IiwgIm1hY2QiOiAiLTAuMTg4NCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="GMX">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'GMX')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiR01YIiwgInByaWNlIjogIjYuNTE3IiwgInJzaSI6ICI1My45IiwgIm1hY2QiOiAiLTAuMTg2MCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="GMX">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'GMX')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">GMX</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiU05YIiwgInByaWNlIjogIjAuMzEyNiIsICJyc2kiOiAiNDUuMiIsICJtYWNkIjogIi0wLjAyODMiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="SNX">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'SNX')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU05YIiwgInByaWNlIjogIjAuMzE0MiIsICJyc2kiOiAiNDUuOCIsICJtYWNkIjogIi0wLjAyODIiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="SNX">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'SNX')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">SNX</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQ1JWIiwgInByaWNlIjogIjAuMjUxNSIsICJyc2kiOiAiNDIuNSIsICJtYWNkIjogIi0wLjAyNTQiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="CRV">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'CRV')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQ1JWIiwgInByaWNlIjogIjAuMjUxOSIsICJyc2kiOiAiNDIuNiIsICJtYWNkIjogIi0wLjAyNTQiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="CRV">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'CRV')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">CRV</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiRU5TIiwgInByaWNlIjogIjYuODUiLCAicnNpIjogIjUzLjEiLCAibWFjZCI6ICItMC41MTc2IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="ENS">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ENS')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiRU5TIiwgInByaWNlIjogIjYuODg5IiwgInJzaSI6ICI1My42IiwgIm1hY2QiOiAiLTAuNTE0NSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="ENS">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ENS')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ENS</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #f87171;" onclick="openModal('eyJzeW1ib2wiOiAiTFJDIiwgInByaWNlIjogIjAuMDM0NDIiLCAicnNpIjogIjM1LjgiLCAibWFjZCI6ICItMC4wMDMzIiwgInNpZ25hbF90eXBlIjogIlNFTEwiLCAiY29sb3IiOiAiI2Y4NzE3MSJ9')" data-symbol="LRC">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'LRC')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiTFJDIiwgInByaWNlIjogIjAuMDM0NTUiLCAicnNpIjogIjM2LjAiLCAibWFjZCI6ICItMC4wMDMzIiwgInNpZ25hbF90eXBlIjogIlNFTEwiLCAiY29sb3IiOiAiI2U1OTg5YiJ9')" data-symbol="LRC">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'LRC')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">LRC</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiTUFTSyIsICJwcmljZSI6ICIwLjQ2OCIsICJyc2kiOiAiNDAuMyIsICJtYWNkIjogIi0wLjAzNDQiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="MASK">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'MASK')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUFTSyIsICJwcmljZSI6ICIwLjQ3MDkiLCAicnNpIjogIjQwLjkiLCAibWFjZCI6ICItMC4wMzQyIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="MASK">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'MASK')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">MASK</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiV09PIiwgInByaWNlIjogIjAuMDE3NTgiLCAicnNpIjogIjQzLjkiLCAibWFjZCI6ICItMC4wMDE5IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="WOO">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'WOO')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiV09PIiwgInByaWNlIjogIjAuMDE3NjkiLCAicnNpIjogIjQ0LjYiLCAibWFjZCI6ICItMC4wMDE5IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="WOO">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'WOO')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">WOO</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQ1ZYIiwgInByaWNlIjogIjIuMTE5IiwgInJzaSI6ICI2MC40IiwgIm1hY2QiOiAiMC4wMTIzIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="CVX">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'CVX')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQ1ZYIiwgInByaWNlIjogIjIuMTI4IiwgInJzaSI6ICI2MC43IiwgIm1hY2QiOiAiMC4wMTMwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="CVX">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'CVX')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">CVX</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQkFMIiwgInByaWNlIjogIjAuMTUyOSIsICJyc2kiOiAiMjQuNSIsICJtYWNkIjogIi0wLjA3NzIiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="BAL">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'BAL')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQkFMIiwgInByaWNlIjogIjAuMTUyNiIsICJyc2kiOiAiMjQuNCIsICJtYWNkIjogIi0wLjA3NzIiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="BAL">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'BAL')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">BAL</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiU1VTSEkiLCAicHJpY2UiOiAiMC4yMDk4IiwgInJzaSI6ICI0MS4wIiwgIm1hY2QiOiAiLTAuMDIwMyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="SUSHI">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'SUSHI')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU1VTSEkiLCAicHJpY2UiOiAiMC4yMTA2IiwgInJzaSI6ICI0MS40IiwgIm1hY2QiOiAiLTAuMDIwMyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="SUSHI">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'SUSHI')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">SUSHI</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiWUZJIiwgInByaWNlIjogIjI4NTAuNiIsICJyc2kiOiAiNTMuMiIsICJtYWNkIjogIi05MS45OTcwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')" data-symbol="YFI">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'YFI')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiWUZJIiwgInByaWNlIjogIjI4NTcuMSIsICJyc2kiOiAiNTMuNCIsICJtYWNkIjogIi05MS40Nzg1IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="YFI">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'YFI')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">YFI</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiMUlOQ0giLCAicHJpY2UiOiAiMC4wOTQ1MSIsICJyc2kiOiAiMzYuMiIsICJtYWNkIjogIi0wLjAwOTgiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="1INCH">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, '1INCH')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiMUlOQ0giLCAicHJpY2UiOiAiMC4wOTQ4MyIsICJyc2kiOiAiMzYuNCIsICJtYWNkIjogIi0wLjAwOTgiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="1INCH">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, '1INCH')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">1INCH</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiWlJYIiwgInByaWNlIjogIjAuMTExMDIiLCAicnNpIjogIjQ5LjIiLCAibWFjZCI6ICItMC4wMDQzIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="ZRX">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ZRX')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiWlJYIiwgInByaWNlIjogIjAuMTExNTciLCAicnNpIjogIjQ5LjYiLCAibWFjZCI6ICItMC4wMDQzIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="ZRX">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ZRX')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ZRX</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiVU1BIiwgInByaWNlIjogIjAuNTEwMSIsICJyc2kiOiAiNDIuNyIsICJtYWNkIjogIi0wLjA0MDAiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="UMA">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'UMA')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiVU1BIiwgInByaWNlIjogIjAuNTEzOSIsICJyc2kiOiAiNDMuMiIsICJtYWNkIjogIi0wLjAzOTciLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="UMA">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'UMA')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">UMA</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiTk1SIiwgInByaWNlIjogIjguMzIxIiwgInJzaSI6ICIzMy40IiwgIm1hY2QiOiAiLTAuMzAxNyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="NMR">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'NMR')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTk1SIiwgInByaWNlIjogIjguMzUiLCAicnNpIjogIjMzLjYiLCAibWFjZCI6ICItMC4yOTk0IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="NMR">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'NMR')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">NMR</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiSkFTTVkiLCAicHJpY2UiOiAiMC4wMDU5NTIiLCAicnNpIjogIjUxLjYiLCAibWFjZCI6ICItMC4wMDAzIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="JASMY">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'JASMY')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiSkFTTVkiLCAicHJpY2UiOiAiMC4wMDU5NzUiLCAicnNpIjogIjUxLjkiLCAibWFjZCI6ICItMC4wMDAzIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="JASMY">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'JASMY')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">JASMY</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQ0VMTyIsICJwcmljZSI6ICIwLjA4MjkzIiwgInJzaSI6ICI0Mi4yIiwgIm1hY2QiOiAiLTAuMDA3NyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="CELO">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'CELO')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQ0VMTyIsICJwcmljZSI6ICIwLjA4MzAzIiwgInJzaSI6ICI0Mi4zIiwgIm1hY2QiOiAiLTAuMDA3NyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="CELO">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'CELO')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">CELO</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiVFdUIiwgInByaWNlIjogIjAuNTU5IiwgInJzaSI6ICIzMS42IiwgIm1hY2QiOiAiLTAuMDcxNSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="TWT">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'TWT')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiVFdUIiwgInByaWNlIjogIjAuNTYiLCAicnNpIjogIjMxLjciLCAibWFjZCI6ICItMC4wNzE0IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="TWT">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'TWT')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">TWT</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiSUQiLCAicHJpY2UiOiAiMC4wNTA3IiwgInJzaSI6ICIzOS4yIiwgIm1hY2QiOiAiLTAuMDA0MSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="ID">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ID')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSUQiLCAicHJpY2UiOiAiMC4wNTA4OSIsICJyc2kiOiAiMzkuNCIsICJtYWNkIjogIi0wLjAwNDAiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="ID">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ID')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ID</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #f87171;" onclick="openModal('eyJzeW1ib2wiOiAiRURVIiwgInByaWNlIjogIjAuMTI5MTEiLCAicnNpIjogIjMxLjEiLCAibWFjZCI6ICItMC4wMDU5IiwgInNpZ25hbF90eXBlIjogIlNFTEwiLCAiY29sb3IiOiAiI2Y4NzE3MSJ9')" data-symbol="EDU">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'EDU')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiRURVIiwgInByaWNlIjogIjAuMTI5NjQiLCAicnNpIjogIjMxLjUiLCAibWFjZCI6ICItMC4wMDU4IiwgInNpZ25hbF90eXBlIjogIlNFTEwiLCAiY29sb3IiOiAiI2U1OTg5YiJ9')" data-symbol="EDU">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'EDU')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">EDU</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiSE9PSyIsICJwcmljZSI6ICIwLjAyNjIiLCAicnNpIjogIjM3LjciLCAibWFjZCI6ICItMC4wMDIxIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')" data-symbol="HOOK">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'HOOK')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSE9PSyIsICJwcmljZSI6ICIwLjAyNjI3IiwgInJzaSI6ICIzNy45IiwgIm1hY2QiOiAiLTAuMDAyMSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="HOOK">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'HOOK')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">HOOK</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQVJLTSIsICJwcmljZSI6ICIwLjExNzQiLCAicnNpIjogIjM4LjYiLCAibWFjZCI6ICItMC4wMTM5IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')" data-symbol="ARKM">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ARKM')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQVJLTSIsICJwcmljZSI6ICIwLjExOCIsICJyc2kiOiAiMzkuMSIsICJtYWNkIjogIi0wLjAxMzgiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="ARKM">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ARKM')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ARKM</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiTUFWIiwgInByaWNlIjogIjAuMDE2MzIiLCAicnNpIjogIjMxLjYiLCAibWFjZCI6ICItMC4wMDIwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')" data-symbol="MAV">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'MAV')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUFWIiwgInByaWNlIjogIjAuMDE2MzkiLCAicnNpIjogIjMyLjAiLCAibWFjZCI6ICItMC4wMDIwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="MAV">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'MAV')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">MAV</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQ1lCRVIiLCAicHJpY2UiOiAiMC43MjIyIiwgInJzaSI6ICI2Ni4yIiwgIm1hY2QiOiAiLTAuMDIxMiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="CYBER">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'CYBER')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQ1lCRVIiLCAicHJpY2UiOiAiMC43MTU2IiwgInJzaSI6ICI2NS44IiwgIm1hY2QiOiAiLTAuMDIxOCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="CYBER">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'CYBER')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">CYBER</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiTlRSTiIsICJwcmljZSI6ICIwLjAxNDE5IiwgInJzaSI6ICI0Mi43IiwgIm1hY2QiOiAiLTAuMDAxOSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="NTRN">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'NTRN')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTlRSTiIsICJwcmljZSI6ICIwLjAxNDMiLCAicnNpIjogIjQzLjMiLCAibWFjZCI6ICItMC4wMDE5IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="NTRN">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'NTRN')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">NTRN</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiU0FUUyIsICJwcmljZSI6ICIxLjE2MWUtMDgiLCAicnNpIjogIjE0LjkiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')" data-symbol="SATS">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'SATS')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU0FUUyIsICJwcmljZSI6ICIxLjE2NmUtMDgiLCAicnNpIjogIjE0LjkiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="SATS">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'SATS')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">SATS</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #f87171;" onclick="openModal('eyJzeW1ib2wiOiAiUkFUUyIsICJwcmljZSI6ICI0LjczNGUtMDUiLCAicnNpIjogIjM3LjkiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIlNFTEwiLCAiY29sb3IiOiAiI2Y4NzE3MSJ9')" data-symbol="RATS">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'RATS')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiUkFUUyIsICJwcmljZSI6ICI0LjczN2UtMDUiLCAicnNpIjogIjM3LjkiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIlNFTEwiLCAiY29sb3IiOiAiI2U1OTg5YiJ9')" data-symbol="RATS">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'RATS')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">RATS</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiTVlSTyIsICJwcmljZSI6ICIwLjAwMzY5NSIsICJyc2kiOiAiNDkuNyIsICJtYWNkIjogIi0wLjAwMDMiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="MYRO">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'MYRO')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTVlSTyIsICJwcmljZSI6ICIwLjAwMzcyMSIsICJyc2kiOiAiNTAuNCIsICJtYWNkIjogIi0wLjAwMDMiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="MYRO">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'MYRO')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">MYRO</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiTVVCSSIsICJwcmljZSI6ICIwLjAwMDU2MzMiLCAicnNpIjogIjU1LjIiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="MUBI">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'MUBI')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTVVCSSIsICJwcmljZSI6ICIwLjAwMDU2MzMiLCAicnNpIjogIjU1LjIiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="MUBI">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'MUBI')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">MUBI</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiVFVSQk8iLCAicHJpY2UiOiAiMC4wMDExMDQiLCAicnNpIjogIjQ0LjIiLCAibWFjZCI6ICItMC4wMDAxIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="TURBO">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'TURBO')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiVFVSQk8iLCAicHJpY2UiOiAiMC4wMDExMTIiLCAicnNpIjogIjQ0LjciLCAibWFjZCI6ICItMC4wMDAxIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="TURBO">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'TURBO')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">TURBO</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiTUVNRSIsICJwcmljZSI6ICIwLjAwMDcwNTMiLCAicnNpIjogIjM5LjUiLCAibWFjZCI6ICItMC4wMDAxIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')" data-symbol="MEME">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'MEME')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUVNRSIsICJwcmljZSI6ICIwLjAwMDcwODMiLCAicnNpIjogIjM5LjgiLCAibWFjZCI6ICItMC4wMDAxIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="MEME">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'MEME')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">MEME</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiUE9QQ0FUIiwgInByaWNlIjogIjAuMDUyMDQiLCAicnNpIjogIjQ2LjIiLCAibWFjZCI6ICItMC4wMDYwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="POPCAT">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'POPCAT')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiUE9QQ0FUIiwgInByaWNlIjogIjAuMDUyMzYiLCAicnNpIjogIjQ2LjUiLCAibWFjZCI6ICItMC4wMDYwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="POPCAT">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'POPCAT')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">POPCAT</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiTU9HIiwgInByaWNlIjogIjEuNzUyZS0wNyIsICJyc2kiOiAiNDEuMyIsICJtYWNkIjogIi0wLjAwMDAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="MOG">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'MOG')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTU9HIiwgInByaWNlIjogIjEuNzYxZS0wNyIsICJyc2kiOiAiNDEuNiIsICJtYWNkIjogIi0wLjAwMDAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="MOG">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'MOG')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">MOG</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiTUVXIiwgInByaWNlIjogIjAuMDAwNjMwNSIsICJyc2kiOiAiNDUuMyIsICJtYWNkIjogIi0wLjAwMDEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="MEW">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'MEW')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTUVXIiwgInByaWNlIjogIjAuMDAwNjMzNCIsICJyc2kiOiAiNDUuNiIsICJtYWNkIjogIi0wLjAwMDEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="MEW">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'MEW')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">MEW</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQk9NRSIsICJwcmljZSI6ICIwLjAwMDQyOTciLCAicnNpIjogIjQzLjgiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="BOME">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'BOME')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQk9NRSIsICJwcmljZSI6ICIwLjAwMDQzMTMiLCAicnNpIjogIjQ0LjAiLCAibWFjZCI6ICItMC4wMDAwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="BOME">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'BOME')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">BOME</span>
         </div>
         
         <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #475569;" onclick="openModal('eyJzeW1ib2wiOiAiU0xFUkYiLCAicHJpY2UiOiAiMC4wMDQxODkiLCAicnNpIjogIjI4LjMiLCAibWFjZCI6ICItMC4wMDA1IiwgInNpZ25hbF90eXBlIjogIk5FVVRSQUwiLCAiY29sb3IiOiAiIzQ3NTU2OSJ9')" data-symbol="SLERF">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'SLERF')">★</span>
-            </div>
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'SLERF')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">SLERF</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiREVHRU4iLCAicHJpY2UiOiAiMC4wMDA3MDM2IiwgInJzaSI6ICI0NC41IiwgIm1hY2QiOiAiLTAuMDAwMSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="DEGEN">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'DEGEN')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiREVHRU4iLCAicHJpY2UiOiAiMC4wMDA3MDQ2IiwgInJzaSI6ICI0NC42IiwgIm1hY2QiOiAiLTAuMDAwMSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="DEGEN">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'DEGEN')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">DEGEN</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQUVWTyIsICJwcmljZSI6ICIwLjAyNzg5IiwgInJzaSI6ICI0MS4yIiwgIm1hY2QiOiAiLTAuMDAyMiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxNjY1MzQifQ==')" data-symbol="AEVO">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'AEVO')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQUVWTyIsICJwcmljZSI6ICIwLjAyODA0IiwgInJzaSI6ICI0MS45IiwgIm1hY2QiOiAiLTAuMDAyMiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="AEVO">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'AEVO')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">AEVO</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiTUVUSVMiLCAicHJpY2UiOiAiMy42ODIiLCAicnNpIjogIjQ2LjYiLCAibWFjZCI6ICItMC4yNjAwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="METIS">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'METIS')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTUVUSVMiLCAicHJpY2UiOiAiMy42OTYiLCAicnNpIjogIjQ2LjkiLCAibWFjZCI6ICItMC4yNTg5IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="METIS">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'METIS')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">METIS</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #f87171;" onclick="openModal('eyJzeW1ib2wiOiAiU0NSVCIsICJwcmljZSI6ICIwLjA5MTY4IiwgInJzaSI6ICIzNy45IiwgIm1hY2QiOiAiLTAuMDEwMSIsICJzaWduYWxfdHlwZSI6ICJTRUxMIiwgImNvbG9yIjogIiNmODcxNzEifQ==')" data-symbol="SCRT">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'SCRT')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiU0NSVCIsICJwcmljZSI6ICIwLjA5MjI3IiwgInJzaSI6ICIzOC41IiwgIm1hY2QiOiAiLTAuMDEwMCIsICJzaWduYWxfdHlwZSI6ICJTRUxMIiwgImNvbG9yIjogIiNlNTk4OWIifQ==')" data-symbol="SCRT">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'SCRT')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">SCRT</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiT05UIiwgInByaWNlIjogIjAuMDQ3OTUiLCAicnNpIjogIjQ0LjAiLCAibWFjZCI6ICItMC4wMDI4IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')" data-symbol="ONT">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ONT')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiT05UIiwgInByaWNlIjogIjAuMDQ4IiwgInJzaSI6ICI0NC4xIiwgIm1hY2QiOiAiLTAuMDAyOCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="ONT">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'ONT')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">ONT</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiU0tMIiwgInByaWNlIjogIjAuMDA2ODkyIiwgInJzaSI6ICI0NC43IiwgIm1hY2QiOiAiLTAuMDAwNiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzRhZGU4MCJ9')" data-symbol="SKL">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'SKL')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU0tMIiwgInByaWNlIjogIjAuMDA2OTE1IiwgInJzaSI6ICI0NS4wIiwgIm1hY2QiOiAiLTAuMDAwNiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="SKL">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'SKL')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">SKL</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiU0MiLCAicHJpY2UiOiAiMC4wMDExOTkiLCAicnNpIjogIjM5LjEiLCAibWFjZCI6ICItMC4wMDAxIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')" data-symbol="SC">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'SC')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU0MiLCAicHJpY2UiOiAiMC4wMDEyMDIiLCAicnNpIjogIjM5LjMiLCAibWFjZCI6ICItMC4wMDAxIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="SC">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'SC')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">SC</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiQkxaIiwgInByaWNlIjogIjAuMDEzNzEiLCAicnNpIjogIjQwLjYiLCAibWFjZCI6ICItMC4wMDA4IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="BLZ">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'BLZ')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQkxaIiwgInByaWNlIjogIjAuMDEzNjkiLCAicnNpIjogIjQwLjQiLCAibWFjZCI6ICItMC4wMDA4IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="BLZ">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'BLZ')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">BLZ</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiUkFZIiwgInByaWNlIjogIjAuNjY0MSIsICJyc2kiOiAiNTEuOSIsICJtYWNkIjogIi0wLjA3OTkiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="RAY">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'RAY')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUkFZIiwgInByaWNlIjogIjAuNjcxNSIsICJyc2kiOiAiNTIuOCIsICJtYWNkIjogIi0wLjA3OTMiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="RAY">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'RAY')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">RAY</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiU1JNIiwgInByaWNlIjogIjAuMDA1NjciLCAicnNpIjogIjQ4LjUiLCAibWFjZCI6ICItMC4wMDEwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="SRM">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'SRM')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU1JNIiwgInByaWNlIjogIjAuMDA1NTg4IiwgInJzaSI6ICI0OC4yIiwgIm1hY2QiOiAiLTAuMDAxMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="SRM">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'SRM')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">SRM</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #f87171;" onclick="openModal('eyJzeW1ib2wiOiAiU1RHIiwgInByaWNlIjogIjAuMTMzMyIsICJyc2kiOiAiNDIuOSIsICJtYWNkIjogIi0wLjAwMTkiLCAic2lnbmFsX3R5cGUiOiAiU0VMTCIsICJjb2xvciI6ICIjZjg3MTcxIn0=')" data-symbol="STG">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'STG')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiU1RHIiwgInByaWNlIjogIjAuMTM0MiIsICJyc2kiOiAiNDMuMiIsICJtYWNkIjogIi0wLjAwMTgiLCAic2lnbmFsX3R5cGUiOiAiU0VMTCIsICJjb2xvciI6ICIjZTU5ODliIn0=')" data-symbol="STG">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'STG')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">STG</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiUkROVCIsICJwcmljZSI6ICIwLjAwNTc5OCIsICJyc2kiOiAiMzMuNyIsICJtYWNkIjogIi0wLjAwMDciLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="RDNT">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'RDNT')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUkROVCIsICJwcmljZSI6ICIwLjAwNTgxMiIsICJyc2kiOiAiMzMuOSIsICJtYWNkIjogIi0wLjAwMDciLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="RDNT">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'RDNT')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">RDNT</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiTUFHSUMiLCAicHJpY2UiOiAiMC4wNzM5NiIsICJyc2kiOiAiNTUuMSIsICJtYWNkIjogIi0wLjAwMzUiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="MAGIC">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'MAGIC')">★</span>
-            </div>
+        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUFHSUMiLCAicHJpY2UiOiAiMC4wNzQ0MSIsICJyc2kiOiAiNTUuNiIsICJtYWNkIjogIi0wLjAwMzUiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="MAGIC">
+            <div class="flex justify-start"><span class="star-btn text-white opacity-40" onclick="toggleFav(event, 'MAGIC')">★</span></div>
             <span class="font-bold font-mono text-[11px] block mt-1">MAGIC</span>
         </div>
         
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiV0FYUCIsICJwcmljZSI6ICIwLjAwNjkwOSIsICJyc2kiOiAiNDUuMSIsICJtYWNkIjogIi0wLjAwMDIiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="WAXP">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'WAXP')">★</span>
-            </div>
-            <span class="font-bold font-mono text-[11px] block mt-1">WAXP</span>
-        </div>
-        
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiR1RDIiwgInByaWNlIjogIjAuMDk4ODYiLCAicnNpIjogIjQ0LjgiLCAibWFjZCI6ICItMC4wMDY0IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNGFkZTgwIn0=')" data-symbol="GTC">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'GTC')">★</span>
-            </div>
-            <span class="font-bold font-mono text-[11px] block mt-1">GTC</span>
-        </div>
-        
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #4ade80;" onclick="openModal('eyJzeW1ib2wiOiAiUFJPTSIsICJwcmljZSI6ICIxLjM0NCIsICJyc2kiOiAiNDkuNSIsICJtYWNkIjogIi0wLjUzMjUiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM0YWRlODAifQ==')" data-symbol="PROM">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'PROM')">★</span>
-            </div>
-            <span class="font-bold font-mono text-[11px] block mt-1">PROM</span>
-        </div>
-        
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiQUxQSEEiLCAicHJpY2UiOiAiMC4wMDM1NDYiLCAicnNpIjogIjEwLjIiLCAibWFjZCI6ICItMC4wMDA2IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')" data-symbol="ALPHA">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'ALPHA')">★</span>
-            </div>
-            <span class="font-bold font-mono text-[11px] block mt-1">ALPHA</span>
-        </div>
-        
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiT0dOIiwgInByaWNlIjogIjAuMDIzNzgiLCAicnNpIjogIjQ5LjEiLCAibWFjZCI6ICItMC4wMDEyIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzE2NjUzNCJ9')" data-symbol="OGN">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'OGN')">★</span>
-            </div>
-            <span class="font-bold font-mono text-[11px] block mt-1">OGN</span>
-        </div>
-        
-        <div class="coin-box p-3 text-center cursor-pointer relative" style="background-color: #166534;" onclick="openModal('eyJzeW1ib2wiOiAiU1RPUkoiLCAicHJpY2UiOiAiMC4xMDAxNiIsICJyc2kiOiAiNDIuNCIsICJtYWNkIjogIi0wLjAwNTYiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMTY2NTM0In0=')" data-symbol="STORJ">
-            <div class="flex justify-start">
-                <span class="star-btn text-slate-200 opacity-30 hover:opacity-100" onclick="toggleFav(event, 'STORJ')">★</span>
-            </div>
-            <span class="font-bold font-mono text-[11px] block mt-1">STORJ</span>
-        </div>
-        
             </div>
         </div>
-
         <div id="detailModal" class="modal" onclick="closeModalOutside(event)">
             <div class="modal-content" onclick="event.stopPropagation()">
                 <div class="flex justify-between items-center mb-8">
@@ -1032,66 +719,39 @@
                 <button onclick="closeModal()" class="w-full mt-8 bg-slate-800 hover:bg-slate-700 py-4 rounded-2xl font-bold transition">Back to Heatmap</button>
             </div>
         </div>
-
         <script>
             let favorites = JSON.parse(localStorage.getItem('favs')) || [];
             let showingFavsOnly = false;
-
             function openModal(encodedData) {
                 const data = JSON.parse(atob(encodedData));
                 document.getElementById('m-title').innerText = data.symbol;
                 document.getElementById('m-body').innerHTML = `
-                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
-                        <div class="text-slate-500 text-[10px] mb-1 uppercase font-bold">Market Price</div>
-                        <div class="font-mono text-2xl font-bold text-white">$${data.price}</div>
-                    </div>
-                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
-                        <div class="text-slate-500 text-[10px] mb-1 uppercase font-bold">Analysis Signal</div>
-                        <div class="font-black text-xl" style="color:${data.color}">${data.signal_type}</div>
-                    </div>
+                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800"><div class="text-slate-500 text-[10px] mb-1 uppercase font-bold">Market Price</div><div class="font-mono text-2xl font-bold text-white">$${data.price}</div></div>
+                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800"><div class="text-slate-500 text-[10px] mb-1 uppercase font-bold">Analysis Signal</div><div class="font-black text-xl" style="color:${data.color}">${data.signal_type}</div></div>
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                            <div class="text-slate-500 text-[10px] mb-1">RSI (14)</div>
-                            <div class="font-bold text-lg text-white">${data.rsi}</div>
-                        </div>
-                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                            <div class="text-slate-500 text-[10px] mb-1">MACD</div>
-                            <div class="font-bold text-lg text-white">${data.macd}</div>
-                        </div>
-                    </div>
-                `;
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800"><div class="text-slate-500 text-[10px] mb-1">RSI (14)</div><div class="font-bold text-lg text-white">${data.rsi}</div></div>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800"><div class="text-slate-500 text-[10px] mb-1">MACD</div><div class="font-bold text-lg text-white">${data.macd}</div></div>
+                    </div>`;
                 document.getElementById('detailModal').style.display = 'block';
             }
-
             function closeModal() { document.getElementById('detailModal').style.display = 'none'; }
             function closeModalOutside(e) { if(e.target.id === 'detailModal') closeModal(); }
-
             function toggleFav(event, symbol) {
                 event.stopPropagation();
-                if (favorites.includes(symbol)) {
-                    favorites = favorites.filter(f => f !== symbol);
-                } else {
-                    favorites.push(symbol);
-                }
+                if (favorites.includes(symbol)) { favorites = favorites.filter(f => f !== symbol); } 
+                else { favorites.push(symbol); }
                 localStorage.setItem('favs', JSON.stringify(favorites));
                 updateStars();
                 if (showingFavsOnly) filterCoins();
             }
-
             function updateStars() {
                 document.querySelectorAll('.coin-box').forEach(box => {
                     const symbol = box.getAttribute('data-symbol');
                     const star = box.querySelector('.star-btn');
-                    if (favorites.includes(symbol)) {
-                        star.style.color = '#fbbf24';
-                        star.style.opacity = '1';
-                    } else {
-                        star.style.color = '';
-                        star.style.opacity = '';
-                    }
+                    if (favorites.includes(symbol)) { star.style.color = '#fbbf24'; star.style.opacity = '1'; } 
+                    else { star.style.color = ''; star.style.opacity = ''; }
                 });
             }
-
             function filterCoins() {
                 const term = document.getElementById('search-input').value.toUpperCase();
                 document.querySelectorAll('.coin-box').forEach(box => {
@@ -1101,7 +761,6 @@
                     box.style.display = (matchesSearch && matchesFav) ? 'block' : 'none';
                 });
             }
-
             function toggleFavoritesFilter() {
                 showingFavsOnly = !showingFavsOnly;
                 document.getElementById('fav-filter-btn').innerText = showingFavsOnly ? 'Show All Assets' : 'Show Favorites';
@@ -1109,7 +768,6 @@
                 document.getElementById('fav-filter-btn').classList.toggle('bg-amber-600');
                 filterCoins();
             }
-
             updateStars();
         </script>
     </body>
