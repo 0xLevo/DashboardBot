@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 import json
 import base64
 
-# --- TOP 200 COINS (Stabil hariç) ---
+# --- TOP 200 COINS (Excluding Stablecoins) ---
 TOP_COINS = [
     'BTC', 'ETH', 'BNB', 'SOL', 'XRP', 'ADA', 'AVAX', 'DOGE', 'DOT', 'TRX',
     'LINK', 'MATIC', 'TON', 'SHIB', 'LTC', 'BCH', 'NEAR', 'UNI', 'LEO', 'PEPE',
@@ -48,12 +48,11 @@ def get_signal_data(tech_data):
     else: score -= 2
     if tech_data['vol_change'] > 0.3 and score > 0: score += 1
     
-    # --- YENİ PASTEL RENK PALETİ ---
-    if score >= 3: return "STRONG BUY", "#1b4332" # Koyu Pastel Orman Yeşili
-    elif score >= 1: return "BUY", "#52b788" # Pastel Yumuşak Yeşil (Göz yormaz)
-    elif score <= -3: return "STRONG SELL", "#7f1d1d" # Koyu Bordo/Kırmızı
-    elif score <= -1: return "SELL", "#e5989b" # Pastel Gül/Kırmızı
-    else: return "NEUTRAL", "#475569" # Dingin Gri
+    if score >= 3: return "STRONG BUY", "#1b4332" 
+    elif score >= 1: return "BUY", "#52b788" 
+    elif score <= -3: return "STRONG SELL", "#7f1d1d" 
+    elif score <= -1: return "SELL", "#e5989b" 
+    else: return "NEUTRAL", "#475569" 
 
 def analyze_market():
     exchange = ccxt.mexc({'enableRateLimit': True})
@@ -88,11 +87,10 @@ def create_html(data):
                 -webkit-text-fill-color: transparent;
             }}
             .disclaimer-bar {{ background: rgba(15, 23, 42, 0.8); border-bottom: 1px solid #1e293b; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; }}
-            /* BELİRGİN KENARLIKLAR (BORDER) */
             .coin-box {{ 
                 border-radius: 4px; 
                 transition: all 0.2s ease; 
-                border: 2px solid rgba(255, 255, 255, 0.2); /* Daha belirgin kenarlık */
+                border: 2px solid rgba(255, 255, 255, 0.2); 
             }}
             .coin-box:hover {{ transform: scale(1.08); z-index: 50; border-color: rgba(255, 255, 255, 0.6); box-shadow: 0 0 15px rgba(0,0,0,0.5); }}
             .modal {{ display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(12px); }}
@@ -107,7 +105,10 @@ def create_html(data):
 
         <div class="p-4 md:p-8">
             <header class="flex flex-col lg:flex-row justify-between items-center pb-8 border-b border-slate-800 mb-8 gap-6">
-                <h1 class="text-5xl font-black gradient-text tracking-tight">BasedVector</h1>
+                <a href="index.html" class="no-underline hover:opacity-80 transition">
+                    <h1 class="text-5xl font-black gradient-text tracking-tight cursor-pointer">BasedVector</h1>
+                </a>
+                
                 <div class="flex flex-wrap gap-4 items-center justify-center">
                     <input type="text" id="search-input" placeholder="Search Asset..." onkeyup="filterCoins()" class="bg-slate-900 border border-slate-700 text-white px-5 py-2 rounded-xl text-sm outline-none w-72 focus:border-sky-500">
                     <button onclick="toggleFavoritesFilter()" id="fav-filter-btn" class="bg-sky-600 hover:bg-sky-500 text-white px-6 py-2 rounded-xl text-sm font-bold transition-all">Show Favorites</button>
