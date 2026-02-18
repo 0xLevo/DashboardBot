@@ -19,21 +19,17 @@ TOP_COINS = [
 ]
 
 def calculate_technical_indicators(df):
-    """MACD, RSI ve Hacim değişimlerini hesaplar."""
-    # RSI
     delta = df['close'].diff()
     gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
     loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
     rs = gain / loss
     rsi = 100 - (100 / (1 + rs))
 
-    # MACD
     ema12 = df['close'].ewm(span=12, adjust=False).mean()
     ema26 = df['close'].ewm(span=26, adjust=False).mean()
     macd = ema12 - ema26
     signal = macd.ewm(span=9, adjust=False).mean()
 
-    # Hacim Değişimi
     vol_change = df['volume'].pct_change()
     
     return {
@@ -45,45 +41,35 @@ def calculate_technical_indicators(df):
     }
 
 def get_signal_data(tech_data):
-    """İndikatörleri harmanlayıp sinyal ve renk belirler."""
     score = 0
-    
-    # RSI Sinyalleri
-    if tech_data['rsi'] < 30: score += 2  # Oversold (Buy)
-    elif tech_data['rsi'] > 70: score -= 2 # Overbought (Sell)
+    if tech_data['rsi'] < 30: score += 2
+    elif tech_data['rsi'] > 70: score -= 2
     elif 30 < tech_data['rsi'] < 40: score += 1
     elif 60 < tech_data['rsi'] < 70: score -= 1
 
-    # MACD Sinyalleri
-    if tech_data['macd'] > tech_data['signal']: score += 2 # Bullish
-    else: score -= 2 # Bearish
+    if tech_data['macd'] > tech_data['signal']: score += 2
+    else: score -= 2
 
-    # Hacim Sinyalleri
-    if tech_data['vol_change'] > 0.5: score += 1 # High volume buy
-    elif tech_data['vol_change'] < -0.5: score -= 1 # High volume sell
+    if tech_data['vol_change'] > 0.5: score += 1
+    elif tech_data['vol_change'] < -0.5: score -= 1
 
-    # Renk Paleti (Belirgin -> Pastel)
-    if score >= 3: return "STRONG BUY", "#166534" # Koyu Yeşil
-    elif score == 2: return "BUY", "#4ade80" # Pastel Yeşil
-    elif score <= -3: return "STRONG SELL", "#991b1b" # Koyu Kırmızı
-    elif score == -2: return "SELL", "#f87171" # Pastel Kırmızı
-    else: return "NEUTRAL", "#475569" # Gri
+    if score >= 3: return "STRONG BUY", "#166534" 
+    elif score == 2: return "BUY", "#4ade80" 
+    elif score <= -3: return "STRONG SELL", "#991b1b" 
+    elif score == -2: return "SELL", "#f87171" 
+    else: return "NEUTRAL", "#475569" 
 
 def analyze_market():
     exchange = ccxt.mexc({'enableRateLimit': True})
     results = []
-
     for symbol in TOP_COINS:
         try:
             pair = f"{symbol}/USDT"
             bars = exchange.fetch_ohlcv(pair, timeframe='1d', limit=40)
             if len(bars) < 30: continue
-
             df = pd.DataFrame(bars, columns=['time', 'open', 'high', 'low', 'close', 'volume'])
-            
             tech_data = calculate_technical_indicators(df)
             signal, color = get_signal_data(tech_data)
-
             results.append({
                 'symbol': symbol,
                 'price': f"{tech_data['close']:.6g}",
@@ -92,9 +78,8 @@ def analyze_market():
                 'signal_type': signal,
                 'color': color
             })
-            time.sleep(0.05)
-        except Exception as e:
-            continue
+            time.sleep(0.01) # Hızlandırıldı
+        except: continue
     return results
 
 def create_html(data):
@@ -104,83 +89,114 @@ def create_html(data):
     <!DOCTYPE html><html lang="en">
     <head>
         <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BasedVector Heatmap</title>
+        <title>BasedVector | Professional Heatmap</title>
         <script src="https://cdn.tailwindcss.com"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
         <style>
             body {{ font-family: 'Montserrat', sans-serif; background-color: #0f172a; color: white; }}
-            .coin-box {{ border-radius: 8px; transition: 0.2s; border: 1px solid rgba(255,255,255,0.1); }}
-            .coin-box:hover {{ transform: scale(1.05); z-index: 10; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }}
-            .modal {{ display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); }}
-            .modal-content {{ background-color: #1e293b; margin: 15% auto; padding: 20px; border-radius: 12px; width: 300px; border: 1px solid #334155; }}
+            .gradient-text {{
+                background: linear-gradient(to right, #991b1b, #f87171, #475569, #4ade80, #166534);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }}
+            .disclaimer-bar {{
+                background: rgba(30, 41, 59, 0.5);
+                border-bottom: 1px solid #334155;
+                font-size: 10px;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }}
+            .coin-box {{ border-radius: 6px; transition: all 0.2s ease; border: 1px solid rgba(255,255,255,0.05); }}
+            .coin-box:hover {{ transform: translateY(-2px); z-index: 10; box-shadow: 0 10px 20px rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.2); }}
+            .modal {{ display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(8px); }}
+            .modal-content {{ background-color: #1e293b; margin: 10% auto; padding: 30px; border-radius: 20px; width: 340px; border: 1px solid #334155; }}
+            .star-btn {{ cursor: pointer; transition: 0.2s; font-size: 1.2rem; line-height: 1; }}
+            input {{ transition: 0.3s; }}
+            input:focus {{ box-shadow: 0 0 0 2px #38bdf8; }}
         </style>
     </head>
-    <body class="p-6">
-        <header class="flex justify-between items-center pb-8 border-b border-slate-700 mb-8">
-            <h1 class="text-3xl font-bold font-mono">
-                <span style="color: #991b1b">B</span><span style="color: #ef4444">a</span><span style="color: #475569">s</span><span style="color: #22c55e">e</span><span style="color: #166534">d</span>
-                <span style="color: #991b1b">V</span><span style="color: #ef4444">e</span><span style="color: #475569">c</span><span style="color: #22c55e">t</span><span style="color: #166535">o</span><span style="color: #166535">r</span>
-                <span class="text-white">Heatmap</span>
-            </h1>
-            <div class="flex gap-2">
-                <button onclick="toggleFavorites()" id="fav-btn" class="bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-semibold">Show Favorites</button>
-                <span class="text-sm text-slate-400 font-mono self-center">{full_update} UTC</span>
-            </div>
-        </header>
+    <body>
+        <div class="disclaimer-bar p-2 text-center text-slate-400">
+            <strong>Legal Disclaimer:</strong> BasedVector is an analytical tool. The information provided does not constitute investment advice. Cryptocurrency trading carries high risk.
+        </div>
 
-        <div class="grid grid-cols-5 md:grid-cols-8 lg:grid-cols-12 gap-2" id="coin-grid">
+        <div class="p-6">
+            <header class="flex flex-col lg:flex-row justify-between items-center pb-8 border-b border-slate-800 mb-8 gap-6">
+                <h1 class="text-4xl font-extrabold gradient-text tracking-tighter">BasedVector</h1>
+                
+                <div class="flex flex-wrap gap-4 items-center justify-center">
+                    <div class="relative">
+                        <input type="text" id="search-input" placeholder="Search Assets..." onkeyup="filterCoins()" class="bg-slate-900 border border-slate-700 text-white px-4 py-2 rounded-xl text-sm outline-none w-64">
+                    </div>
+                    <button onclick="toggleFavoritesFilter()" id="fav-filter-btn" class="bg-sky-600 hover:bg-sky-500 text-white px-5 py-2 rounded-xl text-sm font-bold transition-all shadow-lg shadow-sky-900/20">Show Favorites</button>
+                    <div class="text-[10px] text-slate-500 font-mono bg-slate-900/50 px-3 py-1 rounded-full border border-slate-800">
+                        LAST UPDATE: {full_update} UTC
+                    </div>
+                </div>
+            </header>
+
+            <div class="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-2" id="coin-grid">
     """
 
     for i in data:
         encoded_data = base64.b64encode(json.dumps(i).encode()).decode()
         html += f"""
-        <div class="coin-box relative p-2 text-center cursor-pointer" style="background-color: {i['color']};" onclick="openModal('{encoded_data}')">
-            <span id="star-{i['symbol']}" class="absolute top-0 left-1 text-xs text-slate-300">★</span>
-            <span class="font-bold font-mono text-xs">{i['symbol']}</span>
+        <div class="coin-box p-4 text-center cursor-pointer relative" style="background-color: {i['color']}CC;" onclick="openModal('{encoded_data}')" data-symbol="{i['symbol']}">
+            <span class="star-btn absolute top-1 left-1 text-slate-400 opacity-40 hover:opacity-100" onclick="toggleFav(event, '{i['symbol']}')">★</span>
+            <span class="font-bold font-mono text-xs block mt-1">{i['symbol']}</span>
         </div>
         """
 
     html += """
-        </div>
-
-        <div id="detailModal" class="modal">
-            <div class="modal-content">
-                <div class="flex justify-between mb-4">
-                    <h2 id="m-title" class="text-2xl font-bold"></h2>
-                    <button onclick="closeModal()" class="text-slate-400 hover:text-white">&times;</button>
-                </div>
-                <div id="m-body" class="text-sm text-slate-300 space-y-2"></div>
             </div>
         </div>
 
-        <footer class="mt-12 pt-6 border-t border-slate-700 text-center text-slate-500 text-xs">
-            <p><strong>LEGAL DISCLAIMER:</strong> The information provided on BasedVector is for informational purposes only and does not constitute financial advice. Trading cryptocurrencies involves significant risk.</p>
-        </footer>
+        <div id="detailModal" class="modal" onclick="closeModalOutside(event)">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <div class="flex justify-between items-center mb-8 border-b border-slate-700 pb-4">
+                    <h2 id="m-title" class="text-3xl font-black tracking-tight text-white"></h2>
+                    <button onclick="closeModal()" class="text-slate-500 hover:text-white text-3xl transition">&times;</button>
+                </div>
+                <div id="m-body" class="space-y-5"></div>
+                <button onclick="closeModal()" class="w-full mt-8 bg-slate-700 hover:bg-slate-600 py-3 rounded-xl font-bold transition">Close</button>
+            </div>
+        </div>
 
         <script>
             let favorites = JSON.parse(localStorage.getItem('favs')) || [];
-            let showingFavs = false;
+            let showingFavsOnly = false;
 
             function openModal(encodedData) {
                 const data = JSON.parse(atob(encodedData));
                 document.getElementById('m-title').innerText = data.symbol;
                 document.getElementById('m-body').innerHTML = `
-                    <p>Price: <strong>$${data.price}</strong></p>
-                    <p>Signal: <strong>${data.signal_type}</strong></p>
-                    <p>RSI: <strong>${data.rsi}</strong></p>
-                    <p>MACD: <strong>${data.macd}</strong></p>
+                    <div class="flex justify-between items-center bg-slate-900/50 p-3 rounded-lg">
+                        <span class="text-slate-400 text-xs">PRICE</span>
+                        <span class="font-mono font-bold text-lg text-white">$${data.price}</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-slate-900/50 p-3 rounded-lg">
+                        <span class="text-slate-400 text-xs">SIGNAL</span>
+                        <span class="font-bold px-3 py-1 rounded-full text-xs" style="background:${data.color}; color:white">${data.signal_type}</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 mt-4">
+                        <div class="bg-slate-900/50 p-3 rounded-lg text-center">
+                            <div class="text-slate-500 text-[10px] mb-1">RSI</div>
+                            <div class="font-bold text-white">${data.rsi}</div>
+                        </div>
+                        <div class="bg-slate-900/50 p-3 rounded-lg text-center">
+                            <div class="text-slate-500 text-[10px] mb-1">MACD</div>
+                            <div class="font-bold text-white">${data.macd}</div>
+                        </div>
+                    </div>
                 `;
                 document.getElementById('detailModal').style.display = 'block';
-                
-                // Yıldız Tıklama Kontrolü (Modal açıkken yıldız tıklanırsa)
-                event.stopPropagation(); 
             }
 
-            function closeModal() {
-                document.getElementById('detailModal').style.display = 'none';
-            }
+            function closeModal() { document.getElementById('detailModal').style.display = 'none'; }
+            function closeModalOutside(e) { if(e.target.id === 'detailModal') closeModal(); }
 
-            function toggleFav(symbol) {
+            function toggleFav(event, symbol) {
+                event.stopPropagation();
                 if (favorites.includes(symbol)) {
                     favorites = favorites.filter(f => f !== symbol);
                 } else {
@@ -188,53 +204,42 @@ def create_html(data):
                 }
                 localStorage.setItem('favs', JSON.stringify(favorites));
                 updateStars();
-                if (showingFavs) renderGrid();
-                event.stopPropagation(); // Kutu tıklamasını engelle
+                if (showingFavsOnly) filterCoins();
             }
 
             function updateStars() {
                 document.querySelectorAll('.coin-box').forEach(box => {
-                    const symbol = box.querySelector('.font-mono').innerText;
-                    const star = box.querySelector('span.absolute');
+                    const symbol = box.getAttribute('data-symbol');
+                    const star = box.querySelector('.star-btn');
                     if (favorites.includes(symbol)) {
-                        star.style.color = '#facc15'; // Sarı yıldız
+                        star.style.color = '#fbbf24';
                         star.style.opacity = '1';
                     } else {
-                        star.style.color = '#cbd5e1'; // Soluk yıldız
-                        star.style.opacity = '0.5';
+                        star.style.color = '';
+                        star.style.opacity = '';
                     }
                 });
             }
 
-            function toggleFavorites() {
-                showingFavs = !showingFavs;
-                document.getElementById('fav-btn').innerText = showingFavs ? 'Show All' : 'Show Favorites';
-                renderGrid();
+            function filterCoins() {
+                const term = document.getElementById('search-input').value.toUpperCase();
+                document.querySelectorAll('.coin-box').forEach(box => {
+                    const symbol = box.getAttribute('data-symbol');
+                    const matchesSearch = symbol.includes(term);
+                    const matchesFav = showingFavsOnly ? favorites.includes(symbol) : true;
+                    box.style.display = (matchesSearch && matchesFav) ? 'block' : 'none';
+                });
             }
 
-            function renderGrid() {
-                const grid = document.getElementById('coin-grid');
-                const boxes = grid.getElementsByClassName('coin-box');
-                for (let box of boxes) {
-                    const symbol = box.querySelector('.font-mono').innerText;
-                    if (showingFavs && !favorites.includes(symbol)) {
-                        box.style.display = 'none';
-                    } else {
-                        box.style.display = 'block';
-                    }
-                }
+            function toggleFavoritesFilter() {
+                showingFavsOnly = !showingFavsOnly;
+                document.getElementById('fav-filter-btn').innerText = showingFavsOnly ? 'Show All' : 'Show Favorites';
+                document.getElementById('fav-filter-btn').classList.toggle('bg-sky-600');
+                document.getElementById('fav-filter-btn').classList.toggle('bg-amber-500');
+                filterCoins();
             }
 
-            // Sayfa yüklendiğinde favori yıldızlarını göster
             updateStars();
-            
-            // Modal dışına tıklayınca kapat
-            window.onclick = function(event) {
-                const modal = document.getElementById('detailModal');
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
         </script>
     </body>
     </html>
