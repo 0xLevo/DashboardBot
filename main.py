@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 import json
 import base64
 
-# --- TOP 200 COINS (Excluding Stablecoins) ---
+# --- TOP 200 COINS (Stabil hariç) ---
 TOP_COINS = [
     'BTC', 'ETH', 'BNB', 'SOL', 'XRP', 'ADA', 'AVAX', 'DOGE', 'DOT', 'TRX',
     'LINK', 'MATIC', 'TON', 'SHIB', 'LTC', 'BCH', 'NEAR', 'UNI', 'LEO', 'PEPE',
@@ -25,30 +25,47 @@ TOP_COINS = [
     'SKL', 'CVC', 'SC', 'BLZ', 'RAY', 'SRM', 'STG', 'RDNT', 'MAGIC', 'GAL'
 ]
 
-def calculate_technical_indicators(df):
+def calculate_metrics(df):
+    # RSI Hesaplama
     delta = df['close'].diff()
     gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
     loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
     rs = gain / (loss + 1e-9)
     rsi = 100 - (100 / (1 + rs))
+
+    # MACD Hesaplama
     ema12 = df['close'].ewm(span=12, adjust=False).mean()
     ema26 = df['close'].ewm(span=26, adjust=False).mean()
     macd = ema12 - ema26
     signal_line = macd.ewm(span=9, adjust=False).mean()
+
+    # Hacim Değişimi
     vol_change = df['volume'].pct_change().rolling(5).mean()
-    return {'rsi': rsi.iloc[-1], 'macd': macd.iloc[-1], 'signal': signal_line.iloc[-1], 'vol_change': vol_change.iloc[-1], 'close': df['close'].iloc[-1]}
+
+    # TARİHSEL VWAP (Ağırlıklı Ortalama Maliyet - Son 100 Gün)
+    vwap = (df['close'] * df['volume']).sum() / df['volume'].sum()
+    current_price = df['close'].iloc[-1]
+    cost_diff_pct = ((current_price - vwap) / vwap) * 100
+
+    return {
+        'rsi': rsi.iloc[-1],
+        'macd': macd.iloc[-1],
+        'signal': signal_line.iloc[-1],
+        'vol_change': vol_change.iloc[-1],
+        'close': current_price,
+        'vwap': vwap,
+        'diff': cost_diff_pct
+    }
 
 def get_signal_data(tech_data):
     score = 0
     if tech_data['rsi'] < 30: score += 2
     elif tech_data['rsi'] > 70: score -= 2
-    elif tech_data['rsi'] < 40: score += 1
-    elif tech_data['rsi'] > 60: score -= 1
     if tech_data['macd'] > tech_data['signal']: score += 2
     else: score -= 2
-    if tech_data['vol_change'] > 0.3 and score > 0: score += 1
     
-    if score >= 3: return "STRONG BUY", "#1b4332" 
+    # Renk Paleti (Pastel & Göz Yormayan)
+    if score >= 3: return "STRONG BUY", "#1b4332"
     elif score >= 1: return "BUY", "#52b788" 
     elif score <= -3: return "STRONG SELL", "#7f1d1d" 
     elif score <= -1: return "SELL", "#e5989b" 
@@ -57,15 +74,28 @@ def get_signal_data(tech_data):
 def analyze_market():
     exchange = ccxt.mexc({'enableRateLimit': True})
     results = []
+    print("Market verileri analiz ediliyor...")
     for symbol in TOP_COINS:
         try:
             pair = f"{symbol}/USDT"
-            bars = exchange.fetch_ohlcv(pair, timeframe='1d', limit=40)
-            if len(bars) < 30: continue
+            # Maliyet analizi için daha fazla veri (100 gün) çekiyoruz
+            bars = exchange.fetch_ohlcv(pair, timeframe='1d', limit=100)
+            if len(bars) < 50: continue
             df = pd.DataFrame(bars, columns=['time', 'open', 'high', 'low', 'close', 'volume'])
-            tech_data = calculate_technical_indicators(df)
-            signal_name, color = get_signal_data(tech_data)
-            results.append({'symbol': symbol, 'price': f"{tech_data['close']:.6g}", 'rsi': f"{tech_data['rsi']:.1f}", 'macd': f"{tech_data['macd']:.4f}", 'signal_type': signal_name, 'color': color})
+            
+            data = calculate_metrics(df)
+            signal_name, color = get_signal_data(data)
+            
+            results.append({
+                'symbol': symbol,
+                'price': f"{data['close']:.6g}",
+                'rsi': f"{data['rsi']:.1f}",
+                'macd': f"{data['macd']:.4f}",
+                'vwap': f"{data['vwap']:.6g}",
+                'diff': f"{data['diff']:.2f}",
+                'signal_type': signal_name,
+                'color': color
+            })
             time.sleep(0.01)
         except: continue
     return results
@@ -73,10 +103,10 @@ def analyze_market():
 def create_html(data):
     full_update = datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
     html = f"""
-    <!DOCTYPE html><html lang="en">
+    <!DOCTYPE html><html lang="tr">
     <head>
         <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BasedVector | Pro Heatmap</title>
+        <title>BasedVector | Maliyet Analizi</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
         <style>
@@ -86,21 +116,20 @@ def create_html(data):
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }}
-            .disclaimer-bar {{ background: rgba(15, 23, 42, 0.8); border-bottom: 1px solid #1e293b; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; }}
             .coin-box {{ 
                 border-radius: 4px; 
                 transition: all 0.2s ease; 
                 border: 2px solid rgba(255, 255, 255, 0.2); 
             }}
-            .coin-box:hover {{ transform: scale(1.08); z-index: 50; border-color: rgba(255, 255, 255, 0.6); box-shadow: 0 0 15px rgba(0,0,0,0.5); }}
+            .coin-box:hover {{ transform: scale(1.08); z-index: 50; border-color: rgba(255, 255, 255, 0.6); }}
             .modal {{ display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(12px); }}
-            .modal-content {{ background: #0f172a; margin: 8% auto; padding: 32px; border-radius: 24px; width: 360px; border: 1px solid #334155; }}
+            .modal-content {{ background: #0f172a; margin: 5% auto; padding: 32px; border-radius: 24px; width: 400px; border: 1px solid #334155; }}
             .star-btn {{ cursor: pointer; transition: 0.2s; font-size: 1.1rem; }}
         </style>
     </head>
     <body>
-        <div class="disclaimer-bar p-2 text-center text-slate-500 font-bold">
-            Legal Disclaimer: BasedVector provides analytical data only. Not financial advice. Trading involves high risk.
+        <div class="p-2 text-center text-slate-500 font-bold text-[10px] uppercase tracking-widest bg-slate-950 border-b border-slate-900">
+            BasedVector Analitik Veri Paneli | Finansal Tavsiye Değildir
         </div>
 
         <div class="p-4 md:p-8">
@@ -108,11 +137,10 @@ def create_html(data):
                 <a href="index.html" class="no-underline hover:opacity-80 transition">
                     <h1 class="text-5xl font-black gradient-text tracking-tight cursor-pointer">BasedVector</h1>
                 </a>
-                
                 <div class="flex flex-wrap gap-4 items-center justify-center">
-                    <input type="text" id="search-input" placeholder="Search Asset..." onkeyup="filterCoins()" class="bg-slate-900 border border-slate-700 text-white px-5 py-2 rounded-xl text-sm outline-none w-72 focus:border-sky-500">
-                    <button onclick="toggleFavoritesFilter()" id="fav-filter-btn" class="bg-sky-600 hover:bg-sky-500 text-white px-6 py-2 rounded-xl text-sm font-bold transition-all">Show Favorites</button>
-                    <div class="text-[10px] text-slate-500 font-mono bg-slate-950 px-4 py-2 rounded-full border border-slate-800 uppercase">SYNCED: {full_update}</div>
+                    <input type="text" id="search-input" placeholder="Varlık Ara..." onkeyup="filterCoins()" class="bg-slate-900 border border-slate-700 text-white px-5 py-2 rounded-xl text-sm outline-none w-72 focus:border-sky-500">
+                    <button onclick="toggleFavoritesFilter()" id="fav-filter-btn" class="bg-sky-600 hover:bg-sky-500 text-white px-6 py-2 rounded-xl text-sm font-bold transition-all">Favorileri Göster</button>
+                    <div class="text-[10px] text-slate-500 font-mono bg-slate-950 px-4 py-2 rounded-full border border-slate-800 uppercase">GÜNCEL: {full_update}</div>
                 </div>
             </header>
 
@@ -131,31 +159,61 @@ def create_html(data):
     html += """
             </div>
         </div>
+
         <div id="detailModal" class="modal" onclick="closeModalOutside(event)">
             <div class="modal-content" onclick="event.stopPropagation()">
-                <div class="flex justify-between items-center mb-8">
+                <div class="flex justify-between items-center mb-6">
                     <h2 id="m-title" class="text-4xl font-black text-white"></h2>
                     <button onclick="closeModal()" class="text-slate-500 hover:text-white text-4xl">&times;</button>
                 </div>
-                <div id="m-body" class="space-y-4"></div>
-                <button onclick="closeModal()" class="w-full mt-8 bg-slate-800 hover:bg-slate-700 py-4 rounded-2xl font-bold transition">Back to Heatmap</button>
+                <div id="m-body" class="space-y-3"></div>
+                <button onclick="closeModal()" class="w-full mt-6 bg-slate-800 hover:bg-slate-700 py-4 rounded-2xl font-bold transition">Kapat</button>
             </div>
         </div>
+
         <script>
             let favorites = JSON.parse(localStorage.getItem('favs')) || [];
             let showingFavsOnly = false;
+
             function openModal(encodedData) {
                 const data = JSON.parse(atob(encodedData));
+                const diffColor = parseFloat(data.diff) >= 0 ? '#4ade80' : '#f87171';
+                
                 document.getElementById('m-title').innerText = data.symbol;
                 document.getElementById('m-body').innerHTML = `
-                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800"><div class="text-slate-500 text-[10px] mb-1 uppercase font-bold">Market Price</div><div class="font-mono text-2xl font-bold text-white">$${data.price}</div></div>
-                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800"><div class="text-slate-500 text-[10px] mb-1 uppercase font-bold">Analysis Signal</div><div class="font-black text-xl" style="color:${data.color}">${data.signal_type}</div></div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800"><div class="text-slate-500 text-[10px] mb-1">RSI (14)</div><div class="font-bold text-lg text-white">${data.rsi}</div></div>
-                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800"><div class="text-slate-500 text-[10px] mb-1">MACD</div><div class="font-bold text-lg text-white">${data.macd}</div></div>
-                    </div>`;
+                    <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+                        <div class="text-slate-500 text-[10px] mb-1 uppercase font-bold tracking-wider">Güncel Piyasa Fiyatı</div>
+                        <div class="font-mono text-2xl font-bold text-white">$${data.price}</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 gap-3">
+                        <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+                            <div class="text-slate-500 text-[10px] mb-1 uppercase font-bold tracking-wider">Ortalama Satın Alma Maliyeti (VWAP 100G)</div>
+                            <div class="font-mono text-xl font-bold text-sky-400">$${data.vwap}</div>
+                        </div>
+                        <div class="p-4 bg-slate-950 rounded-xl border border-slate-800">
+                            <div class="text-slate-500 text-[10px] mb-1 uppercase font-bold tracking-wider">Ortalamadan Uzaklık (Maliyet Farkı)</div>
+                            <div class="font-mono text-xl font-bold" style="color:${diffColor}">${data.diff}%</div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 pt-2">
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                            <div class="text-slate-500 text-[10px] mb-1">RSI (14)</div>
+                            <div class="font-bold text-lg">${data.rsi}</div>
+                        </div>
+                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-center">
+                            <div class="text-slate-500 text-[10px] mb-1">MACD</div>
+                            <div class="font-bold text-lg">${data.macd}</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-center py-2 rounded-lg font-black tracking-widest text-sm" style="background-color:${data.color}">
+                        SİNYAL: ${data.signal_type}
+                    </div>
+                `;
                 document.getElementById('detailModal').style.display = 'block';
             }
+
             function closeModal() { document.getElementById('detailModal').style.display = 'none'; }
             function closeModalOutside(e) { if(e.target.id === 'detailModal') closeModal(); }
             function toggleFav(event, symbol) {
@@ -185,7 +243,7 @@ def create_html(data):
             }
             function toggleFavoritesFilter() {
                 showingFavsOnly = !showingFavsOnly;
-                document.getElementById('fav-filter-btn').innerText = showingFavsOnly ? 'Show All Assets' : 'Show Favorites';
+                document.getElementById('fav-filter-btn').innerText = showingFavsOnly ? 'Tüm Varlıkları Göster' : 'Favorileri Göster';
                 document.getElementById('fav-filter-btn').classList.toggle('bg-sky-600');
                 document.getElementById('fav-filter-btn').classList.toggle('bg-amber-600');
                 filterCoins();
