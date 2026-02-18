@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 import json
 import base64
 
-# --- TOP 200 COINS (Excluding Stables) ---
+# --- TOP 200 COINS ---
 TOP_COINS = [
     'BTC', 'ETH', 'BNB', 'SOL', 'XRP', 'ADA', 'AVAX', 'DOGE', 'DOT', 'TRX',
     'LINK', 'MATIC', 'TON', 'SHIB', 'LTC', 'BCH', 'NEAR', 'UNI', 'LEO', 'PEPE',
@@ -25,33 +25,51 @@ TOP_COINS = [
     'SKL', 'CVC', 'SC', 'BLZ', 'RAY', 'SRM', 'STG', 'RDNT', 'MAGIC', 'GAL'
 ]
 
+def format_crypto_price(price):
+    """
+    Bilimsel notasyonu (e) engeller. 
+    1'den küçük sayılarda ilk anlamlı rakamdan sonra 3 basamak gösterir.
+    """
+    if price == 0: return "0.00"
+    if price >= 1: return f"{price:.2f}"
+    
+    # Sayıyı e-notasyonu olmadan string'e çevir (max 12 ondalık)
+    s = f"{price:.12f}"
+    parts = s.split('.')
+    if len(parts) < 2: return s
+    
+    decimal_part = parts[1]
+    # İlk sıfır olmayan rakamın yerini bul
+    first_nonzero_idx = -1
+    for i, char in enumerate(decimal_part):
+        if char != '0':
+            first_nonzero_idx = i
+            break
+    
+    if first_nonzero_idx == -1: return "0.00"
+    
+    # Sıfırları ve sonraki 3 basamağı al
+    return f"0.{decimal_part[:first_nonzero_idx + 3]}"
+
 def calculate_metrics(df):
-    # RSI (14)
     delta = df['close'].diff()
     gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
     loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
     rs = gain / (loss + 1e-9)
     rsi = 100 - (100 / (1 + rs))
 
-    # MACD
     ema12 = df['close'].ewm(span=12, adjust=False).mean()
     ema26 = df['close'].ewm(span=26, adjust=False).mean()
     macd = ema12 - ema26
     signal_line = macd.ewm(span=9, adjust=False).mean()
 
-    # TARİHSEL VWAP (Ağırlıklı Ortalama Maliyet - SON 365 GÜN)
-    # 300 gün ve üzeri veri kullanarak piyasanın uzun vadeli maliyet tabanını hesaplar
     vwap = (df['close'] * df['volume']).sum() / df['volume'].sum()
     current_price = df['close'].iloc[-1]
     cost_diff_pct = ((current_price - vwap) / vwap) * 100
 
     return {
-        'rsi': rsi.iloc[-1],
-        'macd': macd.iloc[-1],
-        'signal': signal_line.iloc[-1],
-        'close': current_price,
-        'vwap': vwap,
-        'diff': cost_diff_pct
+        'rsi': rsi.iloc[-1], 'macd': macd.iloc[-1], 'signal': signal_line.iloc[-1],
+        'close': current_price, 'vwap': vwap, 'diff': cost_diff_pct
     }
 
 def get_signal_data(tech_data):
@@ -70,13 +88,12 @@ def get_signal_data(tech_data):
 def analyze_market():
     exchange = ccxt.mexc({'enableRateLimit': True})
     results = []
-    print("Analyzing Market Data (365D Lookback)... Please wait.")
+    print("Market Analysis (365D - Smart Format) in progress...")
     for symbol in TOP_COINS:
         try:
             pair = f"{symbol}/USDT"
-            # 300+ gün analiz için limiti 450 yapıyoruz
             bars = exchange.fetch_ohlcv(pair, timeframe='1d', limit=450)
-            if len(bars) < 300: continue # Yeterli geçmişi olmayan coinleri eliyoruz
+            if len(bars) < 300: continue
             df = pd.DataFrame(bars, columns=['time', 'open', 'high', 'low', 'close', 'volume'])
             
             data = calculate_metrics(df)
@@ -84,15 +101,15 @@ def analyze_market():
             
             results.append({
                 'symbol': symbol,
-                'price': f"{data['close']:.6g}",
+                'price': format_crypto_price(data['close']),
                 'rsi': f"{data['rsi']:.1f}",
                 'macd': f"{data['macd']:.4f}",
-                'vwap': f"{data['vwap']:.6g}",
+                'vwap': format_crypto_price(data['vwap']),
                 'diff': f"{data['diff']:.2f}",
                 'signal_type': signal_name,
                 'color': color
             })
-            time.sleep(0.02) # Rate limit koruması
+            time.sleep(0.02)
         except: continue
     return results
 
@@ -102,7 +119,7 @@ def create_html(data):
     <!DOCTYPE html><html lang="en">
     <head>
         <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BasedVector | 365D Cost Analysis</title>
+        <title>BasedVector | Smart Heatmap</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
         <style>
