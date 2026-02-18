@@ -26,24 +26,32 @@ TOP_COINS = [
 ]
 
 def calculate_metrics(df):
+    # RSI (14)
     delta = df['close'].diff()
     gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
     loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
     rs = gain / (loss + 1e-9)
     rsi = 100 - (100 / (1 + rs))
 
+    # MACD
     ema12 = df['close'].ewm(span=12, adjust=False).mean()
     ema26 = df['close'].ewm(span=26, adjust=False).mean()
     macd = ema12 - ema26
     signal_line = macd.ewm(span=9, adjust=False).mean()
 
+    # TARİHSEL VWAP (Ağırlıklı Ortalama Maliyet - SON 365 GÜN)
+    # 300 gün ve üzeri veri kullanarak piyasanın uzun vadeli maliyet tabanını hesaplar
     vwap = (df['close'] * df['volume']).sum() / df['volume'].sum()
     current_price = df['close'].iloc[-1]
     cost_diff_pct = ((current_price - vwap) / vwap) * 100
 
     return {
-        'rsi': rsi.iloc[-1], 'macd': macd.iloc[-1], 'signal': signal_line.iloc[-1],
-        'close': current_price, 'vwap': vwap, 'diff': cost_diff_pct
+        'rsi': rsi.iloc[-1],
+        'macd': macd.iloc[-1],
+        'signal': signal_line.iloc[-1],
+        'close': current_price,
+        'vwap': vwap,
+        'diff': cost_diff_pct
     }
 
 def get_signal_data(tech_data):
@@ -62,20 +70,29 @@ def get_signal_data(tech_data):
 def analyze_market():
     exchange = ccxt.mexc({'enableRateLimit': True})
     results = []
+    print("Analyzing Market Data (365D Lookback)... Please wait.")
     for symbol in TOP_COINS:
         try:
             pair = f"{symbol}/USDT"
-            bars = exchange.fetch_ohlcv(pair, timeframe='1d', limit=100)
-            if len(bars) < 50: continue
+            # 300+ gün analiz için limiti 450 yapıyoruz
+            bars = exchange.fetch_ohlcv(pair, timeframe='1d', limit=450)
+            if len(bars) < 300: continue # Yeterli geçmişi olmayan coinleri eliyoruz
             df = pd.DataFrame(bars, columns=['time', 'open', 'high', 'low', 'close', 'volume'])
+            
             data = calculate_metrics(df)
             signal_name, color = get_signal_data(data)
+            
             results.append({
-                'symbol': symbol, 'price': f"{data['close']:.6g}", 'rsi': f"{data['rsi']:.1f}",
-                'macd': f"{data['macd']:.4f}", 'vwap': f"{data['vwap']:.6g}",
-                'diff': f"{data['diff']:.2f}", 'signal_type': signal_name, 'color': color
+                'symbol': symbol,
+                'price': f"{data['close']:.6g}",
+                'rsi': f"{data['rsi']:.1f}",
+                'macd': f"{data['macd']:.4f}",
+                'vwap': f"{data['vwap']:.6g}",
+                'diff': f"{data['diff']:.2f}",
+                'signal_type': signal_name,
+                'color': color
             })
-            time.sleep(0.01)
+            time.sleep(0.02) # Rate limit koruması
         except: continue
     return results
 
@@ -85,7 +102,7 @@ def create_html(data):
     <!DOCTYPE html><html lang="en">
     <head>
         <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>BasedVector | Market Analysis</title>
+        <title>BasedVector | 365D Cost Analysis</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
         <style>
@@ -97,6 +114,7 @@ def create_html(data):
             .modal-content {{ background: #0f172a; margin: 5% auto; padding: 32px; border-radius: 24px; width: 400px; border: 1px solid #334155; }}
             .lang-btn {{ background: #1e293b; color: #94a3b8; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; transition: 0.3s; }}
             .lang-btn.active {{ background: #38bdf8; color: white; }}
+            .star-btn {{ cursor: pointer; transition: 0.2s; font-size: 1.1rem; }}
         </style>
     </head>
     <body>
@@ -159,8 +177,8 @@ def create_html(data):
                     showFavs: "Show Favorites",
                     showAll: "Show All Assets",
                     price: "Current Market Price",
-                    vwap: "Avg. Purchase Cost (VWAP 100D)",
-                    diff: "Distance from Avg. (Cost Difference)",
+                    vwap: "Avg. Purchase Cost (VWAP 365D)",
+                    diff: "Distance from Avg. (Yearly Basis)",
                     rsi: "RSI (14)",
                     macd: "MACD",
                     signal: "SIGNAL",
@@ -173,8 +191,8 @@ def create_html(data):
                     showFavs: "Favorileri Göster",
                     showAll: "Hepsini Göster",
                     price: "Güncel Piyasa Fiyatı",
-                    vwap: "Ort. Satın Alma Maliyeti (VWAP 100G)",
-                    diff: "Ortalamadan Uzaklık (Maliyet Farkı)",
+                    vwap: "Ort. Satın Alma Maliyeti (VWAP 365G)",
+                    diff: "Ortalamadan Uzaklık (Yıllık Bazda)",
                     rsi: "RSI (14)",
                     macd: "MACD",
                     signal: "SİNYAL",
@@ -187,8 +205,8 @@ def create_html(data):
                     showFavs: "显示收藏夹",
                     showAll: "显示全部",
                     price: "当前市场价格",
-                    vwap: "平均购买成本 (VWAP 100D)",
-                    diff: "距均线的距离 (成本差异)",
+                    vwap: "平均购买成本 (VWAP 365D)",
+                    diff: "距均线的距离 (年度基数)",
                     rsi: "相对强弱指数 (14)",
                     macd: "指数平滑移动平均线",
                     signal: "信号",
@@ -205,7 +223,6 @@ def create_html(data):
                 currentLang = lang;
                 document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
                 document.getElementById('btn-' + lang).classList.add('active');
-                
                 document.getElementById('disclaimer').innerText = translations[lang].disclaimer;
                 document.getElementById('search-input').placeholder = translations[lang].search;
                 document.getElementById('fav-filter-btn').innerText = showingFavsOnly ? translations[lang].showAll : translations[lang].showFavs;
