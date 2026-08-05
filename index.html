@@ -36,760 +36,760 @@
                 <div class="flex flex-wrap gap-3 items-center">
                     <input type="text" id="search-input" placeholder="Search..." onkeyup="filterCoins()" class="bg-slate-900 border border-slate-700 px-4 py-2 rounded-lg text-sm outline-none w-48 focus:border-blue-500">
                     <button onclick="toggleFavoritesFilter()" id="fav-filter-btn" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-lg text-sm font-bold transition">Show Favorites</button>
-                    <div class="text-[10px] text-slate-500 font-mono bg-slate-950 px-3 py-2 rounded-full border border-slate-800 uppercase">SYNCED: 2026-08-04 23:10:33</div>
+                    <div class="text-[10px] text-slate-500 font-mono bg-slate-950 px-3 py-2 rounded-full border border-slate-800 uppercase">SYNCED: 2026-08-05 01:49:48</div>
                 </div>
             </header>
 
             <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-10 lg:grid-cols-12 gap-2" id="coin-grid">
     
-        <div class="coin-box p-3 text-center relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiQlRDIiwgInByaWNlIjogIjY0NDAzLjA2IiwgImNoYW5nZSI6ICIrMS4zOSUiLCAicnNpIjogIjM5LjEiLCAibWFjZCI6ICItNjUuNjcxOCIsICJ2d2FwIjogIjg2Nzc5LjE0IiwgImRpZmYiOiAiLTI1Ljc5IiwgInNpZ25hbF90eXBlIjogIlNFTEwiLCAiY29sb3IiOiAiI2U1OTg5YiJ9')" data-symbol="BTC">
+        <div class="coin-box p-3 text-center relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiQlRDIiwgInByaWNlIjogIjY0MjQ5LjE0IiwgImNoYW5nZSI6ICIrMC4yMSUiLCAicnNpIjogIjQwLjAiLCAibWFjZCI6ICItNTUuODYwMyIsICJ2d2FwIjogIjg2NzQ5LjUzIiwgImRpZmYiOiAiLTI1Ljk0IiwgInNpZ25hbF90eXBlIjogIlNFTEwiLCAiY29sb3IiOiAiI2U1OTg5YiJ9')" data-symbol="BTC">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BTC')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">BTC</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.39%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiRVRIIiwgInByaWNlIjogIjE4NzcuMDgiLCAiY2hhbmdlIjogIiswLjg5JSIsICJyc2kiOiAiNDMuOSIsICJtYWNkIjogIjE5LjMyMzEiLCAidndhcCI6ICIyODY2Ljk0IiwgImRpZmYiOiAiLTM0LjUzIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="ETH">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ETH')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">ETH</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.89%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQk5CIiwgInByaWNlIjogIjU5NC4zMCIsICJjaGFuZ2UiOiAiKzAuODQlIiwgInJzaSI6ICI2MS4zIiwgIm1hY2QiOiAiMy4zMjI0IiwgInZ3YXAiOiAiNzc0Ljc3IiwgImRpZmYiOiAiLTIzLjI5IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="BNB">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BNB')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">BNB</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.84%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU09MIiwgInByaWNlIjogIjc0LjE4IiwgImNoYW5nZSI6ICIrMC44NCUiLCAicnNpIjogIjM3LjUiLCAibWFjZCI6ICItMC43NTYzIiwgInZ3YXAiOiAiMTM3LjUxIiwgImRpZmYiOiAiLTQ2LjA1IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="SOL">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SOL')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">SOL</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.84%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiWFJQIiwgInByaWNlIjogIjEuMDgiLCAiY2hhbmdlIjogIiswLjE0JSIsICJyc2kiOiAiMzMuMiIsICJtYWNkIjogIi0wLjAxMDQiLCAidndhcCI6ICIyLjEyIiwgImRpZmYiOiAiLTQ5LjEwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="XRP">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'XRP')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">XRP</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.14%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQURBIiwgInByaWNlIjogIjAuMTkyIiwgImNoYW5nZSI6ICItMC40MSUiLCAicnNpIjogIjY0LjUiLCAibWFjZCI6ICIwLjAwNDciLCAidndhcCI6ICIwLjQ5MCIsICJkaWZmIjogIi02MC42OCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="ADA">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ADA')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">ADA</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.41%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQVZBWCIsICJwcmljZSI6ICI2LjcyIiwgImNoYW5nZSI6ICIrMi4xOSUiLCAicnNpIjogIjUzLjEiLCAibWFjZCI6ICItMC4wMzY5IiwgInZ3YXAiOiAiMTguMTAiLCAiZGlmZiI6ICItNjIuODciLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="AVAX">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'AVAX')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">AVAX</div>
-            <div class="text-[8px] opacity-80 font-bold">+2.19%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRE9HRSIsICJwcmljZSI6ICIwLjA3MDQiLCAiY2hhbmdlIjogIiswLjMzJSIsICJyc2kiOiAiNDEuNCIsICJtYWNkIjogIi0wLjAwMTQiLCAidndhcCI6ICIwLjE2NSIsICJkaWZmIjogIi01Ny4zNyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="DOGE">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'DOGE')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">DOGE</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.33%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRE9UIiwgInByaWNlIjogIjAuODYzIiwgImNoYW5nZSI6ICIrNC42NCUiLCAicnNpIjogIjUzLjIiLCAibWFjZCI6ICItMC4wMTUwIiwgInZ3YXAiOiAiMi40NiIsICJkaWZmIjogIi02NC44OSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="DOT">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'DOT')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">DOT</div>
-            <div class="text-[8px] opacity-80 font-bold">+4.64%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiVFJYIiwgInByaWNlIjogIjAuMzI3IiwgImNoYW5nZSI6ICItMC40MyUiLCAicnNpIjogIjQ1LjkiLCAibWFjZCI6ICIwLjAwMDIiLCAidndhcCI6ICIwLjMwNyIsICJkaWZmIjogIjYuNTYiLCAic2lnbmFsX3R5cGUiOiAiU0VMTCIsICJjb2xvciI6ICIjZTU5ODliIn0=')" data-symbol="TRX">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'TRX')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">TRX</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.43%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTElOSyIsICJwcmljZSI6ICI4LjE5IiwgImNoYW5nZSI6ICItMC4wNCUiLCAicnNpIjogIjQwLjMiLCAibWFjZCI6ICIwLjAzMTUiLCAidndhcCI6ICIxNS4wMSIsICJkaWZmIjogIi00NS40NyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="LINK">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'LINK')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">LINK</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.04%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU0hJQiIsICJwcmljZSI6ICIwLjAwMDAwNDk4IiwgImNoYW5nZSI6ICIrMC4wNiUiLCAicnNpIjogIjY0LjgiLCAibWFjZCI6ICIwLjAwMDAiLCAidndhcCI6ICIwLjAwMDAwOTc1IiwgImRpZmYiOiAiLTQ4Ljg2IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="SHIB">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SHIB')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">SHIB</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.06%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTFRDIiwgInByaWNlIjogIjQ1LjAxIiwgImNoYW5nZSI6ICIrMS42NSUiLCAicnNpIjogIjM4LjgiLCAibWFjZCI6ICItMC4xMjU4IiwgInZ3YXAiOiAiODEuNzAiLCAiZGlmZiI6ICItNDQuOTEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="LTC">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'LTC')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">LTC</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.65%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQkNIIiwgInByaWNlIjogIjIxNC4zMCIsICJjaGFuZ2UiOiAiKzAuNTIlIiwgInJzaSI6ICI0MC44IiwgIm1hY2QiOiAiLTMuNjM4MyIsICJ2d2FwIjogIjQ5MC4zOSIsICJkaWZmIjogIi01Ni4zMCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="BCH">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BCH')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">BCH</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.52%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiTkVBUiIsICJwcmljZSI6ICIxLjc0IiwgImNoYW5nZSI6ICIrMC4yMCUiLCAicnNpIjogIjMyLjgiLCAibWFjZCI6ICItMC4wNjc0IiwgInZ3YXAiOiAiMi4wNyIsICJkaWZmIjogIi0xNS45OCIsICJzaWduYWxfdHlwZSI6ICJTRUxMIiwgImNvbG9yIjogIiNlNTk4OWIifQ==')" data-symbol="NEAR">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'NEAR')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">NEAR</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.20%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiVU5JIiwgInByaWNlIjogIjMuODciLCAiY2hhbmdlIjogIi0wLjc3JSIsICJyc2kiOiAiNTMuNyIsICJtYWNkIjogIjAuMTgyMSIsICJ2d2FwIjogIjUuNjciLCAiZGlmZiI6ICItMzEuNjgiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="UNI">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'UNI')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">UNI</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.77%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUEVQRSIsICJwcmljZSI6ICIwLjAwMDAwMjkxIiwgImNoYW5nZSI6ICIrMC4zNCUiLCAicnNpIjogIjUxLjQiLCAibWFjZCI6ICIwLjAwMDAiLCAidndhcCI6ICIwLjAwMDAwOTIxIiwgImRpZmYiOiAiLTY4LjM2IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="PEPE">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'PEPE')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">PEPE</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.34%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSUNQIiwgInByaWNlIjogIjIuMTEiLCAiY2hhbmdlIjogIi0wLjM4JSIsICJyc2kiOiAiMzcuOCIsICJtYWNkIjogIi0wLjAzODciLCAidndhcCI6ICI0LjA2IiwgImRpZmYiOiAiLTQ4LjExIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="ICP">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ICP')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">ICP</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.38%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQVBUIiwgInByaWNlIjogIjAuNTgzIiwgImNoYW5nZSI6ICIrMS4zMCUiLCAicnNpIjogIjQyLjMiLCAibWFjZCI6ICItMC4wMTU5IiwgInZ3YXAiOiAiMi45MyIsICJkaWZmIjogIi04MC4wNyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="APT">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'APT')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">APT</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.30%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSEJBUiIsICJwcmljZSI6ICIwLjA2OTUiLCAiY2hhbmdlIjogIi0xLjM4JSIsICJyc2kiOiAiNTAuMCIsICJtYWNkIjogIi0wLjAwMDUiLCAidndhcCI6ICIwLjE3OSIsICJkaWZmIjogIi02MS4zMSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="HBAR">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'HBAR')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">HBAR</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.38%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRklMIiwgInByaWNlIjogIjAuNzIyIiwgImNoYW5nZSI6ICItMC4zMCUiLCAicnNpIjogIjQwLjIiLCAibWFjZCI6ICItMC4wMTQ3IiwgInZ3YXAiOiAiMS42MSIsICJkaWZmIjogIi01NS4yNCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="FIL">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'FIL')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">FIL</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.30%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiWExNIiwgInByaWNlIjogIjAuMTcwIiwgImNoYW5nZSI6ICItMC43NiUiLCAicnNpIjogIjIzLjkiLCAibWFjZCI6ICItMC4wMDUwIiwgInZ3YXAiOiAiMC4zMTIiLCAiZGlmZiI6ICItNDUuNjEiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="XLM">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'XLM')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">XLM</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.76%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQVJCIiwgInByaWNlIjogIjAuMDgyMiIsICJjaGFuZ2UiOiAiLTAuNTklIiwgInJzaSI6ICIzNi42IiwgIm1hY2QiOiAiLTAuMDAxNCIsICJ2d2FwIjogIjAuMzM0IiwgImRpZmYiOiAiLTc1LjM4IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="ARB">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ARB')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">ARB</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.59%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQVRPTSIsICJwcmljZSI6ICIxLjM4IiwgImNoYW5nZSI6ICIrMC43MyUiLCAicnNpIjogIjM4LjAiLCAibWFjZCI6ICItMC4wNzMyIiwgInZ3YXAiOiAiMy4yMSIsICJkaWZmIjogIi01Ny4wOCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="ATOM">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ATOM')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">ATOM</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.73%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU1RYIiwgInByaWNlIjogIjAuMTM2IiwgImNoYW5nZSI6ICItMS4zMCUiLCAicnNpIjogIjI5LjQiLCAibWFjZCI6ICItMC4wMDg5IiwgInZ3YXAiOiAiMC41NjciLCAiZGlmZiI6ICItNzUuOTAiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="STX">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'STX')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">STX</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.30%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiT0tCIiwgInByaWNlIjogIjg2Ljk2IiwgImNoYW5nZSI6ICIrMC43MiUiLCAicnNpIjogIjc3LjgiLCAibWFjZCI6ICIxLjc4NjIiLCAidndhcCI6ICIxMzEuMTUiLCAiZGlmZiI6ICItMzMuNzAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="OKB">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'OKB')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">OKB</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.72%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSU1YIiwgInByaWNlIjogIjAuMTExIiwgImNoYW5nZSI6ICIrMC45OSUiLCAicnNpIjogIjI2LjgiLCAibWFjZCI6ICItMC4wMDYwIiwgInZ3YXAiOiAiMC40NTgiLCAiZGlmZiI6ICItNzUuNjUiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="IMX">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'IMX')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">IMX</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.99%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiS0FTIiwgInByaWNlIjogIjAuMDI2NSIsICJjaGFuZ2UiOiAiKzEuNjclIiwgInJzaSI6ICIzNC45IiwgIm1hY2QiOiAiLTAuMDAwNyIsICJ2d2FwIjogIjAuMDY4NSIsICJkaWZmIjogIi02MS4yNSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="KAS">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'KAS')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">KAS</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.67%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiVkVUIiwgInByaWNlIjogIjAuMDA0NjciLCAiY2hhbmdlIjogIi0xLjI1JSIsICJyc2kiOiAiMzcuNyIsICJtYWNkIjogIi0wLjAwMDAiLCAidndhcCI6ICIwLjAxNjciLCAiZGlmZiI6ICItNzIuMDgiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="VET">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'VET')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">VET</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.25%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTERPIiwgInByaWNlIjogIjAuMjgyIiwgImNoYW5nZSI6ICItMTQuMjklIiwgInJzaSI6ICIyMi45IiwgIm1hY2QiOiAiLTAuMDAwMiIsICJ2d2FwIjogIjAuOTA3IiwgImRpZmYiOiAiLTY4Ljg1IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="LDO">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'LDO')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">LDO</div>
-            <div class="text-[8px] opacity-80 font-bold">-14.29%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiVElBIiwgInByaWNlIjogIjAuMzQwIiwgImNoYW5nZSI6ICIrMC4wMCUiLCAicnNpIjogIjM3LjUiLCAibWFjZCI6ICItMC4wMTI5IiwgInZ3YXAiOiAiMS4xOCIsICJkaWZmIjogIi03MS4yOSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="TIA">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'TIA')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">TIA</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.00%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiR1JUIiwgInByaWNlIjogIjAuMDE0NyIsICJjaGFuZ2UiOiAiLTAuMzQlIiwgInJzaSI6ICIyNi41IiwgIm1hY2QiOiAiLTAuMDAwOSIsICJ2d2FwIjogIjAuMDcxNSIsICJkaWZmIjogIi03OS4zOSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="GRT">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'GRT')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">GRT</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.34%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU0VJIiwgInByaWNlIjogIjAuMDQxNiIsICJjaGFuZ2UiOiAiLTAuMDIlIiwgInJzaSI6ICIyNy4zIiwgIm1hY2QiOiAiLTAuMDAyMSIsICJ2d2FwIjogIjAuMTk0IiwgImRpZmYiOiAiLTc4LjU4IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="SEI">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SEI')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">SEI</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.02%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU1VJIiwgInByaWNlIjogIjAuNjk1IiwgImNoYW5nZSI6ICIrMC42OSUiLCAicnNpIjogIjI4LjYiLCAibWFjZCI6ICItMC4wMTUyIiwgInZ3YXAiOiAiMi4yMyIsICJkaWZmIjogIi02OC43OCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="SUI">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SUI')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">SUI</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.69%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiT1AiLCAicHJpY2UiOiAiMC4wODkzIiwgImNoYW5nZSI6ICIrMS4zMyUiLCAicnNpIjogIjM2LjAiLCAibWFjZCI6ICItMC4wMDM3IiwgInZ3YXAiOiAiMC40NzYiLCAiZGlmZiI6ICItODEuMjQiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="OP">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'OP')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">OP</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.33%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiSU5KIiwgInByaWNlIjogIjQuOTIiLCAiY2hhbmdlIjogIi0wLjY5JSIsICJyc2kiOiAiMzguMiIsICJtYWNkIjogIi0wLjAxMzgiLCAidndhcCI6ICI4LjA3IiwgImRpZmYiOiAiLTM5LjAzIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="INJ">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'INJ')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">INJ</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.69%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiUlVORSIsICJwcmljZSI6ICIwLjQ0NiIsICJjaGFuZ2UiOiAiKzEuMTElIiwgInJzaSI6ICI0Ni4wIiwgIm1hY2QiOiAiMC4wMDc3IiwgInZ3YXAiOiAiMS4yMyIsICJkaWZmIjogIi02My41OCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="RUNE">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'RUNE')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">RUNE</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.11%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRkxPS0kiLCAicHJpY2UiOiAiMC4wMDAwMjA2IiwgImNoYW5nZSI6ICIrMC42MyUiLCAicnNpIjogIjQzLjgiLCAibWFjZCI6ICItMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDAwODEzIiwgImRpZmYiOiAiLTc0LjU4IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="FLOKI">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'FLOKI')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">FLOKI</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.63%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTFVOQyIsICJwcmljZSI6ICIwLjAwMDA1MDQiLCAiY2hhbmdlIjogIisxLjA4JSIsICJyc2kiOiAiMjguNyIsICJtYWNkIjogIi0wLjAwMDAiLCAidndhcCI6ICIwLjAwMDA1MDgiLCAiZGlmZiI6ICItMC44MSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="LUNC">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'LUNC')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">LUNC</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.08%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQkVBTSIsICJwcmljZSI6ICIwLjAwODUzIiwgImNoYW5nZSI6ICItMi4xNiUiLCAicnNpIjogIjU1LjYiLCAibWFjZCI6ICItMC4wMDAyIiwgInZ3YXAiOiAiMC4wMjg0IiwgImRpZmYiOiAiLTY5Ljk5IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="BEAM">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BEAM')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">BEAM</div>
-            <div class="text-[8px] opacity-80 font-bold">-2.16%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiR0FMQSIsICJwcmljZSI6ICIwLjAwMTgwIiwgImNoYW5nZSI6ICItMC4wNiUiLCAicnNpIjogIjI2LjUiLCAibWFjZCI6ICItMC4wMDAxIiwgInZ3YXAiOiAiMC4wMTA3IiwgImRpZmYiOiAiLTgzLjIyIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="GALA">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'GALA')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">GALA</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.06%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUEVORExFIiwgInByaWNlIjogIjEuMzYiLCAiY2hhbmdlIjogIi0wLjY2JSIsICJyc2kiOiAiMjQuOCIsICJtYWNkIjogIi0wLjAyOTEiLCAidndhcCI6ICIzLjM3IiwgImRpZmYiOiAiLTU5LjY1IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="PENDLE">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'PENDLE')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">PENDLE</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.66%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRFlEWCIsICJwcmljZSI6ICIwLjExNSIsICJjaGFuZ2UiOiAiKzIuMDklIiwgInJzaSI6ICI0My43IiwgIm1hY2QiOiAiLTAuMDA0NyIsICJ2d2FwIjogIjAuMzE0IiwgImRpZmYiOiAiLTYzLjM2IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="DYDX">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'DYDX')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">DYDX</div>
-            <div class="text-[8px] opacity-80 font-bold">+2.09%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQUFWRSIsICJwcmljZSI6ICI5MC43NiIsICJjaGFuZ2UiOiAiLTEuODklIiwgInJzaSI6ICI0NC4zIiwgIm1hY2QiOiAiMC43NzA5IiwgInZ3YXAiOiAiMTcyLjUyIiwgImRpZmYiOiAiLTQ3LjM5IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="AAVE">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'AAVE')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">AAVE</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.89%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiT1JESSIsICJwcmljZSI6ICIzLjQyIiwgImNoYW5nZSI6ICItMi4wNiUiLCAicnNpIjogIjQzLjAiLCAibWFjZCI6ICItMC4wMDQ3IiwgInZ3YXAiOiAiNy41MiIsICJkaWZmIjogIi01NC41NCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="ORDI">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ORDI')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">ORDI</div>
-            <div class="text-[8px] opacity-80 font-bold">-2.06%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiV0lGIiwgInByaWNlIjogIjAuMTQxIiwgImNoYW5nZSI6ICIrMC4yMSUiLCAicnNpIjogIjM3LjkiLCAibWFjZCI6ICItMC4wMDUwIiwgInZ3YXAiOiAiMC44MDYiLCAiZGlmZiI6ICItODIuNTAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="WIF">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'WIF')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">WIF</div>
             <div class="text-[8px] opacity-80 font-bold">+0.21%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQk9OSyIsICJwcmljZSI6ICIwLjAwMDAwMjgxIiwgImNoYW5nZSI6ICItMC45OCUiLCAicnNpIjogIjQxLjQiLCAibWFjZCI6ICItMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDAwMjAyIiwgImRpZmYiOiAiLTg2LjEwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="BONK">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BONK')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">BONK</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.98%</div>
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiRVRIIiwgInByaWNlIjogIjE4NzIuNTAiLCAiY2hhbmdlIjogIiswLjE0JSIsICJyc2kiOiAiNDIuOCIsICJtYWNkIjogIjE2LjgyNzMiLCAidndhcCI6ICIyODY3LjcwIiwgImRpZmYiOiAiLTM0LjcwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="ETH">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ETH')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">ETH</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.14%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUFlUSCIsICJwcmljZSI6ICIwLjA0MDEiLCAiY2hhbmdlIjogIisyLjU1JSIsICJyc2kiOiAiMjkuMyIsICJtYWNkIjogIi0wLjAwMTEiLCAidndhcCI6ICIwLjEyMyIsICJkaWZmIjogIi02Ny41NiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="PYTH">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'PYTH')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">PYTH</div>
-            <div class="text-[8px] opacity-80 font-bold">+2.55%</div>
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQk5CIiwgInByaWNlIjogIjYwMi45NyIsICJjaGFuZ2UiOiAiKzEuNjUlIiwgInJzaSI6ICI2Ni43IiwgIm1hY2QiOiAiNC42OTI4IiwgInZ3YXAiOiAiNzc1LjU4IiwgImRpZmYiOiAiLTIyLjI2IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="BNB">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BNB')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">BNB</div>
+            <div class="text-[8px] opacity-80 font-bold">+1.65%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSlVQIiwgInByaWNlIjogIjAuMTkwIiwgImNoYW5nZSI6ICItMS45NiUiLCAicnNpIjogIjQxLjUiLCAibWFjZCI6ICItMC4wMDM2IiwgInZ3YXAiOiAiMC4zMzgiLCAiZGlmZiI6ICItNDMuNjgiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="JUP">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'JUP')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">JUP</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.96%</div>
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU09MIiwgInByaWNlIjogIjczLjk2IiwgImNoYW5nZSI6ICIrMC4yNiUiLCAicnNpIjogIjM3LjAiLCAibWFjZCI6ICItMC43NDIwIiwgInZ3YXAiOiAiMTM3LjM2IiwgImRpZmYiOiAiLTQ2LjE1IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="SOL">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SOL')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">SOL</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.26%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRkVUIiwgInByaWNlIjogIjAuMTQ4IiwgImNoYW5nZSI6ICIrMS44NiUiLCAicnNpIjogIjQxLjUiLCAibWFjZCI6ICItMC4wMDY4IiwgInZ3YXAiOiAiMC40MTgiLCAiZGlmZiI6ICItNjQuNjAiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="FET">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'FET')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">FET</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.86%</div>
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiWFJQIiwgInByaWNlIjogIjEuMDciLCAiY2hhbmdlIjogIi0wLjE2JSIsICJyc2kiOiAiMzIuMyIsICJtYWNkIjogIi0wLjAxMDYiLCAidndhcCI6ICIyLjExIiwgImRpZmYiOiAiLTQ5LjI4IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="XRP">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'XRP')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">XRP</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.16%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRUdMRCIsICJwcmljZSI6ICIyLjc1IiwgImNoYW5nZSI6ICIrMS40NCUiLCAicnNpIjogIjE4LjEiLCAibWFjZCI6ICItMC4wNzQ4IiwgInZ3YXAiOiAiMTAuMDkiLCAiZGlmZiI6ICItNzIuNzEiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="EGLD">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'EGLD')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">EGLD</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.44%</div>
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQURBIiwgInByaWNlIjogIjAuMTkyIiwgImNoYW5nZSI6ICItMC4zNiUiLCAicnNpIjogIjYzLjUiLCAibWFjZCI6ICIwLjAwNTYiLCAidndhcCI6ICIwLjQ4OSIsICJkaWZmIjogIi02MC43MCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="ADA">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ADA')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">ADA</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.36%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRkxPVyIsICJwcmljZSI6ICIwLjAyNTkiLCAiY2hhbmdlIjogIi0yLjAwJSIsICJyc2kiOiAiNTAuMSIsICJtYWNkIjogIjAuMDAwMSIsICJ2d2FwIjogIjAuMTIxIiwgImRpZmYiOiAiLTc4LjY3IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="FLOW">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'FLOW')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">FLOW</div>
-            <div class="text-[8px] opacity-80 font-bold">-2.00%</div>
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQVZBWCIsICJwcmljZSI6ICI2LjY3IiwgImNoYW5nZSI6ICItMC4xOSUiLCAicnNpIjogIjUxLjEiLCAibWFjZCI6ICItMC4wMjM4IiwgInZ3YXAiOiAiMTguMDYiLCAiZGlmZiI6ICItNjMuMDUiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="AVAX">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'AVAX')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">AVAX</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.19%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUlOQSIsICJwcmljZSI6ICIwLjA0MTEiLCAiY2hhbmdlIjogIiswLjY5JSIsICJyc2kiOiAiMjIuNCIsICJtYWNkIjogIi0wLjAwMTAiLCAidndhcCI6ICIwLjEzMyIsICJkaWZmIjogIi02OS4xMSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="MINA">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'MINA')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">MINA</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.69%</div>
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRE9HRSIsICJwcmljZSI6ICIwLjA3MDEiLCAiY2hhbmdlIjogIiswLjE0JSIsICJyc2kiOiAiNDEuNiIsICJtYWNkIjogIi0wLjAwMTQiLCAidndhcCI6ICIwLjE2NCIsICJkaWZmIjogIi01Ny40MiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="DOGE">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'DOGE')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">DOGE</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.14%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiUU5UIiwgInByaWNlIjogIjYxLjIwIiwgImNoYW5nZSI6ICIrMi41MyUiLCAicnNpIjogIjMzLjUiLCAibWFjZCI6ICItMS41NDQwIiwgInZ3YXAiOiAiOTIuNzkiLCAiZGlmZiI6ICItMzQuMDUiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="QNT">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'QNT')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">QNT</div>
-            <div class="text-[8px] opacity-80 font-bold">+2.53%</div>
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRE9UIiwgInByaWNlIjogIjAuODU4IiwgImNoYW5nZSI6ICIrMC4yMCUiLCAicnNpIjogIjU1LjAiLCAibWFjZCI6ICItMC4wMTAyIiwgInZ3YXAiOiAiMi40NiIsICJkaWZmIjogIi02NS4wMyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="DOT">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'DOT')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">DOT</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.20%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQVhTIiwgInByaWNlIjogIjAuODI3IiwgImNoYW5nZSI6ICItMC40OSUiLCAicnNpIjogIjIxLjEiLCAibWFjZCI6ICItMC4wNDE4IiwgInZ3YXAiOiAiMS44NiIsICJkaWZmIjogIi01NS40MSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="AXS">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'AXS')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">AXS</div>
+        <div class="coin-box p-3 text-center relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiVFJYIiwgInByaWNlIjogIjAuMzI3IiwgImNoYW5nZSI6ICItMC4wOSUiLCAicnNpIjogIjQ1LjkiLCAibWFjZCI6ICIwLjAwMDEiLCAidndhcCI6ICIwLjMwNyIsICJkaWZmIjogIjYuMTgiLCAic2lnbmFsX3R5cGUiOiAiU0VMTCIsICJjb2xvciI6ICIjZTU5ODliIn0=')" data-symbol="TRX">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'TRX')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">TRX</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.09%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTElOSyIsICJwcmljZSI6ICI4LjE3IiwgImNoYW5nZSI6ICIrMC4yNiUiLCAicnNpIjogIjQwLjciLCAibWFjZCI6ICIwLjAxNjkiLCAidndhcCI6ICIxNS4wMCIsICJkaWZmIjogIi00NS41NCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="LINK">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'LINK')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">LINK</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.26%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU0hJQiIsICJwcmljZSI6ICIwLjAwMDAwNDk3IiwgImNoYW5nZSI6ICItMC4xNCUiLCAicnNpIjogIjY0LjgiLCAibWFjZCI6ICIwLjAwMDAiLCAidndhcCI6ICIwLjAwMDAwOTY4IiwgImRpZmYiOiAiLTQ4LjY2IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="SHIB">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SHIB')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">SHIB</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.14%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTFRDIiwgInByaWNlIjogIjQ1LjE5IiwgImNoYW5nZSI6ICIrMC43OCUiLCAicnNpIjogIjM3LjkiLCAibWFjZCI6ICItMC4xMzE2IiwgInZ3YXAiOiAiODEuNjAiLCAiZGlmZiI6ICItNDQuNjIiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="LTC">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'LTC')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">LTC</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.78%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQkNIIiwgInByaWNlIjogIjIxMi4zMCIsICJjaGFuZ2UiOiAiLTAuNTYlIiwgInJzaSI6ICI0Mi4yIiwgIm1hY2QiOiAiLTMuNTUwMSIsICJ2d2FwIjogIjQ5MC42MyIsICJkaWZmIjogIi01Ni43MyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="BCH">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BCH')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">BCH</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.56%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTkVBUiIsICJwcmljZSI6ICIxLjczIiwgImNoYW5nZSI6ICItMC4yNSUiLCAicnNpIjogIjM2LjIiLCAibWFjZCI6ICItMC4wNjM5IiwgInZ3YXAiOiAiMi4wNyIsICJkaWZmIjogIi0xNi4zOSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="NEAR">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'NEAR')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">NEAR</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.25%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiVU5JIiwgInByaWNlIjogIjMuODQiLCAiY2hhbmdlIjogIi0wLjQ0JSIsICJyc2kiOiAiNTEuMyIsICJtYWNkIjogIjAuMTU3MSIsICJ2d2FwIjogIjUuNjciLCAiZGlmZiI6ICItMzIuMzIiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="UNI">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'UNI')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">UNI</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.44%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUEVQRSIsICJwcmljZSI6ICIwLjAwMDAwMjg4IiwgImNoYW5nZSI6ICItMC4xMCUiLCAicnNpIjogIjQ5LjEiLCAibWFjZCI6ICIwLjAwMDAiLCAidndhcCI6ICIwLjAwMDAwOTE2IiwgImRpZmYiOiAiLTY4LjUzIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="PEPE">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'PEPE')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">PEPE</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.10%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSUNQIiwgInByaWNlIjogIjIuMTAiLCAiY2hhbmdlIjogIiswLjE0JSIsICJyc2kiOiAiMzguMSIsICJtYWNkIjogIi0wLjAzNzciLCAidndhcCI6ICI0LjA2IiwgImRpZmYiOiAiLTQ4LjM4IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="ICP">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ICP')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">ICP</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.14%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQVBUIiwgInByaWNlIjogIjAuNTgwIiwgImNoYW5nZSI6ICIrMC4yOSUiLCAicnNpIjogIjM2LjgiLCAibWFjZCI6ICItMC4wMTUwIiwgInZ3YXAiOiAiMi45MiIsICJkaWZmIjogIi04MC4xMSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="APT">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'APT')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">APT</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.29%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSEJBUiIsICJwcmljZSI6ICIwLjA2OTIiLCAiY2hhbmdlIjogIi0wLjIyJSIsICJyc2kiOiAiMzEuNCIsICJtYWNkIjogIi0wLjAwMDUiLCAidndhcCI6ICIwLjE3OSIsICJkaWZmIjogIi02MS40MiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="HBAR">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'HBAR')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">HBAR</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.22%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRklMIiwgInByaWNlIjogIjAuNzE2IiwgImNoYW5nZSI6ICItMC4yOCUiLCAicnNpIjogIjQwLjUiLCAibWFjZCI6ICItMC4wMTQwIiwgInZ3YXAiOiAiMS42MSIsICJkaWZmIjogIi01NS41MiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="FIL">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'FIL')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">FIL</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.28%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiWExNIiwgInByaWNlIjogIjAuMTY3IiwgImNoYW5nZSI6ICItMC44MyUiLCAicnNpIjogIjI1LjAiLCAibWFjZCI6ICItMC4wMDUzIiwgInZ3YXAiOiAiMC4zMTIiLCAiZGlmZiI6ICItNDYuNTEiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="XLM">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'XLM')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">XLM</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.83%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQVJCIiwgInByaWNlIjogIjAuMDgxMSIsICJjaGFuZ2UiOiAiLTAuODglIiwgInJzaSI6ICIzMi4wIiwgIm1hY2QiOiAiLTAuMDAxNCIsICJ2d2FwIjogIjAuMzMzIiwgImRpZmYiOiAiLTc1LjY3IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="ARB">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ARB')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">ARB</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.88%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQVRPTSIsICJwcmljZSI6ICIxLjM4IiwgImNoYW5nZSI6ICIrMC4wMCUiLCAicnNpIjogIjM5LjQiLCAibWFjZCI6ICItMC4wNjQ4IiwgInZ3YXAiOiAiMy4yMCIsICJkaWZmIjogIi01Ni45OSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="ATOM">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ATOM')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">ATOM</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.00%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU1RYIiwgInByaWNlIjogIjAuMTM0IiwgImNoYW5nZSI6ICItMC41MiUiLCAicnNpIjogIjI3LjAiLCAibWFjZCI6ICItMC4wMDg5IiwgInZ3YXAiOiAiMC41NjUiLCAiZGlmZiI6ICItNzYuMTQiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="STX">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'STX')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">STX</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.52%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiT0tCIiwgInByaWNlIjogIjg2LjQ1IiwgImNoYW5nZSI6ICItMC40OSUiLCAicnNpIjogIjc0LjMiLCAibWFjZCI6ICIxLjcyNDQiLCAidndhcCI6ICIxMzEuMzUiLCAiZGlmZiI6ICItMzQuMTgiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="OKB">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'OKB')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">OKB</div>
             <div class="text-[8px] opacity-80 font-bold">-0.49%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQ0haIiwgInByaWNlIjogIjAuMDEyOSIsICJjaGFuZ2UiOiAiKzAuODYlIiwgInJzaSI6ICIyMy45IiwgIm1hY2QiOiAiLTAuMDAxNCIsICJ2d2FwIjogIjAuMDQwNSIsICJkaWZmIjogIi02OC4xMyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="CHZ">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'CHZ')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">CHZ</div>
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSU1YIiwgInByaWNlIjogIjAuMTExIiwgImNoYW5nZSI6ICIrMC4xOCUiLCAicnNpIjogIjI3LjQiLCAibWFjZCI6ICItMC4wMDU4IiwgInZ3YXAiOiAiMC40NTYiLCAiZGlmZiI6ICItNzUuNTciLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="IMX">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'IMX')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">IMX</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.18%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiS0FTIiwgInByaWNlIjogIjAuMDI2NCIsICJjaGFuZ2UiOiAiLTAuMDIlIiwgInJzaSI6ICIzNS4wIiwgIm1hY2QiOiAiLTAuMDAwNyIsICJ2d2FwIjogIjAuMDY3NyIsICJkaWZmIjogIi02MS4wMyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="KAS">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'KAS')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">KAS</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.02%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiVkVUIiwgInByaWNlIjogIjAuMDA0NjYiLCAiY2hhbmdlIjogIiswLjEzJSIsICJyc2kiOiAiNDAuNSIsICJtYWNkIjogIi0wLjAwMDAiLCAidndhcCI6ICIwLjAxNjYiLCAiZGlmZiI6ICItNzIuMDAiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="VET">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'VET')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">VET</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.13%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTERPIiwgInByaWNlIjogIjAuMjc2IiwgImNoYW5nZSI6ICItMS4yNSUiLCAicnNpIjogIjE3LjIiLCAibWFjZCI6ICItMC4wMDU0IiwgInZ3YXAiOiAiMC45MDUiLCAiZGlmZiI6ICItNjkuNDciLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="LDO">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'LDO')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">LDO</div>
+            <div class="text-[8px] opacity-80 font-bold">-1.25%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiVElBIiwgInByaWNlIjogIjAuMzM2IiwgImNoYW5nZSI6ICItMC4wOSUiLCAicnNpIjogIjM4LjAiLCAibWFjZCI6ICItMC4wMTIxIiwgInZ3YXAiOiAiMS4xOCIsICJkaWZmIjogIi03MS40MSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="TIA">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'TIA')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">TIA</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.09%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiR1JUIiwgInByaWNlIjogIjAuMDE0NiIsICJjaGFuZ2UiOiAiKzAuMDAlIiwgInJzaSI6ICIyNy4xIiwgIm1hY2QiOiAiLTAuMDAwOSIsICJ2d2FwIjogIjAuMDcxMyIsICJkaWZmIjogIi03OS41MSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="GRT">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'GRT')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">GRT</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.00%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU0VJIiwgInByaWNlIjogIjAuMDQxNSIsICJjaGFuZ2UiOiAiKzAuMDAlIiwgInJzaSI6ICIyOC4xIiwgIm1hY2QiOiAiLTAuMDAyMCIsICJ2d2FwIjogIjAuMTkzIiwgImRpZmYiOiAiLTc4LjU0IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="SEI">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SEI')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">SEI</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.00%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU1VJIiwgInByaWNlIjogIjAuNjkzIiwgImNoYW5nZSI6ICItMC4wMSUiLCAicnNpIjogIjI4LjYiLCAibWFjZCI6ICItMC4wMTQ3IiwgInZ3YXAiOiAiMi4yMiIsICJkaWZmIjogIi02OC43NiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="SUI">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SUI')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">SUI</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.01%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiT1AiLCAicHJpY2UiOiAiMC4wODg4IiwgImNoYW5nZSI6ICItMC4xMCUiLCAicnNpIjogIjM2LjMiLCAibWFjZCI6ICItMC4wMDM0IiwgInZ3YXAiOiAiMC40NzQiLCAiZGlmZiI6ICItODEuMjgiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="OP">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'OP')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">OP</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.10%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiSU5KIiwgInByaWNlIjogIjQuODUiLCAiY2hhbmdlIjogIi0wLjg2JSIsICJyc2kiOiAiMzkuNiIsICJtYWNkIjogIi0wLjAyMjQiLCAidndhcCI6ICI4LjA1IiwgImRpZmYiOiAiLTM5LjgyIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="INJ">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'INJ')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">INJ</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.86%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiUlVORSIsICJwcmljZSI6ICIwLjQ0MyIsICJjaGFuZ2UiOiAiKzAuMjMlIiwgInJzaSI6ICI1Mi43IiwgIm1hY2QiOiAiMC4wMDcyIiwgInZ3YXAiOiAiMS4yMSIsICJkaWZmIjogIi02My4zNyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="RUNE">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'RUNE')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">RUNE</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.23%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRkxPS0kiLCAicHJpY2UiOiAiMC4wMDAwMjA2IiwgImNoYW5nZSI6ICIrMC4zOSUiLCAicnNpIjogIjQxLjgiLCAibWFjZCI6ICItMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDAwODExIiwgImRpZmYiOiAiLTc0LjU0IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="FLOKI">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'FLOKI')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">FLOKI</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.39%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTFVOQyIsICJwcmljZSI6ICIwLjAwMDA1MDEiLCAiY2hhbmdlIjogIiswLjI0JSIsICJyc2kiOiAiMjguOSIsICJtYWNkIjogIi0wLjAwMDAiLCAidndhcCI6ICIwLjAwMDA1MDciLCAiZGlmZiI6ICItMS4yOCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="LUNC">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'LUNC')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">LUNC</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.24%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQkVBTSIsICJwcmljZSI6ICIwLjAwODUwIiwgImNoYW5nZSI6ICIrMC4wMCUiLCAicnNpIjogIjYxLjgiLCAibWFjZCI6ICItMC4wMDAyIiwgInZ3YXAiOiAiMC4wMjg0IiwgImRpZmYiOiAiLTcwLjA2IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="BEAM">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BEAM')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">BEAM</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.00%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiR0FMQSIsICJwcmljZSI6ICIwLjAwMTc3IiwgImNoYW5nZSI6ICItMS4wMCUiLCAicnNpIjogIjI1LjMiLCAibWFjZCI6ICItMC4wMDAxIiwgInZ3YXAiOiAiMC4wMTA3IiwgImRpZmYiOiAiLTgzLjUwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="GALA">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'GALA')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">GALA</div>
+            <div class="text-[8px] opacity-80 font-bold">-1.00%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUEVORExFIiwgInByaWNlIjogIjEuMzUiLCAiY2hhbmdlIjogIiswLjQ0JSIsICJyc2kiOiAiMjEuMiIsICJtYWNkIjogIi0wLjAzMzkiLCAidndhcCI6ICIzLjM3IiwgImRpZmYiOiAiLTU5Ljc5IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="PENDLE">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'PENDLE')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">PENDLE</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.44%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRFlEWCIsICJwcmljZSI6ICIwLjExNCIsICJjaGFuZ2UiOiAiKzEuMDUlIiwgInJzaSI6ICIzMS45IiwgIm1hY2QiOiAiLTAuMDA0NyIsICJ2d2FwIjogIjAuMzEzIiwgImRpZmYiOiAiLTYzLjYwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="DYDX">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'DYDX')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">DYDX</div>
+            <div class="text-[8px] opacity-80 font-bold">+1.05%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQUFWRSIsICJwcmljZSI6ICI5MC4yNCIsICJjaGFuZ2UiOiAiLTAuMjglIiwgInJzaSI6ICI0MS41IiwgIm1hY2QiOiAiMC40MTEzIiwgInZ3YXAiOiAiMTcyLjQzIiwgImRpZmYiOiAiLTQ3LjY2IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="AAVE">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'AAVE')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">AAVE</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.28%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiT1JESSIsICJwcmljZSI6ICIzLjM3IiwgImNoYW5nZSI6ICIrMC4wMyUiLCAicnNpIjogIjQ0LjYiLCAibWFjZCI6ICItMC4wMTcyIiwgInZ3YXAiOiAiNy40OCIsICJkaWZmIjogIi01NC45MiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="ORDI">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ORDI')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">ORDI</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.03%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiV0lGIiwgInByaWNlIjogIjAuMTQxIiwgImNoYW5nZSI6ICIrMC44NiUiLCAicnNpIjogIjM3LjYiLCAibWFjZCI6ICItMC4wMDQ5IiwgInZ3YXAiOiAiMC43OTUiLCAiZGlmZiI6ICItODIuMjUiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="WIF">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'WIF')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">WIF</div>
             <div class="text-[8px] opacity-80 font-bold">+0.86%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTUFOQSIsICJwcmljZSI6ICIwLjA2NzEiLCAiY2hhbmdlIjogIi0wLjM0JSIsICJyc2kiOiAiMzkuNyIsICJtYWNkIjogIi0wLjAwMDgiLCAidndhcCI6ICIwLjIwNyIsICJkaWZmIjogIi02Ny43MSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="MANA">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQk9OSyIsICJwcmljZSI6ICIwLjAwMDAwMjc5IiwgImNoYW5nZSI6ICIrMC4zNiUiLCAicnNpIjogIjQwLjciLCAibWFjZCI6ICItMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDAwMjAyIiwgImRpZmYiOiAiLTg2LjE5IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="BONK">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BONK')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">BONK</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.36%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUFlUSCIsICJwcmljZSI6ICIwLjAzOTQiLCAiY2hhbmdlIjogIi0xLjIwJSIsICJyc2kiOiAiMjIuMCIsICJtYWNkIjogIi0wLjAwMTIiLCAidndhcCI6ICIwLjEyMyIsICJkaWZmIjogIi02OC4wNyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="PYTH">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'PYTH')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">PYTH</div>
+            <div class="text-[8px] opacity-80 font-bold">-1.20%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSlVQIiwgInByaWNlIjogIjAuMTg4IiwgImNoYW5nZSI6ICItMC4xMSUiLCAicnNpIjogIjQ3LjIiLCAibWFjZCI6ICItMC4wMDM4IiwgInZ3YXAiOiAiMC4zMzciLCAiZGlmZiI6ICItNDQuMDYiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="JUP">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'JUP')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">JUP</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.11%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRkVUIiwgInByaWNlIjogIjAuMTQ3IiwgImNoYW5nZSI6ICIrMC4yMCUiLCAicnNpIjogIjQxLjYiLCAibWFjZCI6ICItMC4wMDYzIiwgInZ3YXAiOiAiMC40MTUiLCAiZGlmZiI6ICItNjQuNTMiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="FET">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'FET')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">FET</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.20%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRUdMRCIsICJwcmljZSI6ICIyLjc5IiwgImNoYW5nZSI6ICIrMS43MSUiLCAicnNpIjogIjIzLjgiLCAibWFjZCI6ICItMC4wNjg2IiwgInZ3YXAiOiAiMTAuMDMiLCAiZGlmZiI6ICItNzIuMTYiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="EGLD">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'EGLD')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">EGLD</div>
+            <div class="text-[8px] opacity-80 font-bold">+1.71%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRkxPVyIsICJwcmljZSI6ICIwLjAyNjAiLCAiY2hhbmdlIjogIiswLjc3JSIsICJyc2kiOiAiNTAuOCIsICJtYWNkIjogIjAuMDAwMCIsICJ2d2FwIjogIjAuMTIwIiwgImRpZmYiOiAiLTc4LjQ5IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="FLOW">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'FLOW')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">FLOW</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.77%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUlOQSIsICJwcmljZSI6ICIwLjA0MDkiLCAiY2hhbmdlIjogIiswLjMyJSIsICJyc2kiOiAiMjQuMCIsICJtYWNkIjogIi0wLjAwMTAiLCAidndhcCI6ICIwLjEzMiIsICJkaWZmIjogIi02OS4xNyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="MINA">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'MINA')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">MINA</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.32%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUU5UIiwgInByaWNlIjogIjYwLjg5IiwgImNoYW5nZSI6ICItMC42MiUiLCAicnNpIjogIjM0LjgiLCAibWFjZCI6ICItMS40NjkwIiwgInZ3YXAiOiAiOTIuNzYiLCAiZGlmZiI6ICItMzQuMzYiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="QNT">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'QNT')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">QNT</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.62%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQVhTIiwgInByaWNlIjogIjAuODI4IiwgImNoYW5nZSI6ICIrMC43OCUiLCAicnNpIjogIjI0LjMiLCAibWFjZCI6ICItMC4wNDA5IiwgInZ3YXAiOiAiMS44NSIsICJkaWZmIjogIi01NS4yNiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="AXS">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'AXS')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">AXS</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.78%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQ0haIiwgInByaWNlIjogIjAuMDEyOCIsICJjaGFuZ2UiOiAiLTAuMDglIiwgInJzaSI6ICIyMy41IiwgIm1hY2QiOiAiLTAuMDAxNCIsICJ2d2FwIjogIjAuMDQwNSIsICJkaWZmIjogIi02OC40MiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="CHZ">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'CHZ')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">CHZ</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.08%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTUFOQSIsICJwcmljZSI6ICIwLjA2NjciLCAiY2hhbmdlIjogIi0wLjA3JSIsICJyc2kiOiAiMzkuMCIsICJtYWNkIjogIi0wLjAwMDgiLCAidndhcCI6ICIwLjIwNyIsICJkaWZmIjogIi02Ny44MiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="MANA">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'MANA')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">MANA</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.34%</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.07%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU0FORCIsICJwcmljZSI6ICIwLjA0MTkiLCAiY2hhbmdlIjogIi0yLjM3JSIsICJyc2kiOiAiMjkuOSIsICJtYWNkIjogIi0wLjAwMTkiLCAidndhcCI6ICIwLjIxOSIsICJkaWZmIjogIi04MC44MyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="SAND">
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU0FORCIsICJwcmljZSI6ICIwLjA0MTkiLCAiY2hhbmdlIjogIiswLjU4JSIsICJyc2kiOiAiMzEuMSIsICJtYWNkIjogIi0wLjAwMTkiLCAidndhcCI6ICIwLjIxNyIsICJkaWZmIjogIi04MC43NiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="SAND">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SAND')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">SAND</div>
-            <div class="text-[8px] opacity-80 font-bold">-2.37%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.58%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiWFRaIiwgInByaWNlIjogIjAuMjAwIiwgImNoYW5nZSI6ICItMS40OCUiLCAicnNpIjogIjI1LjIiLCAibWFjZCI6ICItMC4wMDg3IiwgInZ3YXAiOiAiMC42NzQiLCAiZGlmZiI6ICItNzAuMzUiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="XTZ">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiWFRaIiwgInByaWNlIjogIjAuMTk4IiwgImNoYW5nZSI6ICIrMC4yNSUiLCAicnNpIjogIjI1LjUiLCAibWFjZCI6ICItMC4wMDg5IiwgInZ3YXAiOiAiMC42NzQiLCAiZGlmZiI6ICItNzAuNTgiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="XTZ">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'XTZ')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">XTZ</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.48%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.25%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSU9UQSIsICJwcmljZSI6ICIwLjAzMzIiLCAiY2hhbmdlIjogIi0wLjYwJSIsICJyc2kiOiAiMzIuNCIsICJtYWNkIjogIi0wLjAwMTUiLCAidndhcCI6ICIwLjEyOSIsICJkaWZmIjogIi03NC4zNSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="IOTA">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSU9UQSIsICJwcmljZSI6ICIwLjAzMzYiLCAiY2hhbmdlIjogIisxLjMzJSIsICJyc2kiOiAiMzYuOSIsICJtYWNkIjogIi0wLjAwMTQiLCAidndhcCI6ICIwLjEyOCIsICJkaWZmIjogIi03My45MSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="IOTA">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'IOTA')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">IOTA</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.60%</div>
+            <div class="text-[8px] opacity-80 font-bold">+1.33%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiS0FWQSIsICJwcmljZSI6ICIwLjA0MDQiLCAiY2hhbmdlIjogIi0wLjY0JSIsICJyc2kiOiAiMy40IiwgIm1hY2QiOiAiLTAuMDAxMiIsICJ2d2FwIjogIjAuMTYxIiwgImRpZmYiOiAiLTc1LjAwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="KAVA">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiS0FWQSIsICJwcmljZSI6ICIwLjA0MDQiLCAiY2hhbmdlIjogIiswLjE3JSIsICJyc2kiOiAiNC43IiwgIm1hY2QiOiAiLTAuMDAxMyIsICJ2d2FwIjogIjAuMTYwIiwgImRpZmYiOiAiLTc0Ljc3IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="KAVA">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'KAVA')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">KAVA</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.64%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.17%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQ0FLRSIsICJwcmljZSI6ICIxLjQyIiwgImNoYW5nZSI6ICItMS4zOSUiLCAicnNpIjogIjUyLjUiLCAibWFjZCI6ICIwLjAxMDQiLCAidndhcCI6ICIyLjQ2IiwgImRpZmYiOiAiLTQyLjM5IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="CAKE">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQ0FLRSIsICJwcmljZSI6ICIxLjQzIiwgImNoYW5nZSI6ICIrMS4yNyUiLCAicnNpIjogIjU1LjEiLCAibWFjZCI6ICIwLjAxMDUiLCAidndhcCI6ICIyLjQ2IiwgImRpZmYiOiAiLTQxLjc5IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="CAKE">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'CAKE')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">CAKE</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.39%</div>
+            <div class="text-[8px] opacity-80 font-bold">+1.27%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQVNUUiIsICJwcmljZSI6ICIwLjAwNDc3IiwgImNoYW5nZSI6ICItMC42MCUiLCAicnNpIjogIjI2LjIiLCAibWFjZCI6ICItMC4wMDAxIiwgInZ3YXAiOiAiMC4wMTYxIiwgImRpZmYiOiAiLTcwLjQwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="ASTR">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQVNUUiIsICJwcmljZSI6ICIwLjAwNDc2IiwgImNoYW5nZSI6ICIrMC4yOSUiLCAicnNpIjogIjI1LjgiLCAibWFjZCI6ICItMC4wMDAxIiwgInZ3YXAiOiAiMC4wMTU5IiwgImRpZmYiOiAiLTcwLjA3IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="ASTR">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ASTR')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">ASTR</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.60%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.29%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiWklMIiwgInByaWNlIjogIjAuMDAyODgiLCAiY2hhbmdlIjogIis2Ljg4JSIsICJyc2kiOiAiNTUuMSIsICJtYWNkIjogIi0wLjAwMDAiLCAidndhcCI6ICIwLjAwNjcyIiwgImRpZmYiOiAiLTU3LjA1IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="ZIL">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiWklMIiwgInByaWNlIjogIjAuMDAyODYiLCAiY2hhbmdlIjogIi0yLjU5JSIsICJyc2kiOiAiNTYuMiIsICJtYWNkIjogIi0wLjAwMDAiLCAidndhcCI6ICIwLjAwNjcwIiwgImRpZmYiOiAiLTU3LjMxIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="ZIL">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ZIL')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">ZIL</div>
-            <div class="text-[8px] opacity-80 font-bold">+6.88%</div>
+            <div class="text-[8px] opacity-80 font-bold">-2.59%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUVRVTSIsICJwcmljZSI6ICIwLjY1MiIsICJjaGFuZ2UiOiAiKzAuNjYlIiwgInJzaSI6ICIyMy44IiwgIm1hY2QiOiAiLTAuMDE1MCIsICJ2d2FwIjogIjIuMDYiLCAiZGlmZiI6ICItNjguMzgiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="QTUM">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUVRVTSIsICJwcmljZSI6ICIwLjY1MCIsICJjaGFuZ2UiOiAiKzAuMDMlIiwgInJzaSI6ICIxOS41IiwgIm1hY2QiOiAiLTAuMDE0NiIsICJ2d2FwIjogIjIuMDYiLCAiZGlmZiI6ICItNjguNDQiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="QTUM">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'QTUM')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">QTUM</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.66%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.03%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiR0xNUiIsICJwcmljZSI6ICIwLjAwNzU5IiwgImNoYW5nZSI6ICIrMC44NSUiLCAicnNpIjogIjE3LjgiLCAibWFjZCI6ICItMC4wMDA0IiwgInZ3YXAiOiAiMC4wMzc3IiwgImRpZmYiOiAiLTc5LjkwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="GLMR">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiR0xNUiIsICJwcmljZSI6ICIwLjAwNzU2IiwgImNoYW5nZSI6ICItMC40OSUiLCAicnNpIjogIjIwLjIiLCAibWFjZCI6ICItMC4wMDA0IiwgInZ3YXAiOiAiMC4wMzc1IiwgImRpZmYiOiAiLTc5Ljg3IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="GLMR">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'GLMR')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">GLMR</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.85%</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.49%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQU5LUiIsICJwcmljZSI6ICIwLjAwMzQxIiwgImNoYW5nZSI6ICIrMC42OCUiLCAicnNpIjogIjM4LjQiLCAibWFjZCI6ICItMC4wMDAxIiwgInZ3YXAiOiAiMC4wMDkwNyIsICJkaWZmIjogIi02Mi40MSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="ANKR">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQU5LUiIsICJwcmljZSI6ICIwLjAwMzQyIiwgImNoYW5nZSI6ICIrMS4wMCUiLCAicnNpIjogIjQwLjkiLCAibWFjZCI6ICItMC4wMDAxIiwgInZ3YXAiOiAiMC4wMDkwNCIsICJkaWZmIjogIi02Mi4xNCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="ANKR">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ANKR')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">ANKR</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.68%</div>
+            <div class="text-[8px] opacity-80 font-bold">+1.00%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUk9TRSIsICJwcmljZSI6ICIwLjAwNTQ5IiwgImNoYW5nZSI6ICIrMS40MCUiLCAicnNpIjogIjQ4LjEiLCAibWFjZCI6ICItMC4wMDAxIiwgInZ3YXAiOiAiMC4wMTg3IiwgImRpZmYiOiAiLTcwLjY1IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="ROSE">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUk9TRSIsICJwcmljZSI6ICIwLjAwNTUzIiwgImNoYW5nZSI6ICIrMS42OSUiLCAicnNpIjogIjUxLjgiLCAibWFjZCI6ICItMC4wMDAxIiwgInZ3YXAiOiAiMC4wMTg2IiwgImRpZmYiOiAiLTcwLjI1IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="ROSE">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ROSE')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">ROSE</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.40%</div>
+            <div class="text-[8px] opacity-80 font-bold">+1.69%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSU9UWCIsICJwcmljZSI6ICIwLjAwMjE2IiwgImNoYW5nZSI6ICItMC44NyUiLCAicnNpIjogIjM3LjYiLCAibWFjZCI6ICItMC4wMDAxIiwgInZ3YXAiOiAiMC4wMTI1IiwgImRpZmYiOiAiLTgyLjc3IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="IOTX">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSU9UWCIsICJwcmljZSI6ICIwLjAwMjI2IiwgImNoYW5nZSI6ICIrNS4zNSUiLCAicnNpIjogIjQ0LjAiLCAibWFjZCI6ICItMC4wMDAxIiwgInZ3YXAiOiAiMC4wMTI0IiwgImRpZmYiOiAiLTgxLjg2IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="IOTX">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'IOTX')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">IOTX</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.87%</div>
+            <div class="text-[8px] opacity-80 font-bold">+5.35%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiREFTSCIsICJwcmljZSI6ICIzMS4zMiIsICJjaGFuZ2UiOiAiKzAuMzUlIiwgInJzaSI6ICIzMC45IiwgIm1hY2QiOiAiLTAuOTI4MSIsICJ2d2FwIjogIjUzLjM4IiwgImRpZmYiOiAiLTQxLjMzIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="DASH">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiREFTSCIsICJwcmljZSI6ICIzMS4zNiIsICJjaGFuZ2UiOiAiKzAuMjYlIiwgInJzaSI6ICIzNi41IiwgIm1hY2QiOiAiLTAuODc5NiIsICJ2d2FwIjogIjUzLjQyIiwgImRpZmYiOiAiLTQxLjI5IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="DASH">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'DASH')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">DASH</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.35%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.26%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #7f1d1d;" onclick="openModal('eyJzeW1ib2wiOiAiWkVDIiwgInByaWNlIjogIjUwNi45NSIsICJjaGFuZ2UiOiAiKzQuODglIiwgInJzaSI6ICI0My4zIiwgIm1hY2QiOiAiLTIuOTMxOSIsICJ2d2FwIjogIjI3MC4wMCIsICJkaWZmIjogIjg3Ljc2IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBTRUxMIiwgImNvbG9yIjogIiM3ZjFkMWQifQ==')" data-symbol="ZEC">
+        <div class="coin-box p-3 text-center relative" style="background-color: #7f1d1d;" onclick="openModal('eyJzeW1ib2wiOiAiWkVDIiwgInByaWNlIjogIjUwOS41MiIsICJjaGFuZ2UiOiAiKzAuNjElIiwgInJzaSI6ICI0OC4zIiwgIm1hY2QiOiAiLTAuOTY3MiIsICJ2d2FwIjogIjI3MC4zMSIsICJkaWZmIjogIjg4LjQ5IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBTRUxMIiwgImNvbG9yIjogIiM3ZjFkMWQifQ==')" data-symbol="ZEC">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ZEC')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">ZEC</div>
-            <div class="text-[8px] opacity-80 font-bold">+4.88%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.61%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiWE1SIiwgInByaWNlIjogIjM1NC4wNSIsICJjaGFuZ2UiOiAiLTIuNjMlIiwgInJzaSI6ICI0Ny45IiwgIm1hY2QiOiAiNy41ODU0IiwgInZ3YXAiOiAiMzU2LjIxIiwgImRpZmYiOiAiLTAuNjEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="XMR">
+        <div class="coin-box p-3 text-center relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiWE1SIiwgInByaWNlIjogIjM1NS4zNCIsICJjaGFuZ2UiOiAiKzAuOTklIiwgInJzaSI6ICI1MS44IiwgIm1hY2QiOiAiNi44MzM5IiwgInZ3YXAiOiAiMzU2LjI5IiwgImRpZmYiOiAiLTAuMjciLCAic2lnbmFsX3R5cGUiOiAiU0VMTCIsICJjb2xvciI6ICIjZTU5ODliIn0=')" data-symbol="XMR">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'XMR')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">XMR</div>
-            <div class="text-[8px] opacity-80 font-bold">-2.63%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.99%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiV0xEIiwgInByaWNlIjogIjAuMzIzIiwgImNoYW5nZSI6ICItMC40MCUiLCAicnNpIjogIjMwLjYiLCAibWFjZCI6ICItMC4wMjY4IiwgInZ3YXAiOiAiMC44NTUiLCAiZGlmZiI6ICItNjIuMjIiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="WLD">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiV0xEIiwgInByaWNlIjogIjAuMzE5IiwgImNoYW5nZSI6ICItMC4xMyUiLCAicnNpIjogIjI1LjgiLCAibWFjZCI6ICItMC4wMjU3IiwgInZ3YXAiOiAiMC44NTIiLCAiZGlmZiI6ICItNjIuNTciLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="WLD">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'WLD')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">WLD</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.40%</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.13%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU1RSSyIsICJwcmljZSI6ICIwLjAyNTgiLCAiY2hhbmdlIjogIis1LjI2JSIsICJyc2kiOiAiMzguOCIsICJtYWNkIjogIi0wLjAwMTQiLCAidndhcCI6ICIwLjEyNCIsICJkaWZmIjogIi03OS4zNSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="STRK">
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU1RSSyIsICJwcmljZSI6ICIwLjAyNTUiLCAiY2hhbmdlIjogIi0wLjEyJSIsICJyc2kiOiAiMzQuNSIsICJtYWNkIjogIi0wLjAwMTQiLCAidndhcCI6ICIwLjEyNCIsICJkaWZmIjogIi03OS41MSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="STRK">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'STRK')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">STRK</div>
-            <div class="text-[8px] opacity-80 font-bold">+5.26%</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.12%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRFlNIiwgInByaWNlIjogIjAuMDEzNCIsICJjaGFuZ2UiOiAiKzEuNTglIiwgInJzaSI6ICIyOC44IiwgIm1hY2QiOiAiLTAuMDAwNyIsICJ2d2FwIjogIjAuMTExIiwgImRpZmYiOiAiLTg3LjkyIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="DYM">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRFlNIiwgInByaWNlIjogIjAuMDEzNiIsICJjaGFuZ2UiOiAiKzEuNDklIiwgInJzaSI6ICIzMi4wIiwgIm1hY2QiOiAiLTAuMDAwNiIsICJ2d2FwIjogIjAuMTExIiwgImRpZmYiOiAiLTg3Ljc3IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="DYM">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'DYM')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">DYM</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.58%</div>
+            <div class="text-[8px] opacity-80 font-bold">+1.49%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUFOVEEiLCAicHJpY2UiOiAiMC4wNTc0IiwgImNoYW5nZSI6ICIrMS4yMCUiLCAicnNpIjogIjIxLjIiLCAibWFjZCI6ICItMC4wMDIyIiwgInZ3YXAiOiAiMC4xNDgiLCAiZGlmZiI6ICItNjEuMzIiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="MANTA">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUFOVEEiLCAicHJpY2UiOiAiMC4wNTczIiwgImNoYW5nZSI6ICIrMC40NCUiLCAicnNpIjogIjIzLjUiLCAibWFjZCI6ICItMC4wMDIyIiwgInZ3YXAiOiAiMC4xNDciLCAiZGlmZiI6ICItNjEuMjEiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="MANTA">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'MANTA')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">MANTA</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.20%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.44%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUk9OIiwgInByaWNlIjogIjAuMDQ3NyIsICJjaGFuZ2UiOiAiLTAuMjMlIiwgInJzaSI6ICIyMy45IiwgIm1hY2QiOiAiLTAuMDAyNSIsICJ2d2FwIjogIjAuMTg5IiwgImRpZmYiOiAiLTc0LjgxIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="RON">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUk9OIiwgInByaWNlIjogIjAuMDQ3OCIsICJjaGFuZ2UiOiAiKzAuMDQlIiwgInJzaSI6ICIyNS43IiwgIm1hY2QiOiAiLTAuMDAyNSIsICJ2d2FwIjogIjAuMTg4IiwgImRpZmYiOiAiLTc0LjYzIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="RON">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'RON')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">RON</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.23%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUElYRUwiLCAicHJpY2UiOiAiMC4wMDQxMiIsICJjaGFuZ2UiOiAiLTAuMDUlIiwgInJzaSI6ICIzNy44IiwgIm1hY2QiOiAiLTAuMDAwMiIsICJ2d2FwIjogIjAuMDE4MiIsICJkaWZmIjogIi03Ny4zNSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="PIXEL">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'PIXEL')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">PIXEL</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.05%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQ0tCIiwgInByaWNlIjogIjAuMDAwODIwIiwgImNoYW5nZSI6ICIrMC40NSUiLCAicnNpIjogIjI4LjUiLCAibWFjZCI6ICItMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDM2NiIsICJkaWZmIjogIi03Ny42MSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="CKB">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'CKB')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">CKB</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.45%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQlRUIiwgInByaWNlIjogIjAuMDAwMDAwMjYyIiwgImNoYW5nZSI6ICIrMC4wNCUiLCAicnNpIjogIjI0LjUiLCAibWFjZCI6ICItMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDAwMDA0NTgiLCAiZGlmZiI6ICItNDIuNzAiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="BTT">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BTT')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">BTT</div>
             <div class="text-[8px] opacity-80 font-bold">+0.04%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiSE9UIiwgInByaWNlIjogIjAuMDAwMzQwIiwgImNoYW5nZSI6ICIrMS40NiUiLCAicnNpIjogIjQ2LjkiLCAibWFjZCI6ICItMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDA3NDgiLCAiZGlmZiI6ICItNTQuNTEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="HOT">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUElYRUwiLCAicHJpY2UiOiAiMC4wMDQxNiIsICJjaGFuZ2UiOiAiKzEuNzglIiwgInJzaSI6ICI0MC4wIiwgIm1hY2QiOiAiLTAuMDAwMiIsICJ2d2FwIjogIjAuMDE4MCIsICJkaWZmIjogIi03Ni44OSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="PIXEL">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'PIXEL')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">PIXEL</div>
+            <div class="text-[8px] opacity-80 font-bold">+1.78%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQ0tCIiwgInByaWNlIjogIjAuMDAwODIxIiwgImNoYW5nZSI6ICIrMC42NCUiLCAicnNpIjogIjI2LjMiLCAibWFjZCI6ICItMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDM2NSIsICJkaWZmIjogIi03Ny41MSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="CKB">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'CKB')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">CKB</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.64%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQlRUIiwgInByaWNlIjogIjAuMDAwMDAwMjYyIiwgImNoYW5nZSI6ICItMC4xMSUiLCAicnNpIjogIjI1LjgiLCAibWFjZCI6ICItMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDAwMDA0NTYiLCAiZGlmZiI6ICItNDIuNDYiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="BTT">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BTT')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">BTT</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.11%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiSE9UIiwgInByaWNlIjogIjAuMDAwMzM4IiwgImNoYW5nZSI6ICIrMC4zMyUiLCAicnNpIjogIjQ1LjkiLCAibWFjZCI6ICItMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDA3NDUiLCAiZGlmZiI6ICItNTQuNTYiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="HOT">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'HOT')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">HOT</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.46%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.33%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiR01UIiwgInByaWNlIjogIjAuMDA2NjIiLCAiY2hhbmdlIjogIi0wLjA1JSIsICJyc2kiOiAiMzQuNiIsICJtYWNkIjogIi0wLjAwMDMiLCAidndhcCI6ICIwLjAzMTYiLCAiZGlmZiI6ICItNzkuMDUiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="GMT">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiR01UIiwgInByaWNlIjogIjAuMDA2NjMiLCAiY2hhbmdlIjogIiswLjkwJSIsICJyc2kiOiAiMzQuMCIsICJtYWNkIjogIi0wLjAwMDMiLCAidndhcCI6ICIwLjAzMTQiLCAiZGlmZiI6ICItNzguOTQiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="GMT">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'GMT')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">GMT</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.05%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.90%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiR05TIiwgInByaWNlIjogIjAuNDk3IiwgImNoYW5nZSI6ICItMC4wNiUiLCAicnNpIjogIjIxLjQiLCAibWFjZCI6ICItMC4wMjUzIiwgInZ3YXAiOiAiMS4yOSIsICJkaWZmIjogIi02MS40NyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="GNS">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiR05TIiwgInByaWNlIjogIjAuNDk2IiwgImNoYW5nZSI6ICIrMC4wMiUiLCAicnNpIjogIjE3LjQiLCAibWFjZCI6ICItMC4wMjQ1IiwgInZ3YXAiOiAiMS4yOSIsICJkaWZmIjogIi02MS40OSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="GNS">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'GNS')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">GNS</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.06%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.02%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiR01YIiwgInByaWNlIjogIjYuMjYiLCAiY2hhbmdlIjogIisxLjA3JSIsICJyc2kiOiAiNDYuNSIsICJtYWNkIjogIjAuMDMxNyIsICJ2d2FwIjogIjEzLjE1IiwgImRpZmYiOiAiLTUyLjQxIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="GMX">
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiR01YIiwgInByaWNlIjogIjYuMjUiLCAiY2hhbmdlIjogIiswLjMyJSIsICJyc2kiOiAiNDMuMyIsICJtYWNkIjogIjAuMDIyMyIsICJ2d2FwIjogIjEzLjE0IiwgImRpZmYiOiAiLTUyLjQxIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="GMX">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'GMX')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">GMX</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.07%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.32%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU05YIiwgInByaWNlIjogIjAuMjEzIiwgImNoYW5nZSI6ICItMC44NCUiLCAicnNpIjogIjM0LjIiLCAibWFjZCI6ICItMC4wMDUwIiwgInZ3YXAiOiAiMC44OTkiLCAiZGlmZiI6ICItNzYuMzMiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="SNX">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU05YIiwgInByaWNlIjogIjAuMjExIiwgImNoYW5nZSI6ICIrMC4yOCUiLCAicnNpIjogIjM3LjUiLCAibWFjZCI6ICItMC4wMDUwIiwgInZ3YXAiOiAiMC44OTkiLCAiZGlmZiI6ICItNzYuNDYiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="SNX">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SNX')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">SNX</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.84%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.28%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQ1JWIiwgInByaWNlIjogIjAuMjA1IiwgImNoYW5nZSI6ICItMC4xNSUiLCAicnNpIjogIjQwLjkiLCAibWFjZCI6ICItMC4wMDE0IiwgInZ3YXAiOiAiMC42NjQiLCAiZGlmZiI6ICItNjkuMDQiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="CRV">
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQ1JWIiwgInByaWNlIjogIjAuMjA0IiwgImNoYW5nZSI6ICItMC4xNSUiLCAicnNpIjogIjQyLjEiLCAibWFjZCI6ICItMC4wMDE1IiwgInZ3YXAiOiAiMC42NjQiLCAiZGlmZiI6ICItNjkuMTUiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="CRV">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'CRV')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">CRV</div>
             <div class="text-[8px] opacity-80 font-bold">-0.15%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiRU5TIiwgInByaWNlIjogIjQuMjYiLCAiY2hhbmdlIjogIiswLjM1JSIsICJyc2kiOiAiMzguMSIsICJtYWNkIjogIi0wLjA0NjgiLCAidndhcCI6ICIxOC4yNSIsICJkaWZmIjogIi03Ni42MyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="ENS">
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiRU5TIiwgInByaWNlIjogIjQuMjUiLCAiY2hhbmdlIjogIiswLjMzJSIsICJyc2kiOiAiMzcuMiIsICJtYWNkIjogIi0wLjA0OTYiLCAidndhcCI6ICIxOC4yMiIsICJkaWZmIjogIi03Ni42OSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="ENS">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ENS')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">ENS</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.35%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.33%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTFJDIiwgInByaWNlIjogIjAuMDEwMyIsICJjaGFuZ2UiOiAiLTAuMTAlIiwgInJzaSI6ICIxOC4xIiwgIm1hY2QiOiAiLTAuMDAwNSIsICJ2d2FwIjogIjAuMDYzOSIsICJkaWZmIjogIi04My43NiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="LRC">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTFJDIiwgInByaWNlIjogIjAuMDEwNCIsICJjaGFuZ2UiOiAiKzAuMDAlIiwgInJzaSI6ICIxOS4zIiwgIm1hY2QiOiAiLTAuMDAwNSIsICJ2d2FwIjogIjAuMDYzOCIsICJkaWZmIjogIi04My43MCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="LRC">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'LRC')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">LRC</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.10%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUFTSyIsICJwcmljZSI6ICIwLjM0OCIsICJjaGFuZ2UiOiAiLTAuMjAlIiwgInJzaSI6ICIyMi4xIiwgIm1hY2QiOiAiLTAuMDEyOSIsICJ2d2FwIjogIjEuMzgiLCAiZGlmZiI6ICItNzQuODAiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="MASK">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'MASK')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">MASK</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.20%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiV09PIiwgInByaWNlIjogIjAuMDExMyIsICJjaGFuZ2UiOiAiLTEuMDQlIiwgInJzaSI6ICIyMC44IiwgIm1hY2QiOiAiLTAuMDAwMiIsICJ2d2FwIjogIjAuMDQ2NCIsICJkaWZmIjogIi03NS41MCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="WOO">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'WOO')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">WOO</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.04%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQ1ZYIiwgInByaWNlIjogIjEuNDIiLCAiY2hhbmdlIjogIis3LjA5JSIsICJyc2kiOiAiNjQuMSIsICJtYWNkIjogIjAuMDI3NSIsICJ2d2FwIjogIjIuODkiLCAiZGlmZiI6ICItNTAuOTAiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="CVX">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'CVX')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">CVX</div>
-            <div class="text-[8px] opacity-80 font-bold">+7.09%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQkFMIiwgInByaWNlIjogIjAuMTA4IiwgImNoYW5nZSI6ICItMC42NSUiLCAicnNpIjogIjM5LjkiLCAibWFjZCI6ICIwLjAwMjMiLCAidndhcCI6ICIwLjM0NyIsICJkaWZmIjogIi02OC43MyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="BAL">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BAL')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">BAL</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.65%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU1VTSEkiLCAicHJpY2UiOiAiMC4xNTciLCAiY2hhbmdlIjogIisxLjQyJSIsICJyc2kiOiAiMzYuNCIsICJtYWNkIjogIi0wLjAwMzAiLCAidndhcCI6ICIwLjU2NiIsICJkaWZmIjogIi03Mi4yMiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="SUSHI">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SUSHI')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">SUSHI</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.42%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiWUZJIiwgInByaWNlIjogIjIxMDguOTAiLCAiY2hhbmdlIjogIi0xLjA1JSIsICJyc2kiOiAiNDguMCIsICJtYWNkIjogIjExLjgzNTMiLCAidndhcCI6ICI0NTE1LjY1IiwgImRpZmYiOiAiLTUzLjMwIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="YFI">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'YFI')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">YFI</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.05%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiMUlOQ0giLCAicHJpY2UiOiAiMC4wODI1IiwgImNoYW5nZSI6ICIrMS43NCUiLCAicnNpIjogIjUwLjYiLCAibWFjZCI6ICIwLjAwMjEiLCAidndhcCI6ICIwLjIwNSIsICJkaWZmIjogIi01OS43NyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="1INCH">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, '1INCH')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">1INCH</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.74%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiWlJYIiwgInByaWNlIjogIjAuMDc5OSIsICJjaGFuZ2UiOiAiLTAuNDAlIiwgInJzaSI6ICIzNS42IiwgIm1hY2QiOiAiLTAuMDAxOSIsICJ2d2FwIjogIjAuMTk2IiwgImRpZmYiOiAiLTU5LjMzIiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="ZRX">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ZRX')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">ZRX</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.40%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiVU1BIiwgInByaWNlIjogIjAuMzM4IiwgImNoYW5nZSI6ICItMC42MiUiLCAicnNpIjogIjMwLjgiLCAibWFjZCI6ICItMC4wMTEzIiwgInZ3YXAiOiAiMS4wNyIsICJkaWZmIjogIi02OC4yMyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="UMA">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'UMA')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">UMA</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.62%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTk1SIiwgInByaWNlIjogIjguNzEiLCAiY2hhbmdlIjogIisyLjY0JSIsICJyc2kiOiAiMzEuNCIsICJtYWNkIjogIi0wLjI2MDIiLCAidndhcCI6ICIxMy4yOCIsICJkaWZmIjogIi0zNC40MiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="NMR">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'NMR')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">NMR</div>
-            <div class="text-[8px] opacity-80 font-bold">+2.64%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSkFTTVkiLCAicHJpY2UiOiAiMC4wMDQyMCIsICJjaGFuZ2UiOiAiLTEuOTYlIiwgInJzaSI6ICIyOS40IiwgIm1hY2QiOiAiLTAuMDAwMSIsICJ2d2FwIjogIjAuMDExOCIsICJkaWZmIjogIi02NC42NCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="JASMY">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'JASMY')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">JASMY</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.96%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQ0VMTyIsICJwcmljZSI6ICIwLjA2MDciLCAiY2hhbmdlIjogIi0wLjg2JSIsICJyc2kiOiAiMjEuMCIsICJtYWNkIjogIi0wLjAwMTciLCAidndhcCI6ICIwLjIxOCIsICJkaWZmIjogIi03Mi4xNiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="CELO">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'CELO')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">CELO</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.86%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiVFdUIiwgInByaWNlIjogIjAuMzYzIiwgImNoYW5nZSI6ICItMS42MCUiLCAicnNpIjogIjU5LjciLCAibWFjZCI6ICIwLjAwNDkiLCAidndhcCI6ICIwLjk3MyIsICJkaWZmIjogIi02Mi43MSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="TWT">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'TWT')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">TWT</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.60%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiSUQiLCAicHJpY2UiOiAiMC4wMjY4IiwgImNoYW5nZSI6ICItMC42NiUiLCAicnNpIjogIjIzLjUiLCAibWFjZCI6ICItMC4wMDE5IiwgInZ3YXAiOiAiMC4xMDAiLCAiZGlmZiI6ICItNzMuMzIiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="ID">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ID')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">ID</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.66%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRURVIiwgInByaWNlIjogIjAuMDMyNiIsICJjaGFuZ2UiOiAiLTEuODklIiwgInJzaSI6ICI1NS44IiwgIm1hY2QiOiAiMC4wMDA2IiwgInZ3YXAiOiAiMC4xMzEiLCAiZGlmZiI6ICItNzUuMTMiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="EDU">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'EDU')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">EDU</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.89%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQVJLTSIsICJwcmljZSI6ICIwLjA5NjQiLCAiY2hhbmdlIjogIisyLjM1JSIsICJyc2kiOiAiMjQuNSIsICJtYWNkIjogIi0wLjAwNTIiLCAidndhcCI6ICIwLjQxNyIsICJkaWZmIjogIi03Ni44OCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="ARKM">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ARKM')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">ARKM</div>
-            <div class="text-[8px] opacity-80 font-bold">+2.35%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUFWIiwgInByaWNlIjogIjAuMDA3OTUiLCAiY2hhbmdlIjogIi0wLjc0JSIsICJyc2kiOiAiMjMuNSIsICJtYWNkIjogIi0wLjAwMDQiLCAidndhcCI6ICIwLjA0NzkiLCAiZGlmZiI6ICItODMuNDMiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="MAV">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'MAV')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">MAV</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.74%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQ1lCRVIiLCAicHJpY2UiOiAiMC4zMDMiLCAiY2hhbmdlIjogIiswLjAwJSIsICJyc2kiOiAiMjMuOCIsICJtYWNkIjogIi0wLjAxMzEiLCAidndhcCI6ICIxLjM4IiwgImRpZmYiOiAiLTc3Ljk5IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="CYBER">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'CYBER')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">CYBER</div>
             <div class="text-[8px] opacity-80 font-bold">+0.00%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU0FUUyIsICJwcmljZSI6ICIwLjAwMDAwMDAwOTY0IiwgImNoYW5nZSI6ICItNC44OCUiLCAicnNpIjogIjEzLjIiLCAibWFjZCI6ICIwLjAwMDAiLCAidndhcCI6ICIwLjAwMDAwMDAzMjkiLCAiZGlmZiI6ICItNzAuNjgiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="SATS">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUFTSyIsICJwcmljZSI6ICIwLjM1NCIsICJjaGFuZ2UiOiAiKzIuMzElIiwgInJzaSI6ICIyOS40IiwgIm1hY2QiOiAiLTAuMDEyMyIsICJ2d2FwIjogIjEuMzgiLCAiZGlmZiI6ICItNzQuMzgiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="MASK">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'MASK')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">MASK</div>
+            <div class="text-[8px] opacity-80 font-bold">+2.31%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiV09PIiwgInByaWNlIjogIjAuMDExMyIsICJjaGFuZ2UiOiAiKzAuNTMlIiwgInJzaSI6ICIyMi40IiwgIm1hY2QiOiAiLTAuMDAwMiIsICJ2d2FwIjogIjAuMDQ2MiIsICJkaWZmIjogIi03NS4zOCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="WOO">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'WOO')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">WOO</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.53%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQ1ZYIiwgInByaWNlIjogIjEuNDAiLCAiY2hhbmdlIjogIi0wLjk5JSIsICJyc2kiOiAiNjIuNCIsICJtYWNkIjogIjAuMDMxMyIsICJ2d2FwIjogIjIuODkiLCAiZGlmZiI6ICItNTEuNjAiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="CVX">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'CVX')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">CVX</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.99%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQkFMIiwgInByaWNlIjogIjAuMTA4IiwgImNoYW5nZSI6ICItMC43NCUiLCAicnNpIjogIjMyLjMiLCAibWFjZCI6ICIwLjAwMTkiLCAidndhcCI6ICIwLjM0NyIsICJkaWZmIjogIi02OC43NiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="BAL">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BAL')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">BAL</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.74%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU1VTSEkiLCAicHJpY2UiOiAiMC4xNTYiLCAiY2hhbmdlIjogIi0wLjA2JSIsICJyc2kiOiAiMzIuNSIsICJtYWNkIjogIi0wLjAwMjgiLCAidndhcCI6ICIwLjU2NSIsICJkaWZmIjogIi03Mi4yNyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="SUSHI">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SUSHI')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">SUSHI</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.06%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiWUZJIiwgInByaWNlIjogIjIwOTkuOTAiLCAiY2hhbmdlIjogIi0wLjYyJSIsICJyc2kiOiAiNTAuMSIsICJtYWNkIjogIjEyLjk3NzQiLCAidndhcCI6ICI0NTE0LjY0IiwgImRpZmYiOiAiLTUzLjQ5IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="YFI">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'YFI')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">YFI</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.62%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiMUlOQ0giLCAicHJpY2UiOiAiMC4wODIwIiwgImNoYW5nZSI6ICIrMC4yOSUiLCAicnNpIjogIjQ3LjUiLCAibWFjZCI6ICIwLjAwMTkiLCAidndhcCI6ICIwLjIwNCIsICJkaWZmIjogIi01OS45NiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="1INCH">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, '1INCH')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">1INCH</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.29%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiWlJYIiwgInByaWNlIjogIjAuMDc5NSIsICJjaGFuZ2UiOiAiKzAuMTAlIiwgInJzaSI6ICIzMi41IiwgIm1hY2QiOiAiLTAuMDAxOSIsICJ2d2FwIjogIjAuMTk2IiwgImRpZmYiOiAiLTU5LjQ2IiwgInNpZ25hbF90eXBlIjogIkJVWSIsICJjb2xvciI6ICIjNTJiNzg4In0=')" data-symbol="ZRX">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ZRX')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">ZRX</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.10%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiVU1BIiwgInByaWNlIjogIjAuMzM4IiwgImNoYW5nZSI6ICIrMC4zMCUiLCAicnNpIjogIjMxLjYiLCAibWFjZCI6ICItMC4wMTExIiwgInZ3YXAiOiAiMS4wNyIsICJkaWZmIjogIi02OC4yMiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="UMA">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'UMA')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">UMA</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.30%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTk1SIiwgInByaWNlIjogIjguNzciLCAiY2hhbmdlIjogIiswLjg1JSIsICJyc2kiOiAiMzIuNyIsICJtYWNkIjogIi0wLjIzOTAiLCAidndhcCI6ICIxMy4yOSIsICJkaWZmIjogIi0zMy45NiIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="NMR">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'NMR')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">NMR</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.85%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiSkFTTVkiLCAicHJpY2UiOiAiMC4wMDQxNiIsICJjaGFuZ2UiOiAiLTAuNjAlIiwgInJzaSI6ICIzMi44IiwgIm1hY2QiOiAiLTAuMDAwMSIsICJ2d2FwIjogIjAuMDExOCIsICJkaWZmIjogIi02NC43OSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="JASMY">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'JASMY')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">JASMY</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.60%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQ0VMTyIsICJwcmljZSI6ICIwLjA2MDciLCAiY2hhbmdlIjogIiswLjU2JSIsICJyc2kiOiAiNi4zIiwgIm1hY2QiOiAiLTAuMDAxOCIsICJ2d2FwIjogIjAuMjE2IiwgImRpZmYiOiAiLTcxLjk3IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="CELO">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'CELO')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">CELO</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.56%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiVFdUIiwgInByaWNlIjogIjAuMzY0IiwgImNoYW5nZSI6ICIrMC42NCUiLCAicnNpIjogIjYwLjUiLCAibWFjZCI6ICIwLjAwNDQiLCAidndhcCI6ICIwLjk3MyIsICJkaWZmIjogIi02Mi42MCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="TWT">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'TWT')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">TWT</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.64%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiSUQiLCAicHJpY2UiOiAiMC4wMjc3IiwgImNoYW5nZSI6ICIrMy40NiUiLCAicnNpIjogIjMxLjciLCAibWFjZCI6ICItMC4wMDE4IiwgInZ3YXAiOiAiMC4xMDAiLCAiZGlmZiI6ICItNzIuMzQiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="ID">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ID')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">ID</div>
+            <div class="text-[8px] opacity-80 font-bold">+3.46%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiRURVIiwgInByaWNlIjogIjAuMDMyNiIsICJjaGFuZ2UiOiAiKzAuNjUlIiwgInJzaSI6ICI1NS42IiwgIm1hY2QiOiAiMC4wMDA2IiwgInZ3YXAiOiAiMC4xMzAiLCAiZGlmZiI6ICItNzUuMDEiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="EDU">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'EDU')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">EDU</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.65%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQVJLTSIsICJwcmljZSI6ICIwLjA5NTYiLCAiY2hhbmdlIjogIiswLjM3JSIsICJyc2kiOiAiMjMuNSIsICJtYWNkIjogIi0wLjAwNTEiLCAidndhcCI6ICIwLjQxNCIsICJkaWZmIjogIi03Ni45MyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="ARKM">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ARKM')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">ARKM</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.37%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUFWIiwgInByaWNlIjogIjAuMDA3OTYiLCAiY2hhbmdlIjogIiswLjg0JSIsICJyc2kiOiAiMTguMSIsICJtYWNkIjogIi0wLjAwMDQiLCAidndhcCI6ICIwLjA0NzkiLCAiZGlmZiI6ICItODMuMzkiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="MAV">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'MAV')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">MAV</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.84%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQ1lCRVIiLCAicHJpY2UiOiAiMC4zMDQiLCAiY2hhbmdlIjogIiswLjYzJSIsICJyc2kiOiAiMjYuNiIsICJtYWNkIjogIi0wLjAxMjYiLCAidndhcCI6ICIxLjM4IiwgImRpZmYiOiAiLTc3LjkwIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="CYBER">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'CYBER')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">CYBER</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.63%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU0FUUyIsICJwcmljZSI6ICIwLjAwMDAwMDAwOTUzIiwgImNoYW5nZSI6ICItMC41NCUiLCAicnNpIjogIjEzLjEiLCAibWFjZCI6ICIwLjAwMDAiLCAidndhcCI6ICIwLjAwMDAwMDAzMjciLCAiZGlmZiI6ICItNzAuOTIiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="SATS">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SATS')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">SATS</div>
-            <div class="text-[8px] opacity-80 font-bold">-4.88%</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.54%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #e5989b;" onclick="openModal('eyJzeW1ib2wiOiAiUkFUUyIsICJwcmljZSI6ICIwLjAwMDA0NjIiLCAiY2hhbmdlIjogIi0yMS43OSUiLCAicnNpIjogIjY4LjUiLCAibWFjZCI6ICIwLjAwMDAiLCAidndhcCI6ICIwLjAwMDAyOTIiLCAiZGlmZiI6ICI1OC4yMCIsICJzaWduYWxfdHlwZSI6ICJTRUxMIiwgImNvbG9yIjogIiNlNTk4OWIifQ==')" data-symbol="RATS">
+        <div class="coin-box p-3 text-center relative" style="background-color: #7f1d1d;" onclick="openModal('eyJzeW1ib2wiOiAiUkFUUyIsICJwcmljZSI6ICIwLjAwMDA0NjYiLCAiY2hhbmdlIjogIi0wLjAyJSIsICJyc2kiOiAiNzAuMiIsICJtYWNkIjogIjAuMDAwMCIsICJ2d2FwIjogIjAuMDAwMDI5MSIsICJkaWZmIjogIjYwLjAxIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBTRUxMIiwgImNvbG9yIjogIiM3ZjFkMWQifQ==')" data-symbol="RATS">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'RATS')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">RATS</div>
-            <div class="text-[8px] opacity-80 font-bold">-21.79%</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.02%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTVlSTyIsICJwcmljZSI6ICIwLjAwMTg4IiwgImNoYW5nZSI6ICItMy4zOCUiLCAicnNpIjogIjI3LjciLCAibWFjZCI6ICItMC4wMDAxIiwgInZ3YXAiOiAiMC4wMDgzNCIsICJkaWZmIjogIi03Ny40MCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="MYRO">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTVlSTyIsICJwcmljZSI6ICIwLjAwMTg2IiwgImNoYW5nZSI6ICItMS4yMiUiLCAicnNpIjogIjI3LjUiLCAibWFjZCI6ICItMC4wMDAxIiwgInZ3YXAiOiAiMC4wMDgyMiIsICJkaWZmIjogIi03Ny4zOSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="MYRO">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'MYRO')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">MYRO</div>
-            <div class="text-[8px] opacity-80 font-bold">-3.38%</div>
+            <div class="text-[8px] opacity-80 font-bold">-1.22%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiVFVSQk8iLCAicHJpY2UiOiAiMC4wMDA4NDAiLCAiY2hhbmdlIjogIis2LjgzJSIsICJyc2kiOiAiNTEuNiIsICJtYWNkIjogIi0wLjAwMDAiLCAidndhcCI6ICIwLjAwMzEwIiwgImRpZmYiOiAiLTcyLjk0IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="TURBO">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiVFVSQk8iLCAicHJpY2UiOiAiMC4wMDA4MjkiLCAiY2hhbmdlIjogIi0xLjAwJSIsICJyc2kiOiAiNTEuNSIsICJtYWNkIjogIi0wLjAwMDAiLCAidndhcCI6ICIwLjAwMzA3IiwgImRpZmYiOiAiLTczLjA1IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="TURBO">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'TURBO')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">TURBO</div>
-            <div class="text-[8px] opacity-80 font-bold">+6.83%</div>
+            <div class="text-[8px] opacity-80 font-bold">-1.00%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTUVNRSIsICJwcmljZSI6ICIwLjAwMDQ5NyIsICJjaGFuZ2UiOiAiLTAuODYlIiwgInJzaSI6ICIzNy4zIiwgIm1hY2QiOiAiLTAuMDAwMCIsICJ2d2FwIjogIjAuMDAxOTciLCAiZGlmZiI6ICItNzQuODAiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="MEME">
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiTUVNRSIsICJwcmljZSI6ICIwLjAwMDQ5MyIsICJjaGFuZ2UiOiAiLTAuMDIlIiwgInJzaSI6ICIzNS4zIiwgIm1hY2QiOiAiLTAuMDAwMCIsICJ2d2FwIjogIjAuMDAxOTYiLCAiZGlmZiI6ICItNzQuOTIiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="MEME">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'MEME')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">MEME</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.86%</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.02%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUE9QQ0FUIiwgInByaWNlIjogIjAuMDQ1NCIsICJjaGFuZ2UiOiAiKzAuNzElIiwgInJzaSI6ICI1My42IiwgIm1hY2QiOiAiLTAuMDAwMiIsICJ2d2FwIjogIjAuMjMwIiwgImRpZmYiOiAiLTgwLjIzIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="POPCAT">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUE9QQ0FUIiwgInByaWNlIjogIjAuMDQ1MCIsICJjaGFuZ2UiOiAiLTAuMDclIiwgInJzaSI6ICI1My44IiwgIm1hY2QiOiAiLTAuMDAwMSIsICJ2d2FwIjogIjAuMjI2IiwgImRpZmYiOiAiLTgwLjA3IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="POPCAT">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'POPCAT')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">POPCAT</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.71%</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.07%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTU9HIiwgInByaWNlIjogIjAuMDAwMDAwMTAxIiwgImNoYW5nZSI6ICIrMC40NSUiLCAicnNpIjogIjMzLjAiLCAibWFjZCI6ICItMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDAwMDA1NDUiLCAiZGlmZiI6ICItODEuNDYiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="MOG">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTU9HIiwgInByaWNlIjogIjAuMDAwMDAwMTAwIiwgImNoYW5nZSI6ICIrMC4zMyUiLCAicnNpIjogIjMyLjYiLCAibWFjZCI6ICItMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDAwMDA1NDMiLCAiZGlmZiI6ICItODEuNTEiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="MOG">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'MOG')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">MOG</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.33%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUVXIiwgInByaWNlIjogIjAuMDAwMzM2IiwgImNoYW5nZSI6ICIrMC41NyUiLCAicnNpIjogIjM1LjUiLCAibWFjZCI6ICItMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDIxNyIsICJkaWZmIjogIi04NC41MSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="MEW">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'MEW')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">MEW</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.57%</div>
+        </div>
+        
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQk9NRSIsICJwcmljZSI6ICIwLjAwMDU4MCIsICJjaGFuZ2UiOiAiKzAuNDUlIiwgInJzaSI6ICI3NC4xIiwgIm1hY2QiOiAiMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDEzNCIsICJkaWZmIjogIi01Ni44OSIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="BOME">
+            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BOME')">★</span></div>
+            <div class="font-bold text-[11px] font-mono mt-1">BOME</div>
             <div class="text-[8px] opacity-80 font-bold">+0.45%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUVXIiwgInByaWNlIjogIjAuMDAwMzM3IiwgImNoYW5nZSI6ICIrMC42OSUiLCAicnNpIjogIjM4LjMiLCAibWFjZCI6ICItMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDIyMCIsICJkaWZmIjogIi04NC42OCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="MEW">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'MEW')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">MEW</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.69%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiQk9NRSIsICJwcmljZSI6ICIwLjAwMDU4MyIsICJjaGFuZ2UiOiAiLTIuMzQlIiwgInJzaSI6ICI3Ni4zIiwgIm1hY2QiOiAiMC4wMDAwIiwgInZ3YXAiOiAiMC4wMDEzNSIsICJkaWZmIjogIi01Ni45NyIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="BOME">
-            <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'BOME')">★</span></div>
-            <div class="font-bold text-[11px] font-mono mt-1">BOME</div>
-            <div class="text-[8px] opacity-80 font-bold">-2.34%</div>
-        </div>
-        
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiREVHRU4iLCAicHJpY2UiOiAiMC4wMDEyNCIsICJjaGFuZ2UiOiAiKzAuMTclIiwgInJzaSI6ICI0NC44IiwgIm1hY2QiOiAiLTAuMDAwMCIsICJ2d2FwIjogIjAuMDAxNjQiLCAiZGlmZiI6ICItMjQuNDEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="DEGEN">
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiREVHRU4iLCAicHJpY2UiOiAiMC4wMDEyMiIsICJjaGFuZ2UiOiAiLTEuMjQlIiwgInJzaSI6ICI0NS44IiwgIm1hY2QiOiAiLTAuMDAwMCIsICJ2d2FwIjogIjAuMDAxNjAiLCAiZGlmZiI6ICItMjMuNzEiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="DEGEN">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'DEGEN')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">DEGEN</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.17%</div>
+            <div class="text-[8px] opacity-80 font-bold">-1.24%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQUVWTyIsICJwcmljZSI6ICIwLjAxODkiLCAiY2hhbmdlIjogIi0xLjg3JSIsICJyc2kiOiAiNDguNyIsICJtYWNkIjogIjAuMDAwMSIsICJ2d2FwIjogIjAuMDc5NyIsICJkaWZmIjogIi03Ni4yNiIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="AEVO">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiQUVWTyIsICJwcmljZSI6ICIwLjAxODciLCAiY2hhbmdlIjogIiswLjQ4JSIsICJyc2kiOiAiNDUuMiIsICJtYWNkIjogIjAuMDAwMCIsICJ2d2FwIjogIjAuMDc5NSIsICJkaWZmIjogIi03Ni4zOCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="AEVO">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'AEVO')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">AEVO</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.87%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.48%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUVUSVMiLCAicHJpY2UiOiAiMi40MyIsICJjaGFuZ2UiOiAiLTEuMTAlIiwgInJzaSI6ICIyMy43IiwgIm1hY2QiOiAiLTAuMTAxMSIsICJ2d2FwIjogIjkuMjkiLCAiZGlmZiI6ICItNzMuODYiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="METIS">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUVUSVMiLCAicHJpY2UiOiAiMi40MyIsICJjaGFuZ2UiOiAiKzAuNDYlIiwgInJzaSI6ICIyNC44IiwgIm1hY2QiOiAiLTAuMTAxOCIsICJ2d2FwIjogIjkuMjciLCAiZGlmZiI6ICItNzMuODIiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="METIS">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'METIS')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">METIS</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.10%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.46%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU0NSVCIsICJwcmljZSI6ICIwLjAzMjMiLCAiY2hhbmdlIjogIiswLjg3JSIsICJyc2kiOiAiMjIuNSIsICJtYWNkIjogIi0wLjAwNDEiLCAidndhcCI6ICIwLjE1NCIsICJkaWZmIjogIi03OS4wOCIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="SCRT">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU0NSVCIsICJwcmljZSI6ICIwLjAzMjIiLCAiY2hhbmdlIjogIi0wLjA2JSIsICJyc2kiOiAiMTkuNyIsICJtYWNkIjogIi0wLjAwNDAiLCAidndhcCI6ICIwLjE1NCIsICJkaWZmIjogIi03OS4wNyIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="SCRT">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SCRT')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">SCRT</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.87%</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.06%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiT05UIiwgInByaWNlIjogIjAuMDM3NyIsICJjaGFuZ2UiOiAiLTAuMjQlIiwgInJzaSI6ICIyMi43IiwgIm1hY2QiOiAiLTAuMDAxOSIsICJ2d2FwIjogIjAuMTAwIiwgImRpZmYiOiAiLTYyLjI4IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="ONT">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiT05UIiwgInByaWNlIjogIjAuMDM3NiIsICJjaGFuZ2UiOiAiKzAuMjElIiwgInJzaSI6ICIyMy44IiwgIm1hY2QiOiAiLTAuMDAxOSIsICJ2d2FwIjogIjAuMDk5OSIsICJkaWZmIjogIi02Mi4zOSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="ONT">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'ONT')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">ONT</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.24%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.21%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU0tMIiwgInByaWNlIjogIjAuMDAzNjIiLCAiY2hhbmdlIjogIi0wLjc5JSIsICJyc2kiOiAiMzUuMiIsICJtYWNkIjogIi0wLjAwMDEiLCAidndhcCI6ICIwLjAyMDAiLCAiZGlmZiI6ICItODEuOTUiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="SKL">
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiU0tMIiwgInByaWNlIjogIjAuMDAzNjAiLCAiY2hhbmdlIjogIi0wLjY2JSIsICJyc2kiOiAiMzguNSIsICJtYWNkIjogIi0wLjAwMDEiLCAidndhcCI6ICIwLjAyMDAiLCAiZGlmZiI6ICItODIuMDUiLCAic2lnbmFsX3R5cGUiOiAiQlVZIiwgImNvbG9yIjogIiM1MmI3ODgifQ==')" data-symbol="SKL">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SKL')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">SKL</div>
-            <div class="text-[8px] opacity-80 font-bold">-0.79%</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.66%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU0MiLCAicHJpY2UiOiAiMC4wMDA0OTUiLCAiY2hhbmdlIjogIi0xLjM5JSIsICJyc2kiOiAiMTIuOCIsICJtYWNkIjogIi0wLjAwMDAiLCAidndhcCI6ICIwLjAwMTgxIiwgImRpZmYiOiAiLTcyLjczIiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="SC">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU0MiLCAicHJpY2UiOiAiMC4wMDA0OTUiLCAiY2hhbmdlIjogIi0wLjA2JSIsICJyc2kiOiAiMTQuMCIsICJtYWNkIjogIi0wLjAwMDAiLCAidndhcCI6ICIwLjAwMTgxIiwgImRpZmYiOiAiLTcyLjY1IiwgInNpZ25hbF90eXBlIjogIlNUUk9ORyBCVVkiLCAiY29sb3IiOiAiIzFiNDMzMiJ9')" data-symbol="SC">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'SC')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">SC</div>
-            <div class="text-[8px] opacity-80 font-bold">-1.39%</div>
+            <div class="text-[8px] opacity-80 font-bold">-0.06%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiUkFZIiwgInByaWNlIjogIjAuNjE5IiwgImNoYW5nZSI6ICIrMS4yNCUiLCAicnNpIjogIjI1LjEiLCAibWFjZCI6ICItMC4wMTYwIiwgInZ3YXAiOiAiMi4wMyIsICJkaWZmIjogIi02OS41MSIsICJzaWduYWxfdHlwZSI6ICJTVFJPTkcgQlVZIiwgImNvbG9yIjogIiMxYjQzMzIifQ==')" data-symbol="RAY">
+        <div class="coin-box p-3 text-center relative" style="background-color: #52b788;" onclick="openModal('eyJzeW1ib2wiOiAiUkFZIiwgInByaWNlIjogIjAuNjIzIiwgImNoYW5nZSI6ICIrMS4xOCUiLCAicnNpIjogIjM0LjciLCAibWFjZCI6ICItMC4wMTQ4IiwgInZ3YXAiOiAiMi4wMiIsICJkaWZmIjogIi02OS4yMCIsICJzaWduYWxfdHlwZSI6ICJCVVkiLCAiY29sb3IiOiAiIzUyYjc4OCJ9')" data-symbol="RAY">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'RAY')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">RAY</div>
-            <div class="text-[8px] opacity-80 font-bold">+1.24%</div>
+            <div class="text-[8px] opacity-80 font-bold">+1.18%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU1RHIiwgInByaWNlIjogIjAuMTIwIiwgImNoYW5nZSI6ICIrMC40MiUiLCAicnNpIjogIjIzLjEiLCAibWFjZCI6ICItMC4wMTIzIiwgInZ3YXAiOiAiMC4xNzMiLCAiZGlmZiI6ICItMzAuMzAiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="STG">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiU1RHIiwgInByaWNlIjogIjAuMTIwIiwgImNoYW5nZSI6ICIrMC41MCUiLCAicnNpIjogIjE4LjEiLCAibWFjZCI6ICItMC4wMTE4IiwgInZ3YXAiOiAiMC4xNzIiLCAiZGlmZiI6ICItMzAuMjUiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="STG">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'STG')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">STG</div>
-            <div class="text-[8px] opacity-80 font-bold">+0.42%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.50%</div>
         </div>
         
-        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUFHSUMiLCAicHJpY2UiOiAiMC4wNDA2IiwgImNoYW5nZSI6ICItMi41MiUiLCAicnNpIjogIjQwLjciLCAibWFjZCI6ICItMC4wMDA2IiwgInZ3YXAiOiAiMC4xNjEiLCAiZGlmZiI6ICItNzQuOTAiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="MAGIC">
+        <div class="coin-box p-3 text-center relative" style="background-color: #1b4332;" onclick="openModal('eyJzeW1ib2wiOiAiTUFHSUMiLCAicHJpY2UiOiAiMC4wNDA3IiwgImNoYW5nZSI6ICIrMC43NyUiLCAicnNpIjogIjQyLjgiLCAibWFjZCI6ICItMC4wMDA2IiwgInZ3YXAiOiAiMC4xNjEiLCAiZGlmZiI6ICItNzQuODAiLCAic2lnbmFsX3R5cGUiOiAiU1RST05HIEJVWSIsICJjb2xvciI6ICIjMWI0MzMyIn0=')" data-symbol="MAGIC">
             <div class="flex justify-start"><span class="star-btn" onclick="toggleFav(event, 'MAGIC')">★</span></div>
             <div class="font-bold text-[11px] font-mono mt-1">MAGIC</div>
-            <div class="text-[8px] opacity-80 font-bold">-2.52%</div>
+            <div class="text-[8px] opacity-80 font-bold">+0.77%</div>
         </div>
         
             </div>
